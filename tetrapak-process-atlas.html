@@ -638,11 +638,11 @@ button.avr:hover{background:var(--surface)}
 
 /* mapa de impacto */
 .im-w{overflow-x:auto}
-.im{display:grid;grid-template-columns:minmax(200px,.9fr) minmax(300px,1.6fr) minmax(110px,.5fr) minmax(110px,.5fr);gap:6px;min-width:760px}
+.im{display:grid;grid-template-columns:minmax(130px,.45fr) repeat(3,minmax(220px,1fr));gap:6px;min-width:860px}
 .im-hd{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted);padding:2px 12px 6px;display:flex;align-items:baseline;gap:8px}
 .im-hd b{font-family:var(--f-display);font-size:18px;letter-spacing:0;color:var(--fg);font-weight:600}
 .im-hd.alto{color:var(--cobalt)}
-.im-rh{display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.im-rh{display:flex;flex-direction:column;gap:8px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
 .im-rh .ci{width:30px;height:30px;border-radius:6px;display:grid;place-items:center;background:var(--raised);color:var(--fg);flex:none}
 .im-rh b{display:block;font-size:14px;line-height:1.25}
 .im-rh small{display:block;font-size:12px;color:var(--faint)}
@@ -2057,7 +2057,7 @@ function renderOv(){
   const imap=`<div class="im-w"><div class="im">
     <div class="im-hd"></div>${lvls.map(lv=>`<div class="im-hd ${lv}">${IMPL[lv]}<b>${by(o=>o.a.pain.imp===lv)}</b></div>`).join('')}
     ${catsSorted.map(c=>`<div class="im-rh"><span class="ci">${ic(c.i)}</span><span><b>${esc(c.n)}</b><small>${O.filter(o=>o.cat===c).length} dores</small></span></div>`+lvls.map(lv=>{const L=cell(c,lv);
-      return `<div class="im-c ${lv}" style="--w:${L.length/maxC}"><span class="im-n">${L.length||'–'}</span>${lv==='alto'&&L.length?`<ul>${L.map(o=>`<li><button type="button" data-ovgo="${o.x.id}" title="${esc(o.a.pain.why||'')}"><span>${esc(o.a.t)}</span><small>${esc(o.s.name)}${o.a.pain.why?' · '+esc(o.a.pain.why):''}</small></button></li>`).join('')}</ul>`:''}</div>`}).join('')).join('')}
+      return `<div class="im-c ${lv}" style="--w:${L.length/maxC}"><span class="im-n">${L.length||'–'}</span>${L.length?`<ul>${L.map(o=>`<li><button type="button" data-ovgo="${o.x.id}" title="${esc(o.a.pain.why||'')}"><span>${esc(o.a.t)}</span><small>${esc(o.s.name)}${o.a.pain.why?' · '+esc(o.a.pain.why):''}</small></button></li>`).join('')}</ul>`:''}</div>`}).join('')).join('')}
   </div></div>`;
   $('#ov').innerHTML=`
   <div class="ov-h"><h1><span>${N}</span> dores mapeadas</h1></div>
