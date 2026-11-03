@@ -546,7 +546,7 @@ tr.go:focus-visible td{background:color-mix(in srgb,var(--cobalt) 8%,transparent
 .tp-ev small{font-size:13px;color:var(--deep-dim)}
 .tp-head h2{margin:4px 0 0;font-family:var(--f-display);font-weight:700;font-size:clamp(28px,3.2vw,40px);line-height:1.08;word-spacing:.16em;text-wrap:balance}
 .tp-head p{margin:8px 0 0;font-size:16px;color:var(--muted);max-width:90ch}
-.tp-phases{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.tp-phases{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
 .tp-phase{display:grid;gap:4px;align-content:start;text-align:left;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--deep);border-radius:4px;padding:12px 14px;box-shadow:0 1px 2px var(--shadow)}
 .tp-phase:hover{border-top-color:var(--cobalt)}
 .tp-phase span{font-family:var(--f-display);font-size:26px;color:var(--cobalt);line-height:1}
@@ -625,12 +625,104 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .tp-page{min-height:calc(100vh - var(--pgh,52px));min-height:calc(100dvh - var(--pgh,52px));align-content:start}
 .tp-heropage{background:var(--deep);box-shadow:0 0 0 100vmax var(--deep);clip-path:inset(0 -100vmax);display:grid;align-content:center}
 .tp-hero{box-shadow:none;clip-path:none}
+
+/* ---------- Diagnóstico (do resumo do anexo, no template KPMG) */
+.dg-kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+@media (max-width:1100px){.dg-kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:620px){.dg-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi-c{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--cobalt);border-radius:4px;padding:14px 16px;display:grid;gap:4px;align-content:start;min-width:0;box-shadow:0 1px 2px var(--shadow)}
+.kpi-c.dark{background:var(--deep);border-color:var(--deep);border-top-color:var(--pacific);color:var(--deep-ink)}
+.kpi-c b{font-family:var(--f-display);font-weight:700;font-size:40px;line-height:1;font-variant-numeric:tabular-nums}
+.kpi-c span{font-size:14px;color:var(--fg);line-height:1.35}
+.kpi-c.dark span{color:var(--deep-ink)}
+.kpi-c em{font-style:normal;font-size:12px;color:var(--faint)}
+.ov-sec{display:grid;gap:12px;min-width:0}
+.ov-sec > h3{margin:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;border-bottom:1px solid var(--fg);padding-bottom:6px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.ov-sec > h3 small{font-size:12px;letter-spacing:0;text-transform:none;font-weight:400;color:var(--faint)}
+.cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.cats-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1100px){.cats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:620px){.cats,.cats-3{grid-template-columns:1fr}}
+.cat{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px 16px;display:grid;gap:10px;align-content:start;text-align:left;min-width:0;box-shadow:0 1px 2px var(--shadow)}
+.cat-go{cursor:pointer;border-top:3px solid var(--sc,var(--cobalt))}
+.cat-go:hover{border-color:var(--cobalt)}
+.cat-h{display:flex;gap:10px;align-items:center}
+.cat-h .ci{width:34px;height:34px;border-radius:6px;display:grid;place-items:center;background:var(--raised);color:var(--fg);font-size:17px;flex:none}
+.cat-h b{font-size:15px;line-height:1.25}
+.cat .big{font-family:var(--f-display);font-weight:700;font-size:34px;line-height:1;font-variant-numeric:tabular-nums}
+.cat p{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
+.sbar{display:flex;height:6px;border-radius:999px;overflow:hidden;background:var(--raised)}
+.sbar i{display:block;height:100%;background:var(--cobalt)}
+.ov-two{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:980px){.ov-two{grid-template-columns:1fr}}
+.avl{display:grid;gap:14px}
+.avr{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr) 36px;gap:12px;align-items:center;font-size:14px}
+.avr small{display:block;font-size:12px;color:var(--muted);line-height:1.3;font-weight:400}
+.avr .tr{height:14px;background:var(--raised);border-radius:3px;overflow:hidden}
+.avr .tr i{display:block;height:100%;border-radius:3px;background:var(--cobalt)}
+.avr > b{text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:620px){.avr{grid-template-columns:1fr 36px}.avr .tr{grid-column:1/-1;grid-row:2}}
+.im-f{justify-self:start;flex-wrap:wrap}
+.im-w{overflow-x:auto}
+.im{display:grid;grid-template-columns:minmax(130px,.45fr) repeat(3,minmax(220px,1fr));gap:6px;min-width:860px}
+.im-hd{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted);padding:2px 12px 6px;display:flex;align-items:baseline;gap:8px}
+.im-hd b{font-family:var(--f-display);font-size:18px;letter-spacing:0;color:var(--fg)}
+.im-hd.alto{color:var(--pain)}
+.im-rh{display:flex;flex-direction:column;gap:8px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:10px 12px}
+.im-rh .ci{width:30px;height:30px;border-radius:6px;display:grid;place-items:center;background:var(--raised);color:var(--fg);flex:none}
+.im-rh b{display:block;font-size:14px;line-height:1.25}
+.im-rh small{display:block;font-size:12px;color:var(--faint)}
+.im-c{border-radius:4px;border:1px solid var(--line);padding:10px 12px;display:grid;gap:8px;align-content:start;background:color-mix(in srgb,var(--muted) calc(var(--w) * 12%),var(--surface))}
+.im-c.alto{background:color-mix(in srgb,var(--pain) calc(var(--w) * 12%),var(--surface));border-color:color-mix(in srgb,var(--pain) 30%,var(--line))}
+.im-n{font-family:var(--f-display);font-weight:700;font-size:24px;line-height:1;font-variant-numeric:tabular-nums}
+.im-c.alto .im-n{color:var(--pain)}
+.im-c ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.im-c li button{width:100%;text-align:left;display:grid;gap:1px;padding:5px 6px;margin:0 -6px;border-radius:4px}
+.im-c li button:hover{background:var(--surface)}
+.im-c li span{font-size:13.5px;font-weight:700;line-height:1.3}
+.im-c li small{font-size:12px;color:var(--muted);line-height:1.35}
+.qwl{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.qw{display:grid;gap:6px;align-content:start;text-align:left;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--best);border-radius:4px;padding:12px 14px}
+.qw:hover{border-color:var(--cobalt)}
+.qw b{font-size:14.5px;line-height:1.3}
+.qw span:not(.stag){font-size:13px;color:var(--muted);line-height:1.4}
+.qw em{font-style:normal;font-size:12px;font-weight:700;color:var(--cobalt)}
+.qw .stag{justify-self:start}
+.imptag{display:inline-block;margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.02em;border-radius:999px;padding:1px 8px;border:1px solid var(--line);color:var(--muted)}
+.imptag.imp-alto{color:var(--pain);border-color:color-mix(in srgb,var(--pain) 40%,var(--line));background:color-mix(in srgb,var(--pain) 8%,transparent)}
+.barbtns{display:inline-flex;gap:6px;flex-wrap:wrap}
+.ws.ws-max{position:fixed;inset:0;z-index:60;margin:0;padding:12px max(12px,env(safe-area-inset-right,0px)) 12px max(12px,env(safe-area-inset-left,0px));background:var(--bg);height:100vh;height:100dvh;grid-template-rows:minmax(0,1fr);align-items:stretch}
+.ws.ws-max:fullscreen{width:100%;height:100%}
+.ws.ws-max .stage{display:flex;flex-direction:column;min-height:0}
+.ws.ws-max #stageBody{flex:1;min-height:0;overflow:auto}
+.ws.ws-max .insp{position:static;top:auto;max-height:none;height:100%;min-height:0}
+body.noscroll{overflow:hidden}
+@media (max-width:900px){.ws.ws-max{overflow:auto;grid-template-rows:auto}.ws.ws-max .insp{height:auto}.ws.ws-max #stageBody{overflow:visible}}
+.nextwrap{display:flex;justify-content:center;padding:26px 0 6px}
+.nextwrap:empty{display:none}
+.nextchap{display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:7px 8px 7px 18px;white-space:nowrap;box-shadow:0 2px 10px var(--shadow)}
+.nextchap small{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.nextchap b{font-size:14px}
+.nextchap i{font-style:normal;width:32px;height:32px;border-radius:50%;background:var(--deep);color:#fff;display:grid;place-items:center;font-size:16px}
+.nextchap:hover{border-color:var(--cobalt)}
+.nextchap:hover i{background:var(--cobalt)}
+
+/* ---------- capa no tema claro/escuro do painel; abas com texto mais claro */
+.tp-heropage{background:var(--bg);box-shadow:none;clip-path:none;--deep-ink:var(--fg);--deep-dim:var(--muted)}
+.tp-hero{background:transparent;color:var(--fg)}
+.tp-hero .tp-k,.tp-hero h1 span{color:var(--cobalt)}
+.tp-ev{background:var(--surface);border-color:var(--line);border-left-color:var(--c);box-shadow:0 1px 2px var(--shadow)}
+.top .mode{color:#E8EEF5}
+.top .mode:hover,.top .mode[aria-selected="true"]{color:#FFFFFF}
+/* ---------- Paliativos × CoE: mostrar/ocultar os achados */
+.vh3 .instog{margin-left:auto;font-size:12px;letter-spacing:.06em;border:1px solid var(--line);background:var(--surface);color:var(--cobalt);padding:4px 10px;border-radius:3px;cursor:pointer}
+.vh3 .instog:hover{border-color:var(--cobalt);text-decoration:none}
 </style>
 
 <div class="wrap">
   <header class="top">
     <div class="top-row"><div class="brand"><span class="k">KPMG</span><span class="sep"></span><span class="ctx">Tetra Pak · Supply Chain CoE (AMER) · Wave 2</span></div>
-    <span class="tr"><span class="tag" id="tagHyp"></span><button class="fsbtn" id="fs" type="button" aria-pressed="false">⛶ Tela cheia</button></span></div>
+    <span class="tr"><button class="fsbtn" id="fs" type="button" aria-pressed="false">⛶ Tela cheia</button></span></div>
     <nav class="modes" id="modes" role="tablist" aria-label="Visão"></nav>
   </header>
   <nav class="pager" id="pager" aria-label="Páginas do capítulo"><div class="pages" id="pages"></div><div class="parrows"><button id="pgPrev" type="button" aria-label="Página anterior">←</button><button id="pgNext" type="button" aria-label="Próxima página">→</button></div></nav>
@@ -638,8 +730,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   <div class="tp-ht"><div class="tp-k">KPMG · Material de trabalho · 03/11/2026</div>
   <h1>Supply Chain CoE<br><span>Tetra Pak AMER · Wave 2</span></h1>
   <p>Este material reúne a leitura do CoE Design da Wave 1, as entrevistas do Planning Hub de 29/10/2026, o mapa de processos das três áreas, o cruzamento dos paliativos com o CoE e o plano de ação do Planning Hub.</p></div>
-  <div class="tp-espa"><div class="tp-ev" style="--c:var(--pain)"><span>1</span><b>Eliminar</b><small>Esse trabalho precisa existir?</small></div><div class="tp-ev" style="--c:var(--pal)"><span>2</span><b>Simplificar</b><small>Dá para fazer com menos passos?</small></div><div class="tp-ev" style="--c:var(--cobalt)"><span>3</span><b>Padronizar</b><small>Todo mundo faz igual?</small></div><div class="tp-ev" style="--c:var(--best)"><span>4</span><b>Automatizar</b><small>O que sobrou pode rodar sozinho?</small></div></div></div></article><article class="tp-page" id="pg-como-ler" data-title="Como ler este painel"><header class="tp-head"><div class="tp-eb">Como ler este painel</div><h2>Capítulos</h2><p>Use as abas no topo ou a linha de páginas abaixo delas. No mapa interativo, clique numa etapa para ver as atividades, as dores e as simulações.</p></header><div class="tp-phases"><button class="tp-phase" type="button" data-mode="cadeia"><span>1</span><b>Cadeia e CoE</b><small>Como a cadeia funciona, o que o CoE prevê e o que ainda não foi visto</small></button><button class="tp-phase" type="button" data-mode="map"><span>2</span><b>Mapa interativo</b><small>Fluxo das três áreas com dores, paliativos, simulações e o modo Percorrer</small></button><button class="tp-phase" type="button" data-mode="dores"><span>3</span><b>Dores</b><small>As 85 dores em tabela, com filtros e busca</small></button><button class="tp-phase" type="button" data-mode="coe"><span>4</span><b>Paliativos × CoE</b><small>O que já está na Wave 1, o que entra no CoE e em qual camada</small></button><button class="tp-phase" type="button" data-mode="plan"><span>5</span><b>Plano de ação</b><small>A fila de seis frentes do Planning Hub, uma de cada vez</small></button></div><div class="tp-facts"><span><b>3</b> áreas do CoE</span><span><b>85</b> dores mapeadas</span><span><b>3</b> entrevistas do Planning Hub</span><span><b>95</b> KPIs e <b>41</b> alertas na Wave 1</span><span><b>6</b> frentes na fila</span></div></article></section>
+  <div class="tp-espa"><div class="tp-ev" style="--c:var(--pain)"><span>1</span><b>Eliminar</b><small>Esse trabalho precisa existir?</small></div><div class="tp-ev" style="--c:var(--pal)"><span>2</span><b>Simplificar</b><small>Dá para fazer com menos passos?</small></div><div class="tp-ev" style="--c:var(--cobalt)"><span>3</span><b>Padronizar</b><small>Todo mundo faz igual?</small></div><div class="tp-ev" style="--c:var(--best)"><span>4</span><b>Automatizar</b><small>O que sobrou pode rodar sozinho?</small></div></div></div></article><article class="tp-page" id="pg-como-ler" data-title="Como ler este painel"><header class="tp-head"><div class="tp-eb">Como ler este painel</div><h2>Capítulos</h2><p>Use as abas no topo ou a linha de páginas abaixo delas. No mapa interativo, clique numa etapa para ver as atividades, as dores e as simulações.</p></header><div class="tp-phases"><button class="tp-phase" type="button" data-mode="cadeia"><span>1</span><b>Cadeia e CoE</b><small>Como a cadeia funciona, o que o CoE prevê e o que ainda não foi visto</small></button><button class="tp-phase" type="button" data-mode="diag"><span>2</span><b>Diagnóstico</b><small>As 85 dores por tipo de solução, por área e no mapa de impacto</small></button><button class="tp-phase" type="button" data-mode="map"><span>3</span><b>Mapa interativo</b><small>Fluxo das três áreas com dores, paliativos e simulações</small></button><button class="tp-phase" type="button" data-mode="dores"><span>4</span><b>Dores</b><small>As 85 dores em tabela, com filtros de área, impacto, CoE e fonte</small></button><button class="tp-phase" type="button" data-mode="coe"><span>5</span><b>Paliativos × CoE</b><small>O que já está na Wave 1, o que entra no CoE e em qual camada</small></button><button class="tp-phase" type="button" data-mode="plan"><span>6</span><b>Plano de ação</b><small>A fila de seis frentes do Planning Hub, uma de cada vez</small></button></div><div class="tp-facts"><span><b>3</b> áreas do CoE</span><span><b>85</b> dores mapeadas</span><span><b>3</b> entrevistas do Planning Hub</span><span><b>95</b> KPIs e <b>41</b> alertas na Wave 1</span><span><b>6</b> frentes na fila</span></div></article></section>
   <section class="chap" id="ch-cadeia" hidden aria-label="Cadeia e CoE"><article class="tp-page" id="pg-cadeia" data-title="A cadeia"><header class="tp-head"><div class="tp-eb">Cadeia e CoE</div><h2>Cadeia de suprimentos da Tetra Pak AMER</h2><p>A Tetra Pak AMER produz material de embalagem: bobinas de papel cartão laminado com polímero e alumínio, impressas com a arte do cliente. O CoE acompanha a cadeia em três áreas, na ordem do CoE Design: Planning Hub, SCCT e Repro Design.</p></header><div class="tp-chain"><div class="tp-step"><div class="tp-sh"><span>1</span><b>Repro Design</b></div><p>Arte do cliente vira arquivo e matriz de impressão. Sem arte aprovada não há pedido.</p><small>REP-01…16 · My Repro Tools</small><em>8 dores</em></div><div class="tp-step"><div class="tp-sh"><span>2</span><b>Planning Hub</b></div><p>Planeja matéria-prima (papel cartão, polímero, alumínio), capacidade das fábricas e o inbound via GEODIS.</p><small>PLH-MAT · PCA · ROAD · OCN</small><em>40 dores</em></div><div class="tp-step"><div class="tp-sh"><span>3</span><b>Produção · P2</b></div><p>Impressora → laminadora → slitter. Doctoring repara bobinas antes de liberar. Oito fábricas nas Américas.</p><small>Vancouver e Sikeston fora do P2</small></div><div class="tp-step"><div class="tp-sh"><span>4</span><b>SCCT · outbound</b></div><p>Planeja a carga no OTM, carrega, transporta, rastreia e paga o frete. Fill rate mede o caminhão cheio.</p><small>SUP-PLAN · LDG · TRE · ROAD · OCN</small><em>37 dores</em></div><div class="tp-step"><div class="tp-sh"><span>5</span><b>Clientes</b></div><p>Coca-Cola, Pepsico, Ambev, Nestlé, Parmalat e outros, no Brasil, no Cone Sul, no México e nos EUA.</p><small>OTIF · fill rate · perfect order</small></div></div><p class="tp-note">KPK = mil embalagens. Doctoring = reparo ou rebobinamento de bobinas com defeito. Fill rate = quanto da capacidade do veículo sai ocupada.</p></article><article class="tp-page" id="pg-coe-design" data-title="O CoE em uma página"><header class="tp-head"><div class="tp-eb">CoE Design · Wave 1</div><h2>CoE Design da Wave 1</h2></header><div class="tp-stat3"><div><b>95</b><span>KPIs no video wall (50 SCCT, 29 Planning Hub, 16 Repro)</span></div><div><b>61 / 19 / 15</b><span>KPIs com maturidade de dados alta, intermediária e baixa</span></div><div><b>39</b><span>quick wins de OTM, 9 testados, potencial de ~280 h/mês</span></div></div><div class="tp-g12"><div class="tp-sec"><h3>As camadas</h3><div class="tp-layers"><div class="dk"><span class="tp-ico">VW</span><b>Video wall · 12 telas</b><small>O que está acontecendo agora. 6 SCCT, 4 Planning Hub, 2 Repro. Atualização de 15 minutos a diária.</small></div><div class=""><span class="tp-ico">TÁ</span><b>Camada tática · 19 telas</b><small>Onde está acontecendo e quem age. Listas de ordens, cargas, materiais e designs.</small></div><div class=""><span class="tp-ico">ES</span><b>Camada estratégica · 44 telas</b><small>Por que aconteceu e como melhorar. Histórico, tendências e análises.</small></div><div class=""><span class="tp-ico">AL</span><b>41 alertas</b><small>Gatilhos por limite de KPI, enviados por Teams ou e-mail.</small></div></div></div><div class="tp-sec"><h3>As ondas</h3><div class="tp-cascade"><div class=""><b>Wave 1 · Analyze</b><small>2025 · concluída. Modelo, KPIs, governança e dados.</small></div><div class="cur"><b>Wave 2 · Design &amp; Implementation</b><small>2026 · agora. Dados, telas, alertas e go-live do piloto.</small></div><div class=""><b>Wave 3 · Optimize &amp; Scale</b><small>2027. Exceção, automação e pilotos de simulação.</small></div><div class=""><b>Wave 4 · Augmented</b><small>2028. Modelos preditivos e fluxos semiautônomos.</small></div></div><p class="tp-note">A Wave 2 tem três pilares: governança do projeto, OTM e agentes de IA (quick wins e Fill Rate Agent) e o roadmap de exploração de tecnologia.</p></div></div></article><article class="tp-page" id="pg-nao-visto" data-title="O que ainda não foi visto"><header class="tp-head"><div class="tp-eb">Leitura do CoE Design</div><h2>Pontos de atenção para a Wave 2</h2></header><div class="tp-find"><div><span>1</span><b>Fora do Planning Hub, o Atlas é raso</b><p>SCCT e Repro vieram só da matriz da Wave 1. O SCCT concentra 48 dos 73 desafios e 28 dos 39 quick wins de OTM. O maior volume de dor e de custo está no outbound, que ainda não foi entrevistado.</p></div><div><span>2</span><b>O fill rate parece nascer na produção</b><p>Três dores do SCCT apontam para a costura produção → expedição: horas até a carga ficar pronta, DO sem material em estoque e estimativa de produção. Hipótese a validar com dado real; os números do mockup são ilustrativos.</p></div><div><span>3</span><b>O inbound é o maior risco de go-live do Planning Hub</b><p>Os 12 KPIs de tracking inbound têm fonte &quot;não disponível&quot;. O acompanhamento depende de e-mail da GEODIS e o business case do inbound no OTM está incompleto.</p></div><div><span>4</span><b>41 alertas sem roteiro de resposta</b><p>O desenho define o gatilho, mas não quem age, em quanto tempo e para quem escala. Sem essa rotina, os alertas não geram ação. O CoE Design avaliou adoção como risco baixo (2 de 5); pela experiência das entrevistas, o risco parece maior.</p></div><div><span>5</span><b>Norte e Sul trabalham diferente em toda área</b><p>No GR/IR, o armazém do Sul resolve sozinho e o do Norte pede instrução. No outbound, o Sul tem Dachser e o Norte não. Copiar a prática do Sul é melhoria sem tecnologia.</p></div><div><span>6</span><b>Melhoria operacional e automação seguem a mesma ordem</b><p>O foco operacional pedido pelo Juan e as automações pedidas pelo Thomas usam a mesma lista de dores, na ordem eliminar, simplificar, padronizar e automatizar.</p></div></div></article><article class="tp-page" id="pg-como-atuar" data-title="Como atuar"><header class="tp-head"><div class="tp-eb">Supply chain na Wave 2</div><h2>Como atuar na Wave 2</h2><p>Cada dor do mapa entra numa das três categorias abaixo. As melhorias operacionais e as automações saem da mesma lista.</p></header><div class="tp-g3"><div class="tp-card"><div class="tp-sh"><span>A</span><b>Processo e regra</b></div><p>Sem tecnologia: padrão Sul → Norte, SLA, dono, roteiro de alerta.</p><small>Puxa: Juan (operacional)</small></div><div class="tp-card"><div class="tp-sh"><span>B</span><b>Paliativo leve</b></div><p>Excel, Power Query, Power BI, Power Automate. Nada desenvolvido no IBP.</p><small>Puxa: Thomas (ganho imediato)</small></div><div class="tp-card"><div class="tp-sh"><span>C</span><b>Nativo do sistema</b></div><p>Módulos do IBP e do OTM, com os times de sistema e o Global IM.</p><small>Puxa: Daniel e times IBP/OTM</small></div></div><div class="tp-question"><span>Perguntas para cada dor</span><b>Esse trabalho precisa existir? Dá para fazer com menos passos? Todos fazem igual? O que sobrou pode ser automatizado?</b></div></article></section>
+  <section class="chap" id="ch-diag" hidden aria-label="Diagnóstico"></section>
   <section class="hero">
     <div>
       <h1>Mapa de processos</h1>
@@ -657,13 +750,12 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
           <button id="vFlow" aria-pressed="true"></button>
           <button id="vTable" aria-pressed="false"></button>
         </div>
-        <button class="helpbtn" id="bHelp"></button>
+        <span class="barbtns"><button class="helpbtn" id="bHelp"></button><button class="helpbtn" id="bMax" type="button" aria-pressed="false"></button></span>
         <div class="stepper" id="stepper">
           <button id="bReset" title="Voltar à visão geral" aria-label="Voltar à visão geral"></button>
           <button id="bPrev" aria-label="Etapa anterior"></button>
           <span class="lbl" id="sLbl"></span>
           <button id="bNext" aria-label="Próxima etapa"></button>
-          <button id="bPlay" class="primary"></button>
         </div>
       </div>
       <div class="hl" id="hl"></div>
@@ -676,6 +768,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   <section class="view" id="v-coe" hidden aria-label="Paliativos × CoE"></section>
   <section class="plan" id="plan" hidden aria-label="Plano de ação"></section>
   <section class="legend" id="legend"></section>
+  <div class="nextwrap" id="nextch"></div>
   <div class="foot"><span>Fontes: CoE Design (mar/2026) · Kick-off Wave 2 (out/2026) · entrevistas de 29/10/2026 (Daniel e Iranildes, Lia, Elizabeth) · Plano de ação do Planning Hub (03/11/2026) · Technology Assessment Matrix · deck “AI, Simulation and Digital Twin for the E2E Supply Chain” (out/2026)</span><span>KPMG Confidential · material de trabalho</span></div>
 </div>
 
@@ -692,13 +785,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 </div>
 <div class="ov" id="help" hidden role="dialog" aria-modal="true" aria-label="Como usar">
   <div class="howto"><h3>Como usar o mapa</h3><ol>
-    <li><b>Os capítulos</b> ficam no topo: Início, Cadeia e CoE, Mapa interativo, Dores, Paliativos × CoE e Plano de ação. A linha logo abaixo mostra as páginas de cada capítulo.</li>
+    <li><b>Os capítulos</b> ficam no topo: Início, Cadeia e CoE, Diagnóstico, Mapa interativo, Dores, Paliativos × CoE e Plano de ação. A linha logo abaixo mostra as páginas de cada capítulo.</li>
     <li><b>No mapa, escolha a área</b> nos cartões ou na linha de páginas. A ordem é a do CoE Design: Planning Hub, SCCT e Repro Design.</li>
     <li><b>Clique numa etapa</b> do fluxo. O painel à direita mostra quem faz, a frequência, os sistemas, os KPIs que já existem no CoE e as atividades.</li>
     <li><b>Atividades com ⚠ abrem</b> com a dor e a fonte (Reunião 1, 2 ou 3, ou a matriz), o paliativo com o passo a passo de “como chegar” e o melhor cenário em IBP, OTM ou S/4.</li>
     <li><b>No Planning Hub, as faixas são as fases</b> do processo: Início (planejar), Meio (comprar e trazer) e Fim (receber, pagar, estocar e consumir).</li>
     <li><b>Etapas com ▶ simulação</b> têm uma animação: abra a atividade e clique em “Simular”. Você vê o processo hoje e com a solução, passo a passo, como no Flostep.</li>
-    <li><b>Percorrer</b> anda pelo processo inteiro sozinho. As setas ← → do teclado fazem o mesmo, e Esc volta para a visão geral.</li>
+    <li><b>Mapa em tela cheia</b> abre o fluxo e o painel do setor ocupando a tela inteira. As setas ← → do teclado andam pelas etapas e Esc volta para a visão geral.</li>
     <li><b>Destacar sistema</b> acende só as etapas que usam aquele sistema, por exemplo Excel.</li>
     <li><b>Painel de dores</b> lista todas as dores em tabela, com filtros e busca. <b>Paliativos × CoE</b> mostra o que entra no CoE e em qual camada.</li>
     <li><b>Plano de ação</b>, no topo, mostra a fila de frentes do Planning Hub: para cada uma, como funciona hoje, onde dói e o que eliminar, simplificar, padronizar e automatizar, com atalho para a etapa no mapa.</li>
@@ -788,7 +881,7 @@ const SECTORS = [
         pain:{txt:'Não há aviso quando um item consome 100% do forecast em 15 dias, nem quando não consome nada e as ordens futuras deveriam ser revistas.', ids:['PLH-STM-01'], src:'R1'},
         pal:{txt:'Ritmo de consumo × forecast por material e cliente, com semáforo e lista de itens para agir.', tools:['pbi'],
           how:{steps:['Extração diária do consumo por material e cliente (relatório Hana já usado).','Calcular o ritmo: consumo até hoje ÷ dias decorridos × dias do mês, contra o forecast do mês.','Semáforo: acima de 100% do forecast antes do dia 20, ou abaixo de 30% depois do dia 15. Gera a lista “rever ordens futuras”.'], needs:'Consumo diário, forecast do mês', effort:'Baixo'}},
-        best:{txt:'Demand Sensing ajusta as próximas 4 a 8 semanas com pedidos e embarques reais.', plat:'SAP IBP · Demand Sensing', avail:'agora', layer:'prever'}}
+        best:{txt:'Demand Sensing do IBP ajusta o forecast das próximas 4 a 8 semanas com os pedidos e embarques reais, e o desvio aparece antes de virar falta.', plat:'SAP IBP · Demand Sensing', avail:'agora', layer:'prever'}}
     ]},
   { id:'ph3', lane:'ini', mod:'Material Planning', src:['R1','R2','R3'], icon:'git-compare', t:'Conversão em production forecast', who:'Production intelligence · Material planners', freq:'Mensal', sys:['APO','IBP'], out:'production forecast',
     acts:[
@@ -802,7 +895,7 @@ const SECTORS = [
         pain:{txt:'Os números não batem. Também não está claro se o volume de exportação aparece pela data de embarque (ETD) ou de chegada (ETA). Até o IBP virar oficial, o time mantém os dois.', ids:[], src:'R1 R2 R3'},
         pal:{txt:'Relatório de reconciliação APO × IBP por material, cliente e mês, mostrando só as divergências.', tools:['pbi'],
           how:{steps:['Exportar o mesmo recorte (material, cliente, planta e mês) do APO e do IBP pelas telas e relatórios padrão, sem desenvolver nada.','No Power Query, alinhar as chaves e deixar explícito se a data é ETD ou ETA.','No Power BI, mostrar só as linhas com diferença acima da tolerância, já com a evidência para abrir chamado ao time global.'], needs:'Exportações padrão do APO e do IBP, regra de ETD/ETA por mercado', effort:'Médio'}},
-        best:{txt:'IBP como fonte única depois do S/4.', plat:'SAP IBP + S/4HANA', avail:'roadmap', layer:'dados'}}
+        best:{txt:'Depois da migração para o S/4, o IBP vira a fonte única do número e a conferência entre sistemas deixa de existir.', plat:'SAP IBP + S/4HANA', avail:'roadmap', layer:'dados'}}
     ]},
   { id:'ph5', lane:'ini', mod:'Production Capacity', src:['R2','R1'], coe:['PLH-PCA-01 · Production capacity status','PLH-PCA-05 · Order intake','PLH-PCA-06 · Forecast','PLH-PCA-07 · Factory bottleneck EE'], icon:'gauge', t:'Capacidade e alocação', who:'Capacity planning (Lia) · Valmir e Saulo nas realocações', freq:'Mensal e sob demanda', sys:['IBP','Excel','CORE'], out:'capacidade validada',
     acts:[
@@ -826,16 +919,16 @@ const SECTORS = [
         pain:{txt:'O ritmo (produzido ÷ dias decorridos × dias do mês) é calculado à mão, e os meses fechados somem da tela. Trazer histórico do P2 tem custo alto de volume de dados.', ids:['PLH-KPI-02'], src:'R2'},
         pal:{txt:'Indicador de ritmo com projeção de fechamento e visão do mês anterior e do ano, na tela do CoE.', tools:['core'],
           how:{steps:['Ler a produção do P2 já usada nas telas do CoE em totais diários, e não linha a linha, para conter o custo de volume.','Calcular ritmo e projeção de fechamento por fábrica.','Guardar o fechamento de cada mês numa tabela de histórico, para mostrar o mês anterior e o acumulado do ano.'], needs:'Produção diária por fábrica (P2), meta do mês', effort:'Baixo'}},
-        best:{txt:'Projeção de fechamento sobre os dados de produção, como KPI padrão da região.', plat:'CoE + dados do P2', avail:'ativar', layer:'visib'}}
+        best:{txt:'A projeção de fechamento do mês, calculada sobre os dados de produção, vira um KPI padrão da região, igual para todas as fábricas.', plat:'CoE + dados do P2', avail:'ativar', layer:'visib'}}
     ]},
   { id:'ph6', lane:'ini', mod:'Production Capacity', src:['R1','R2'], coe:['PLH-PCA-03 · Production status: actual vs plan'], icon:'calendar-check', t:'MPS e Last Order Day', who:'Operational planners', freq:'Semanal', sys:['Siplan','APO'], out:'plano de produção',
     acts:[
       {t:'Publicar o MPS por bloco semanal: o que produzir, quando, Last Order Day e data de despacho', sys:['Siplan'], ok:true, note:'O Siplan será substituído pelo S/4 no futuro.'},
       {t:'Acompanhar se o mercado colocou as ordens que foram aceitas', sys:['SAP'],
         pain:{txt:'Não há como ver de qual mercado e cliente são as ordens. Os +100 milhões de embalagens aceitos para novembro (Brasil) e a transferência Querétaro → Ponta Grossa são conferidos entrando no SAP.', ids:[], src:'R2'},
-        pal:{txt:'Volume aceito × ordens colocadas, por mercado, cliente e mês, na tela do CoE.', tools:['core','sp'],
+        pal:{txt:'Uma lista no SharePoint registra os volumes aceitos fora do forecast. A tela do CoE cruza essa lista com a carteira de ordens do SAP e mostra, por mercado, cliente e mês, quanto foi aceito e quanto já virou ordem.', tools:['core','sp'],
           how:{steps:['Registrar numa lista do SharePoint os volumes aceitos fora do forecast, com mercado, cliente, mês e volume.','Cruzar com a carteira de ordens do SAP por mercado e cliente.','A tela mostra aceito × colocado e destaca quando o mercado não está colocando o que pediu (lembrando que a matéria-prima já foi comprada).'], needs:'Lista de volumes aceitos, carteira de ordens com mercado e cliente', effort:'Baixo'}},
-        best:{txt:'Vínculo ordem → mercado → cliente nativo no S/4 e visível no IBP.', plat:'S/4HANA + SAP IBP', avail:'roadmap', layer:'visib'}}
+        best:{txt:'O S/4 liga cada ordem ao mercado e ao cliente de origem, e o IBP mostra esse vínculo sem consulta manual.', plat:'S/4HANA + SAP IBP', avail:'roadmap', layer:'visib'}}
     ]},
   { id:'ph4', lane:'mei', mod:'Material Planning', src:['R1','R2'], coe:['PLH-MAT-01 · Extra forecast'], icon:'zap', t:'Ordem do cliente e extra forecast', who:'CSR · Planners de papel, alumínio e filme · Capacidade em volumes grandes', freq:'Diária: 50 ou mais solicitações por dia', sys:['Siplan','ExtraFcst','Excel'], out:'aceite ou recusa',
     acts:[
@@ -858,7 +951,7 @@ const SECTORS = [
         pain:{txt:'A conversão roda numa planilha. Cada planner copia a parte do seu material para a própria análise.', ids:[], src:'R3'},
         pal:{txt:'Explosão automática de todos os quality sizes num modelo único, lido por todos os planners.', tools:['pbi'],
           how:{steps:['Transformar o Excel de BOM da Elizabeth numa tabela única: quality size × material × gramas por KPK.','Carregar o production forecast por quality size em KPK a cada nova versão.','Power BI calcula kg por material e planta; cada planner filtra o seu material.'], needs:'BOM, production forecast em KPK', effort:'Baixo'}},
-        best:{txt:'BOM e explosão dentro do IBP.', plat:'SAP IBP · Supply', avail:'agora', layer:'dados'}},
+        best:{txt:'A BOM e a explosão do forecast em matéria-prima rodam dentro do IBP, sem planilha paralela.', plat:'SAP IBP · Supply', avail:'agora', layer:'dados'}},
       {t:'Revisar cobertura contra safety stock, SKU a SKU e planta a planta', sys:['APO','Excel'],
         pain:{txt:'Duas planilhas em paralelo por SKU. O alerta do APO não desconta o que já foi consumido e acusa stockout que não existe.', ids:['PLH-KPI-01'], src:'R3'},
         pal:{txt:'Painel de cobertura com consumo realizado e alerta de stockout real, aproveitando as telas PLH-MAT do CoE.', tools:['pbi','pa','core'],
@@ -870,10 +963,10 @@ const SECTORS = [
           how:{steps:['Usar a explosão por quality size do item a, mantendo o cliente e a versão do forecast.','Comparar versão atual × anterior por cliente e quality size, em KPK e em kg.','Gerar um resumo por quality size com todos os materiais afetados, para avisar o CSR uma vez só.'], needs:'Versões do forecast com cliente, BOM', effort:'Médio'}},
         best:{txt:'A mesma visão no IBP, com um agente que redige um aviso único ao CSR cobrindo todos os materiais afetados.', plat:'SAP IBP + Joule', avail:'ativar', layer:'genai'}},
       {t:'Conferir estoque de polímeros no VMI da Braskem (Netvimi)', sys:['Netvimi'],
-        pain:{txt:'O dado da plataforma é pouco confiável, e a confirmação é feita à mão com as fábricas.', ids:['PLH-STM-04'], src:'M'},
-        pal:{txt:'Conciliação Netvimi × consumo das fábricas, com lista de divergências.', tools:['pa','pbi'],
+        pain:{txt:'O estoque de polímeros que a Braskem informa no Netvimi (VMI) não é confiável, e o planner precisa confirmar à mão com cada fábrica.', ids:['PLH-STM-04'], src:'M'},
+        pal:{txt:'Exportar o estoque do Netvimi, comparar com o consumo e o estoque das fábricas e listar só as divergências acima da tolerância para confirmar.', tools:['pa','pbi'],
           how:{steps:['Exportar o estoque informado no Netvimi.','Comparar com o consumo e o estoque das fábricas.','Listar só as divergências acima da tolerância para confirmar com a fábrica.'], needs:'Exportação do Netvimi, consumo por fábrica', effort:'Baixo'}},
-        best:{txt:'Dado de VMI integrado ao IBP como estoque do fornecedor.', plat:'Integração + SAP IBP', avail:'ativar', layer:'dados'}},
+        best:{txt:'O dado do VMI entra no IBP como estoque do fornecedor, já conciliado.', plat:'Integração + SAP IBP', avail:'ativar', layer:'dados'}},
       {t:'Validar master data e MOQ entre APO e IBP (hypercare)', sys:['APO','IBP','SAP'],
         pain:{txt:'Uma mudança de MOQ sobrescreveu valores definidos e foi preciso refazer a base. Divergências por cliente viram chamado global. Até o IBP virar oficial, o trabalho é dobrado.', ids:[], src:'R3'},
         pal:{txt:'Rotina de comparação de master data (MOQ, lead time, cliente) com lista de exceções.', tools:['pbi','excel'],
@@ -885,12 +978,12 @@ const SECTORS = [
     acts:[
       {t:'Criar a PO respeitando o lead time do fornecedor (90 a 120 dias nos importados)', sys:['SAP'],
         pain:{txt:'Pedidos saem sem a antecedência que o fornecedor precisa, e o atraso só aparece na chegada.', ids:[], src:'R1'},
-        pal:{txt:'Lista das POs colocadas tarde: data de colocação + lead time × request ETA.', tools:['pbi'],
+        pal:{txt:'Lista das POs colocadas tarde: quando a data de criação mais o lead time do fornecedor passa do request ETA, a PO aparece para o planner agir antes de virar atraso.', tools:['pbi'],
           how:{steps:['Usar a base de POs com data de criação, request ETA e fornecedor que o time já tem.','Ter uma tabela de lead time por fornecedor (produção + trânsito).','Marcar as POs em que criação + lead time passa do request ETA e mostrar por planner.'], needs:'POs abertas, lead time por fornecedor', effort:'Baixo'}},
         best:{txt:'Lead Time Intelligence compara o lead time real com o cadastrado e propõe a correção para aprovação.', plat:'SAP IBP 2608 · Joule', avail:'ativar', layer:'prever'}},
       {t:'Enviar a PO e um e-mail paralelo ao fornecedor', sys:['SAP','Email'],
         pain:{txt:'Além do envio do sistema, o planner manda e-mail manual para garantir que o fornecedor recebeu.', ids:[], src:'R1'},
-        pal:{txt:'E-mail ao fornecedor gerado automaticamente quando a PO é criada.', tools:['pa'],
+        pal:{txt:'Quando a PO é criada, o Power Automate envia ao fornecedor um e-mail padrão com a PO anexada, e o planner deixa de mandar o e-mail manual.', tools:['pa'],
           how:{steps:['Power Automate lê as POs criadas no dia (relatório agendado do SAP).','Envia ao fornecedor um e-mail padrão com a PO anexada.','O planner deixa de mandar o e-mail manual.'], needs:'Relatório diário de POs, e-mail por fornecedor', effort:'Baixo'}},
         best:{txt:'Envio e confirmação por EDI ou portal de fornecedor para todos os importados.', plat:'S/4HANA · colaboração', avail:'roadmap', layer:'auto'}},
       {t:'Cobrar a confirmação do pedido (order acknowledgement)', sys:['SAP','Hana','Excel'],
@@ -902,7 +995,7 @@ const SECTORS = [
   { id:'ph9', lane:'mei', mod:'Transport Tracking · Road e Ocean', src:['R1','M'], coe:['PLH-ROAD-01…06 · Tracking road (RDD × ATA, OTIF, atrasos)','PLH-OCN-01…06 · Tracking ocean'], icon:'ship', t:'Trânsito de importados', who:'Inbound · Material planners · GEODIS', freq:'Contínua', sys:['GEODIS','Hana','Email'], out:'material no porto',
     acts:[
       {t:'Acompanhar embarques e ETA', sys:['GEODIS','Email'], qw:'Quick wins de OTM inbound em validação: janelas de recebimento por material e fornecedor, regras de planejamento e master data. O business case do inbound ainda está incompleto.',
-        pain:{txt:'O acompanhamento chega por e-mail da GEODIS, fora do sistema.', ids:['PLH-STM-03'], src:'M'},
+        pain:{txt:'O status dos embarques de importados chega por e-mail da GEODIS, fora de qualquer sistema. Para saber onde está uma PO, é preciso procurar nos e-mails.', ids:['PLH-STM-03'], src:'M'},
         pal:{txt:'Captura automática dos e-mails e arquivos da GEODIS para um status único por PO.', tools:['pa'],
           how:{steps:['Criar uma caixa de e-mail compartilhada para os avisos da GEODIS.','Power Automate extrai PO, navio, ETD e ETA do e-mail ou do anexo e grava numa lista.','Uma tela mostra o status por PO e destaca mudança de ETA.'], needs:'Padrão dos e-mails e arquivos da GEODIS', effort:'Médio'}},
         best:{txt:'Inbound no OTM, com eventos de embarque e ETA previsto por ML. Depende de fechar o business case do inbound.', plat:'Oracle OTM · ML transit time', avail:'agora', layer:'prever'}},
@@ -912,18 +1005,18 @@ const SECTORS = [
           how:{steps:['Juntar data de criação da PO, request ETA, data de embarque e chegada real.','Separar o atraso em três trechos: colocação tarde, produção do fornecedor e trânsito.','Ver por fornecedor, rota e mês para mostrar a sazonalidade da virada do ano.'], needs:'Datas da PO, do embarque e da chegada', effort:'Médio'}},
         best:{txt:'Lead times reais do OTM alimentando os lead times do IBP. É o quick win de integração do deck de Digital Twin.', plat:'Oracle OTM → SAP IBP', avail:'ativar', layer:'prever'}},
       {t:'Evitar que todos os contêineres sigam no mesmo navio', sys:['GEODIS'],
-        pain:{txt:'Nenhuma regra garante que a GEODIS distribua a carga entre navios.', ids:['PLH-PRO-05'], src:'M'},
-        pal:{txt:'Alerta de concentração por navio na lista de embarques, antes da saída.', tools:['pa','pbi'],
+        pain:{txt:'Nenhuma regra garante que a GEODIS divida a carga entre navios. Todos os contêineres de um material crítico podem seguir no mesmo navio, e um atraso afeta tudo de uma vez.', ids:['PLH-PRO-05'], src:'M'},
+        pal:{txt:'Na lista de embarques, contar os contêineres por navio e material e alertar antes da saída quando mais de X% de um material crítico estiver no mesmo navio.', tools:['pa','pbi'],
           how:{steps:['Na lista de embarques do item a, contar contêineres por navio e material.','Alertar quando mais de X% do volume de um material crítico estiver no mesmo navio.'], needs:'Lista de bookings com navio', effort:'Baixo'}},
-        best:{txt:'Regra de diversificação no OTM, com exceção enviada para aprovação.', plat:'Oracle OTM', avail:'agora', layer:'auto'}}
+        best:{txt:'Regra de diversificação de navio configurada no OTM, com as exceções enviadas para aprovação.', plat:'Oracle OTM', avail:'agora', layer:'auto'}}
     ]},
   { id:'ph10a', lane:'mei', mod:'Material Planning', src:['R1','R3'], icon:'package-check', t:'Recebimento físico (GR)', who:'Warehouse · Material planners', freq:'Diária', sys:['SAP'], out:'material em estoque',
     acts:[
       {t:'Warehouse registra o recebimento (GR) e a validade', sys:['SAP'],
-        pain:{txt:'A validade nem sempre é preenchida, o que derruba os alertas de shelf life.', ids:[], src:'R1'},
-        pal:{txt:'Relatório diário de GR sem validade, devolvido ao armazém responsável.', tools:['pbi','pa'],
+        pain:{txt:'O armazém nem sempre preenche a validade do material no recebimento (GR). Sem essa data, os alertas de vencimento (shelf life) não funcionam.', ids:[], src:'R1'},
+        pal:{txt:'Relatório diário dos recebimentos sem validade, enviado automaticamente ao armazém responsável para completar, e um indicador de % de GR com validade na tela do CoE.', tools:['pbi','pa'],
           how:{steps:['Relatório diário de GR sem data de validade, por armazém.','Envio automático ao armazém para completar.','Indicador de % de GR com validade na tela do CoE.'], needs:'Relatório de GR com campo de validade', effort:'Baixo'}},
-        best:{txt:'Captura obrigatória de lote e validade no recebimento.', plat:'S/4HANA', avail:'roadmap', layer:'processo'}},
+        best:{txt:'O S/4 torna obrigatória a captura de lote e validade no recebimento.', plat:'S/4HANA', avail:'roadmap', layer:'processo'}},
       {t:'Conferir o que chegou contra a PO (quantidade, etiqueta, m²)', sys:['SAP'],
         pain:{txt:'No alumínio, medido em m², a diferença entre etiqueta, GR e fatura é comum (ex.: 2.000 m²) e só aparece depois, na conciliação. Às vezes a etiqueta veio errada do fornecedor. Nos materiais adicionais, contados por unidade (KPC), isso quase não acontece.', ids:[], src:'R3'},
         pal:{txt:'Registro da divergência no ato do recebimento, com aviso no mesmo dia ao planner e ao fornecedor.', tools:['papps','pa'],
@@ -939,7 +1032,7 @@ const SECTORS = [
         best:{txt:'Workflow de exceções do VIM roteando por motivo, com regras de tolerância.', plat:'SAP VIM / S/4HANA', avail:'ativar', layer:'auto'}},
       {t:'Responder dúvidas da Capgemini sobre como lançar (credit note, débito ou crédito subsequente)', sys:['VIM'],
         pain:{txt:'A Capgemini pergunta como lançar casos que se repetem. Como a Elizabeth questionou: se a resposta já é conhecida, por que não é automático?', ids:[], src:'R3'},
-        pal:{txt:'Guia “caso → como lançar” que a Capgemini consulta antes de abrir uma dúvida.', tools:['sp','copilot'],
+        pal:{txt:'Um guia “caso → como lançar”, validado pela controladoria, que a Capgemini consulta antes de abrir uma dúvida.', tools:['sp','copilot'],
           how:{steps:['Levantar no histórico do VIM as dúvidas mais frequentes e a resposta dada.','Montar a tabela caso → como lançar (ex.: preço já corrigido na PO → débito subsequente), validada pela controladoria.','Publicar para a Capgemini num SharePoint e combinar que só abre dúvida para caso fora da tabela.','Se houver licença, um agente no Copilot responde em cima dessa tabela.'], needs:'Histórico de dúvidas do VIM, validação da controladoria', effort:'Baixo'}},
         best:{txt:'Regras de lançamento automáticas no VIM para os casos conhecidos.', plat:'SAP VIM', avail:'ativar', layer:'auto'}},
       {t:'Conferir o preço da fatura contra a tabela de preço do fornecedor', sys:['SAP','Excel'],
@@ -954,7 +1047,7 @@ const SECTORS = [
         best:{txt:'Regra de espera por GR configurada no VIM.', plat:'SAP VIM', avail:'ativar', layer:'auto'}},
       {t:'Cobrir as pendências de quem está de férias', sys:['VIM'],
         pain:{txt:'A pendência fica no nome de quem criou a PO. Nas férias, alguém precisa assumir para não travar o pagamento.', ids:[], src:'R3'},
-        pal:{txt:'Fila por equipe, com substituto definido para cada planner.', tools:['pa'],
+        pal:{txt:'Uma tabela de substitutos por planner. Durante a ausência, o Power Automate redireciona as pendências para o substituto, lendo o calendário do Outlook.', tools:['pa'],
           how:{steps:['Tabela de substitutos por planner.','Power Automate redireciona as pendências durante a ausência, lendo o calendário do Outlook.'], needs:'Tabela de substitutos', effort:'Baixo'}},
         best:{txt:'Substituição configurada no próprio workflow do VIM.', plat:'SAP VIM', avail:'ativar', layer:'auto'}}
     ]},
@@ -1003,7 +1096,7 @@ const SECTORS = [
     acts:[
       {t:'Extrair o relatório de consumo de cada fábrica', sys:['P2'],
         pain:{txt:'O relatório é gerado fábrica a fábrica, à mão. É o consumo que alimenta o acompanhamento contra o forecast (etapa 2) e a cobertura (etapa 8).', ids:['PLH-STM-05'], src:'M'},
-        pal:{txt:'Extração consolidada e agendada de todas as fábricas.', tools:['pa'],
+        pal:{txt:'Agendar o relatório de consumo de cada fábrica e consolidar numa tabela única por dia, que alimenta o ritmo de consumo × forecast e o painel de cobertura.', tools:['pa'],
           how:{steps:['Agendar o relatório de consumo de cada fábrica no P2/SAP.','Consolidar num arquivo ou tabela única por dia.','Ligar essa tabela ao ritmo de consumo × forecast e ao painel de cobertura.'], needs:'Acesso aos relatórios de consumo do P2/SAP', effort:'Baixo'}},
         best:{txt:'Consumo real alimentando o IBP, como entrada do Demand Sensing e do supply planning.', plat:'P2 → SAP IBP', avail:'ativar', layer:'dados'}}
     ]},
@@ -1015,7 +1108,7 @@ const SECTORS = [
           how:{steps:['Reunir as instruções de trabalho já mapeadas num SharePoint organizado por processo.','Criar no Copilot Studio um agente apontando para essa pasta.','Testar com as pessoas novas e corrigir as instruções que geram resposta ruim.'], needs:'Instruções atualizadas, licença Copilot', effort:'Baixo'}},
         best:{txt:'Agente ligado ao SAP e ao Hana que responde perguntas operacionais, como o status de confirmação de um pedido (nível 2).', plat:'Agente + SAP/Hana', avail:'ativar', layer:'genai'}},
       {t:'Padronizar o processo entre fábricas e áreas', sys:[],
-        pain:{txt:'Cada fábrica opera de um jeito e as áreas trabalham em silos.', ids:['PLH-PRO-01','PLH-PRO-02'], src:'M'},
+        pain:{txt:'Cada fábrica executa o mesmo processo de um jeito, e as áreas trabalham em silos, sem ver o que a outra faz.', ids:['PLH-PRO-01','PLH-PRO-02'], src:'M'},
         pal:{txt:'Fluxo padrão com papéis, dados mínimos e regras de exceção, usando este mapa como AS-IS.', tools:['bpmn'],
           how:{steps:['Usar este mapa como AS-IS.','Desenhar o fluxo padrão em BPMN no Bizagi, com papéis e exceções.','Validar com o Sul e o Norte.'], needs:'Tempo dos planners para validação', effort:'Médio'}},
         best:{txt:'Processo padrão refletido na configuração do IBP.', plat:'Processo', avail:'processo', layer:'processo'}}
@@ -1042,176 +1135,176 @@ const SECTORS = [
         pal:{txt:'Publicar a previsão de ready time de cada ordem, vinda do P2, na tela tática do SCCT.', tools:['pbi','pa']},
         best:{txt:'Disponibilidade futura saindo do plano de produção direto para o planejamento de transporte no OTM.', plat:'SAP IBP / S/4 → Oracle OTM', avail:'ativar', layer:'dados'}},
       {t:'Fábrica cria a DO', sys:['SAP'],
-        pain:{txt:'DOs criadas sem material em estoque geram retrabalho no outbound.', ids:['SUP-STM-16'], src:'M'},
-        pal:{txt:'Validação de estoque antes de liberar a DO para o outbound.', tools:['pa']},
-        best:{txt:'Check de disponibilidade no fluxo SAP → OTM antes do planejamento de carga.', plat:'SAP + Oracle OTM', avail:'ativar', layer:'auto'}},
+        pain:{txt:'A fábrica cria a DO (delivery order) mesmo quando o material ainda não está em estoque. O outbound planeja o transporte, descobre a falta depois e precisa refazer o planejamento.', ids:['SUP-STM-16'], src:'M'},
+        pal:{txt:'Todo dia, conferir as DOs criadas contra o estoque do material. Se a DO não tem estoque, a fábrica e o outbound recebem um aviso antes de o transporte ser planejado. Na tela do CoE, um indicador mostra as DOs sem estoque por fábrica.', tools:['pa']},
+        best:{txt:'O fluxo SAP → OTM checa a disponibilidade do material antes de liberar a DO para o planejamento de carga. DO sem estoque não chega ao OTM.', plat:'SAP + Oracle OTM', avail:'ativar', layer:'auto'}},
       {t:'Corrigir DOs criadas erradas', sys:['SAP'],
-        pain:{txt:'As alterações são manuais e dependem de confirmação do back-office.', ids:['SUP-STM-29'], src:'M'},
-        pal:{txt:'Formulário de correção com aprovação e atualização automática.', tools:['papps','pa']},
-        best:{txt:'Integração SAP ↔ OTM com sistema master definido para cada objeto.', plat:'SAP + Oracle OTM', avail:'ativar', layer:'auto'}},
+        pain:{txt:'Quando a DO é criada com algum dado errado, a correção é manual e depende de o back-office confirmar cada alteração. O motivo do erro não fica registrado, então ele se repete.', ids:['SUP-STM-29'], src:'M'},
+        pal:{txt:'Um formulário único de correção: quem pede informa o campo errado, o valor certo e o motivo. O back-office aprova pelo Power Automate e o motivo fica registrado para atacar a causa na fábrica.', tools:['papps','pa']},
+        best:{txt:'Integração SAP ↔ OTM com um sistema master definido para cada dado da DO. A correção é feita uma vez, no master, e replica sozinha.', plat:'SAP + Oracle OTM', avail:'ativar', layer:'auto'}},
       {t:'CSR pede mudança de data da DO', sys:['Email'],
-        pain:{txt:'Falta um nível de aceite em que todas as partes confirmem a nova data antes do agendamento.', ids:['SUP-STM-20'], src:'M'},
-        pal:{txt:'Fluxo de aceite com prazo para cada parte.', tools:['pa']},
-        best:{txt:'O Shipment Change Assistant do OTM trata a mudança, com aprovação do usuário.', plat:'Oracle OTM 26C', avail:'agora', layer:'agente'}},
+        pain:{txt:'Quando o CSR pede para mudar a data de uma DO, não há uma etapa em que fábrica, transporte e armazém confirmem a nova data. O agendamento muda sem que todos saibam ou concordem.', ids:['SUP-STM-20'], src:'M'},
+        pal:{txt:'Pedido de mudança por formulário. O Power Automate pede o aceite de fábrica, transporte e armazém, cada um com prazo, e o agendamento só muda depois de todos aceitarem.', tools:['pa']},
+        best:{txt:'O Shipment Change Assistant do OTM (26C) recebe o pedido, calcula o impacto no embarque e sugere o ajuste, que o usuário aprova.', plat:'Oracle OTM 26C', avail:'agora', layer:'agente'}},
       {t:'Tratar pedidos que não são PM nem AM', sys:['SAP'],
-        pain:{txt:'Só seguem pelo fluxo regular quando completos; matéria-prima tem de ir como inbound externo.', ids:['SUP-STM-28'], src:'M'},
-        pal:{txt:'Mapear o caso e definir um fluxo alternativo.', tools:['bpmn']},
-        best:{txt:'Redesenho do processo e avaliação da aderência nativa do OTM.', plat:'Processo + Oracle OTM', avail:'processo', layer:'processo'}}
+        pain:{txt:'Pedidos fora das categorias PM e AM só seguem pelo fluxo regular quando estão completos. Matéria-prima, por exemplo, precisa ser tratada como inbound externo, fora do processo normal.', ids:['SUP-STM-28'], src:'M'},
+        pal:{txt:'Levantar os casos dos últimos meses e o caminho que cada um seguiu, desenhar um fluxo alternativo em BPMN e validar com o outbound e o inbound.', tools:['bpmn']},
+        best:{txt:'Processo redesenhado para esses pedidos, aproveitando o que o OTM já faz de forma nativa antes de criar qualquer exceção.', plat:'Processo + Oracle OTM', avail:'processo', layer:'processo'}}
     ]},
   { id:'s2', src:['M','C'], lane:'plan', coe:['SUP-PLAN-02/03 · Today’s e planned orders','SUP-PLAN-07/08 · Planned × done (KPK/KPC)'], icon:'layers', t:'Planejamento de carga', who:'Planejamento de transporte', freq:'Diária', sys:['OTM','SAP'], out:'carga planejada',
     acts:[
       {t:'Montar cargas e consolidar entregas', sys:['OTM'], qw:'Em teste: auto tender para DOs de 26 pallets e regras para o OTM planejar ordens sozinho.',
-        pain:{txt:'Nenhuma integração sugere ou automatiza consolidações.', ids:['SUP-STM-15'], src:'M'},
-        pal:{txt:'Relatório de oportunidades de consolidação: mesmo cliente, mesma janela.', tools:['pbi']},
-        best:{txt:'Otimização de carga do OTM, com fill rate e alternativas de custo.', plat:'Oracle OTM', avail:'agora', layer:'otimizar'}},
+        pain:{txt:'Ao montar as cargas, nada sugere quais entregas poderiam ir juntas. A consolidação depende de o planner perceber a oportunidade, e cargas saem com espaço sobrando.', ids:['SUP-STM-15'], src:'M'},
+        pal:{txt:'Exportar do OTM as DOs abertas e agrupar no Power BI as que podem ir juntas (mesmo cliente ou destino e janelas compatíveis). O planner consulta essa lista antes de fechar as cargas.', tools:['pbi']},
+        best:{txt:'O otimizador de carga do OTM propõe as consolidações sozinho, buscando o maior fill rate e mostrando as alternativas de custo.', plat:'Oracle OTM', avail:'agora', layer:'otimizar'}},
       {t:'Ver o volume de carregamento dos próximos dias', sys:['Excel'],
-        pain:{txt:'O controle é manual e não mostra com precisão o planejamento futuro.', ids:['SUP-STM-18'], src:'M'},
-        pal:{txt:'Visão de carga por dia e doca, alimentada pelo plano de produção.', tools:['pbi']},
-        best:{txt:'Plano de produção alimentando o OTM, com regras de calendário e doca.', plat:'SAP IBP → Oracle OTM', avail:'ativar', layer:'dados'}},
+        pain:{txt:'O volume a carregar nos próximos dias é controlado à mão e não mostra com precisão o que vem pela frente. Fica difícil dimensionar doca, equipe e transportadoras.', ids:['SUP-STM-18'], src:'M'},
+        pal:{txt:'Juntar a previsão de término das ordens (P2) com as cargas já planejadas no OTM e mostrar o volume por dia e por doca para os próximos 3 dias.', tools:['pbi']},
+        best:{txt:'O plano de produção alimenta o OTM, que planeja as cargas futuras respeitando calendário e capacidade de doca.', plat:'SAP IBP → Oracle OTM', avail:'ativar', layer:'dados'}},
       {t:'Distribuir as entregas ao longo da semana', sys:['OTM'],
-        pain:{txt:'As entregas se concentram na segunda, quinta e sexta.', ids:['SUP-STM-23'], src:'M'},
-        pal:{txt:'Mapa de entregas por dia e cliente para renegociar janelas.', tools:['pbi']},
-        best:{txt:'Dock Scheduling Assistant e janelas de entrega no OTM.', plat:'Oracle OTM 26C', avail:'agora', layer:'agente'}},
+        pain:{txt:'As entregas se concentram na segunda, na quinta e na sexta. Nesses dias faltam caminhões e doca; nos outros, sobra capacidade.', ids:['SUP-STM-23'], src:'M'},
+        pal:{txt:'Mapa das entregas por dia da semana e por cliente, para identificar quem concentra os picos e renegociar as janelas de recebimento.', tools:['pbi']},
+        best:{txt:'Janelas de entrega cadastradas no OTM e o Dock Scheduling Assistant (26C) distribuindo os agendamentos ao longo da semana.', plat:'Oracle OTM 26C', avail:'agora', layer:'agente'}},
       {t:'Respeitar dias fechados do cliente e feriados', sys:['SAP','OTM'], qw:'Em validação: cadastro de cliente no OTM com operação e tipos de caminhão permitidos.',
         pain:{txt:'Há cargas planejadas para dias em que o armazém do cliente está fechado, e o SAP não deixa o cliente agendar quando estamos em feriado.', ids:['SUP-STM-24','SUP-STM-05'], src:'M'},
-        pal:{txt:'Tabela de calendários de cliente consultada antes de fechar a carga.', tools:['pa']},
-        best:{txt:'Calendários e janelas de recebimento configurados no OTM.', plat:'Oracle OTM', avail:'agora', layer:'auto'}},
+        pal:{txt:'Planilha de calendário por cliente, com dias e horários de recebimento e feriados. O Power Automate confere a data planejada de cada carga contra esse calendário e avisa o planner quando cai num dia fechado.', tools:['pa']},
+        best:{txt:'Calendários e janelas de recebimento de cada cliente configurados no OTM, que deixa de planejar cargas para dias fechados.', plat:'Oracle OTM', avail:'agora', layer:'auto'}},
       {t:'Cumprir o SLA dos planos', sys:[],
-        pain:{txt:'Planos saem fora do SLA e faltam stakeholders no processo.', ids:['SUP-PRO-09'], src:'M'},
-        pal:{txt:'Rever o fluxo com quem está faltando e medir o SLA.', tools:['bpmn']},
-        best:{txt:'Fluxo revisto com papéis e SLA definidos.', plat:'Processo', avail:'processo', layer:'processo'}}
+        pain:{txt:'Os planos de transporte saem depois do prazo combinado (SLA), e algumas áreas que deveriam participar não estão no processo.', ids:['SUP-PRO-09'], src:'M'},
+        pal:{txt:'Medir o SLA atual dos planos, mapear quem participa e quem falta, e rever o fluxo com essas pessoas.', tools:['bpmn']},
+        best:{txt:'Fluxo de planejamento revisado, com cada papel e prazo definidos e o SLA medido todo mês.', plat:'Processo', avail:'processo', layer:'processo'}}
     ]},
   { id:'s3', src:['M','C'], lane:'plan', coe:['SUP-TRE-01 · Port status','SUP-OCN-08 · Ship lines allocation'], icon:'anchor', t:'Booking e exportação', who:'Exportação · GEODIS', freq:'Diária', sys:['GEODIS','IRIS','OTM','Email'], out:'booking confirmado',
     acts:[
       {t:'Fazer e acompanhar bookings', sys:['GEODIS','Email'],
-        pain:{txt:'Não existe plataforma única de booking: há retrabalho e falta visibilidade.', ids:['SUP-STM-01'], src:'M'},
-        pal:{txt:'Lista única de bookings alimentada pelos e-mails e arquivos da GEODIS.', tools:['pa','pbi']},
-        best:{txt:'Booking e status centralizados no OTM, integrados à GEODIS.', plat:'Oracle OTM + GEODIS', avail:'ativar', layer:'auto'}},
+        pain:{txt:'Não existe uma plataforma única de booking. Cada booking é feito e acompanhado por e-mail com a GEODIS, o que gera retrabalho e deixa o time sem visão do status.', ids:['SUP-STM-01'], src:'M'},
+        pal:{txt:'Uma caixa de e-mail compartilhada recebe os avisos da GEODIS. O Power Automate extrai booking, navio, datas e status para uma lista única, e uma tela mostra o status e avisa quando algo muda.', tools:['pa','pbi']},
+        best:{txt:'Booking e status centralizados no OTM, integrado à GEODIS, sem depender de e-mail.', plat:'Oracle OTM + GEODIS', avail:'ativar', layer:'auto'}},
       {t:'Consultar dados no IRIS (GEODIS)', sys:['IRIS'],
-        pain:{txt:'O sistema é pouco usado, mas guarda todos os dados de booking.', ids:['SUP-STM-07'], src:'M'},
-        pal:{txt:'Exportação periódica do IRIS para a mesma base.', tools:['pa']},
-        best:{txt:'Dados de booking trazidos para o OTM e o IRIS fora da rotina.', plat:'Oracle OTM', avail:'ativar', layer:'dados'}},
+        pain:{txt:'O IRIS, sistema da GEODIS, guarda todos os dados de booking, mas quase ninguém usa. A informação existe e não chega a quem precisa.', ids:['SUP-STM-07'], src:'M'},
+        pal:{txt:'Exportação periódica do IRIS para a mesma lista de bookings, para que os dados apareçam junto com o resto.', tools:['pa']},
+        best:{txt:'Os dados de booking passam a vir para o OTM e o IRIS deixa de fazer parte da rotina.', plat:'Oracle OTM', avail:'ativar', layer:'dados'}},
       {t:'Seguir o fluxo de exportação', sys:[],
-        pain:{txt:'Não há um fluxo único: cada rota usa sistemas e métodos diferentes.', ids:['SUP-STM-02'], src:'M'},
-        pal:{txt:'Mapear o AS-IS e escolher o fluxo padrão.', tools:['bpmn']},
-        best:{txt:'Fluxo padrão de exportação com a aderência nativa do OTM.', plat:'Processo + Oracle OTM', avail:'processo', layer:'processo'}}
+        pain:{txt:'Não existe um fluxo único de exportação. Cada rota usa sistemas e métodos diferentes, o que dificulta treinar pessoas, medir e automatizar.', ids:['SUP-STM-02'], src:'M'},
+        pal:{txt:'Mapear como cada rota funciona hoje, escolher o fluxo padrão e as exceções, e documentar em BPMN.', tools:['bpmn']},
+        best:{txt:'Um fluxo padrão de exportação para todas as rotas, usando o que o OTM já faz de forma nativa.', plat:'Processo + Oracle OTM', avail:'processo', layer:'processo'}}
     ]},
   { id:'s4', src:['M','C'], lane:'load', coe:['SUP-LDG-01 · Loading status','SUP-LDG-02 · Rejections','SUP-LDG-03/04 · Tender e scheduled','SUP-LDG-05/06 · Late trucks e late loads'], icon:'truck', t:'Transportadora e veículo', who:'Planejamento de transporte · Transportadoras', freq:'Diária', sys:['OTM','Email'], out:'veículo alocado',
     acts:[
       {t:'Registrar rejeição de veículo', sys:['OTM'], qw:'Em teste: custo adicional parametrizado para penalidade de janela de carregamento (cerca de 700 cargas rejeitadas por mês).',
         pain:{txt:'O OTM não tem opção para marcar a rejeição e notificar ou penalizar a transportadora na hora.', ids:['SUP-STM-10'], src:'M'},
-        pal:{txt:'Formulário de rejeição que notifica a transportadora e registra a ocorrência.', tools:['papps','pa']},
-        best:{txt:'Evento de rejeição no OTM com notificação e regra de penalidade auditável.', plat:'Oracle OTM', avail:'agora', layer:'auto'}},
+        pal:{txt:'Formulário de rejeição com carga, transportadora, motivo e horário. A transportadora é avisada na hora, e um indicador de rejeições por transportadora apoia a negociação.', tools:['papps','pa']},
+        best:{txt:'A rejeição vira um evento no OTM, que avisa a transportadora e aplica a penalidade por regra, com registro auditável.', plat:'Oracle OTM', avail:'agora', layer:'auto'}},
       {t:'Pedir equipes de motoristas (team drivers)', sys:['Email'], qw:'Em validação: marcar ações no OTM, como hypercare e team drivers.',
-        pain:{txt:'O pedido e o hypercare correm por e-mail.', ids:['SUP-STM-19'], src:'M'},
-        pal:{txt:'Solicitação por formulário, com status visível.', tools:['papps']},
-        best:{txt:'Pedido e confirmação do recurso dentro do OTM.', plat:'Oracle OTM', avail:'agora', layer:'auto'}}
+        pain:{txt:'Pedidos de equipes de motoristas (team drivers) e o acompanhamento de hypercare correm por e-mail, sem status visível para quem precisa.', ids:['SUP-STM-19'], src:'M'},
+        pal:{txt:'Pedido por formulário com carga, rota e data, e uma lista que mostra o status de cada pedido: pedido, confirmado ou recusado.', tools:['papps']},
+        best:{txt:'O pedido e a confirmação do recurso ficam dentro do OTM, marcados na própria carga.', plat:'Oracle OTM', avail:'agora', layer:'auto'}}
     ]},
   { id:'s6', src:['M','C'], lane:'load', coe:['SUP-LDG-07 · Warehouse capacity (3 dias)'], icon:'warehouse', t:'Armazéns e expedição', who:'Armazéns externos · Outbound', freq:'Diária', sys:['WMS','Dachser','Email'], out:'carga expedida',
     acts:[
       {t:'Operar com armazéns externos', sys:['WMS'],
-        pain:{txt:'Fluxos manuais e troca de dados entre sistemas.', ids:['SUP-PRO-06'], src:'M'},
-        pal:{txt:'Troca de arquivos padronizada e automática com cada armazém.', tools:['pa']},
-        best:{txt:'Armazéns integrados ao fluxo SAP ↔ OTM.', plat:'Integração', avail:'ativar', layer:'auto'}},
+        pain:{txt:'A troca de dados com os armazéns externos é manual, e cada armazém manda a informação num formato diferente.', ids:['SUP-PRO-06'], src:'M'},
+        pal:{txt:'Definir com cada armazém um layout padrão de arquivo, trocado automaticamente numa pasta compartilhada e validado na chegada.', tools:['pa']},
+        best:{txt:'Armazéns integrados ao fluxo SAP ↔ OTM, trocando dados por integração em vez de arquivo.', plat:'Integração', avail:'ativar', layer:'auto'}},
       {t:'Alinhar as rotinas do Norte e do Sul', sys:['Dachser'],
-        pain:{txt:'O Sul conta com o sistema da Dachser; o Norte, não.', ids:['SUP-PRO-07'], src:'M'},
-        pal:{txt:'Comparar os dois fluxos e escolher o padrão.', tools:['bpmn']},
-        best:{txt:'Fluxo único com a capacidade nativa do OTM.', plat:'Processo + Oracle OTM', avail:'processo', layer:'processo'}},
+        pain:{txt:'No Sul, o outbound trabalha com o sistema da Dachser; no Norte, não. As duas regiões fazem a mesma atividade de jeitos diferentes.', ids:['SUP-PRO-07'], src:'M'},
+        pal:{txt:'Mapear os dois fluxos lado a lado, escolher o padrão e definir o que precisa continuar como exceção.', tools:['bpmn']},
+        best:{txt:'Um fluxo único para as duas regiões, apoiado no que o OTM já faz de forma nativa.', plat:'Processo + Oracle OTM', avail:'processo', layer:'processo'}},
       {t:'Obter respostas dos armazéns', sys:['Email'],
-        pain:{txt:'Armazéns não respondem ou dão informação inconsistente.', ids:['SUP-STM-25'], src:'M'},
-        pal:{txt:'Canal único com prazo de resposta.', tools:['pa']},
-        best:{txt:'Status registrado no OTM.', plat:'Processo + Oracle OTM', avail:'processo', layer:'processo'}}
+        pain:{txt:'Os armazéns demoram a responder ou dão informações que não batem, e o outbound precisa cobrar caso a caso.', ids:['SUP-STM-25'], src:'M'},
+        pal:{txt:'Um canal único (lista ou formulário) para os pedidos aos armazéns, com prazo de resposta e lembrete automático.', tools:['pa']},
+        best:{txt:'O status de cada pedido ao armazém fica registrado no OTM, visível para todos.', plat:'Processo + Oracle OTM', avail:'processo', layer:'processo'}}
     ]},
   { id:'s5', src:['M','C'], lane:'exec', coe:[], icon:'file-check', t:'Documentos e compliance', who:'Exportação · Despachantes', freq:'Por embarque', sys:['SAP','Bizagi','EDI','Email'], out:'documentos liberados',
     acts:[
       {t:'Lançar os dados da DO no Bizagi', sys:['Bizagi'],
-        pain:{txt:'Digitação manual: o dado deveria vir direto da DO.', ids:['SUP-STM-03'], src:'M'},
-        pal:{txt:'Integração SAP → Bizagi por API ou RPA.', tools:['script','pa']},
-        best:{txt:'Fim da redigitação, com sistema master definido.', plat:'SAP + integração', avail:'ativar', layer:'auto'}},
+        pain:{txt:'Os dados da DO são digitados à mão no Bizagi, embora já existam no SAP. Além do tempo gasto, a redigitação gera erro.', ids:['SUP-STM-03'], src:'M'},
+        pal:{txt:'Extrair do SAP os campos que hoje são digitados e preencher o Bizagi por RPA, ou pela API do Bizagi se estiver disponível.', tools:['script','pa']},
+        best:{txt:'Os dados passam a vir do sistema master, sem redigitação em nenhum ponto.', plat:'SAP + integração', avail:'ativar', layer:'auto'}},
       {t:'Enviar documentos a transportadoras e despachantes', sys:['EDI','Email'], qw:'Com a TI: integração via OIC que leva documentos de uma pasta para o OTM.',
-        pain:{txt:'O fluxo de documentos corre por e-mail.', ids:['SUP-STM-21'], src:'M'},
-        pal:{txt:'Pasta e envio automáticos por embarque.', tools:['pa']},
-        best:{txt:'Documentos acessíveis aos parceiros dentro do OTM.', plat:'Oracle OTM', avail:'ativar', layer:'auto'}},
+        pain:{txt:'Os documentos de cada embarque vão para transportadoras e despachantes por e-mail, um a um, sem controle de quem recebeu o quê.', ids:['SUP-STM-21'], src:'M'},
+        pal:{txt:'Uma pasta por embarque com os documentos gerados, enviada automaticamente pelo Power Automate ao parceiro daquele embarque.', tools:['pa']},
+        best:{txt:'Os documentos ficam disponíveis para os parceiros dentro do OTM.', plat:'Oracle OTM', avail:'ativar', layer:'auto'}},
       {t:'Conferir valores antes do embarque (Uruguai, Nigéria)', sys:['SAP'],
         pain:{txt:'Divergência entre a NF brasileira e a TPI devolve caminhões. A Nigéria só recebe com carta de crédito, sem nenhuma discrepância.', ids:['SUP-STM-17','SUP-PRO-05'], src:'M'},
         pal:{txt:'Checklist automático que compara os campos críticos e segura o embarque se algo não bater.', tools:['pa','script']},
         best:{txt:'Validação documental no fluxo, com um agente que interpreta divergências de texto.', plat:'Oracle OTM + SAP + agente', avail:'ativar', layer:'agente'}},
       {t:'Emitir air waybill e tratar bloqueios de nota', sys:['SAP'],
         pain:{txt:'O faturamento da exportação aérea precisa ser redesenhado, e bloqueios de NF geram burocracia.', ids:['SUP-PRO-08','SUP-PRO-10'], src:'M'},
-        pal:{txt:'Redesenho dos dois fluxos.', tools:['bpmn']},
-        best:{txt:'Fluxos redesenhados e parametrizados.', plat:'Processo', avail:'processo', layer:'processo'}}
+        pal:{txt:'Mapear os fluxos de faturamento da exportação aérea e de bloqueio de nota fiscal, com os pontos em que travam, e redesenhar com o fiscal e a exportação.', tools:['bpmn']},
+        best:{txt:'Os dois fluxos redesenhados e parametrizados no sistema, sem etapas manuais de desbloqueio.', plat:'Processo', avail:'processo', layer:'processo'}}
     ]},
   { id:'s7', src:['M','C'], lane:'exec', coe:['SUP-ROAD-01…06 · Tracking road','SUP-OCN-01…07 · Tracking ocean','SUP-TRE-06/07 · ATA e POD'], icon:'radar', t:'Tracking e exceções', who:'Torre de controle · Outbound', freq:'Contínua', sys:['FourKites','P44','OTM'], out:'entrega realizada',
     acts:[
       {t:'Rastrear embarques e transbordos', sys:['FourKites','P44'],
         pain:{txt:'O tracking está dividido entre FourKites, project44 e transbordo, e o stakeholder precisa de um link externo.', ids:['SUP-STM-06','SUP-STM-26'], src:'M'},
-        pal:{txt:'Painel único de status juntando FourKites e project44.', tools:['pbi']},
-        best:{txt:'Eventos de tracking dentro do OTM, com ETA previsto por ML.', plat:'Oracle OTM · ML ETA', avail:'agora', layer:'prever'}},
+        pal:{txt:'Exportar os eventos do FourKites e do project44 e juntar numa tela única por embarque, incluindo os transbordos, sem precisar abrir link externo.', tools:['pbi']},
+        best:{txt:'Os eventos de tracking entram no OTM, que mostra o status e calcula o ETA previsto com ML.', plat:'Oracle OTM · ML ETA', avail:'agora', layer:'prever'}},
       {t:'Receber alertas', sys:['Email'], qw:'Em teste: alertas no OTM pedindo POD e faturas de embarque ainda não cobradas.',
-        pain:{txt:'Chegam por e-mail alertas de todas as DOs, não só das que exigem ação.', ids:['SUP-STM-13'], src:'M'},
-        pal:{txt:'Filtrar e enviar só as exceções.', tools:['pa']},
-        best:{txt:'Gestão por exceção no OTM; um agente resume causa, impacto e próximo passo.', plat:'Oracle OTM + AI Agent Studio', avail:'ativar', layer:'agente'}},
+        pain:{txt:'Chegam por e-mail alertas de todas as DOs, mesmo das que estão no prazo. O que exige ação se perde no meio do volume.', ids:['SUP-STM-13'], src:'M'},
+        pal:{txt:'Definir regras de exceção (atraso acima de X horas, sem sinal, ETA fora da janela), e o Power Automate envia só os alertas que se encaixam nelas.', tools:['pa']},
+        best:{txt:'Gestão por exceção no OTM. Um agente do AI Agent Studio resume a causa, o impacto e o próximo passo de cada exceção.', plat:'Oracle OTM + AI Agent Studio', avail:'ativar', layer:'agente'}},
       {t:'Acompanhar drop shipments pendentes', sys:['OTM'],
-        pain:{txt:'Os pendentes não são monitorados de forma consistente.', ids:['SUP-STM-04','SUP-STM-30'], src:'M'},
-        pal:{txt:'Lista diária de drop shipments abertos, com idade.', tools:['pbi']},
-        best:{txt:'Status e alerta de atraso no OTM.', plat:'Oracle OTM', avail:'agora', layer:'auto'}},
+        pain:{txt:'Os drop shipments pendentes não são acompanhados de forma consistente, e um embarque parado pode passar dias sem ninguém ver.', ids:['SUP-STM-04','SUP-STM-30'], src:'M'},
+        pal:{txt:'Relatório diário dos drop shipments abertos, com a idade e o responsável de cada um.', tools:['pbi']},
+        best:{txt:'Status e alerta de atraso dos drop shipments no próprio OTM.', plat:'Oracle OTM', avail:'agora', layer:'auto'}},
       {t:'Buscar embarque por nota de entrega ou nota fiscal', sys:['OTM'],
-        pain:{txt:'O OTM não tem esse campo de busca.', ids:['SUP-STM-27'], src:'M'},
-        pal:{txt:'Tabela de referência DO/NF → shipment.', tools:['pbi']},
-        best:{txt:'Campo de busca configurado no OTM.', plat:'Oracle OTM', avail:'agora', layer:'auto'}}
+        pain:{txt:'O OTM não tem campo de busca por nota de entrega ou nota fiscal. Para achar o embarque a partir de uma NF, é preciso procurar em outro sistema.', ids:['SUP-STM-27'], src:'M'},
+        pal:{txt:'Uma tabela de referência DO/NF → shipment, exportada do OTM e do SAP, com busca numa tela do Power BI.', tools:['pbi']},
+        best:{txt:'Campo de busca por DO e NF configurado no OTM.', plat:'Oracle OTM', avail:'agora', layer:'auto'}}
     ]},
   { id:'s8', src:['M','C'], lane:'fr', coe:['SUP-TRE-03 · Airfreight cost','SUP-TRE-15 · Monthly unplanned costs','SUP-TER-16 · Cost of poor quality'], icon:'hand-coins', t:'Frete e custos', who:'Outbound · Financeiro', freq:'Por embarque e mensal', sys:['OTM','SAP'], out:'frete pago',
     acts:[
       {t:'Criar a PR/PO de frete', sys:['SAP'],
-        pain:{txt:'A criação é muito manual e gera erros.', ids:['SUP-PRO-01'], src:'M'},
-        pal:{txt:'Criação automática a partir do shipment.', tools:['pa','script']},
-        best:{txt:'Integração OTM → SAP gerando a PR/PO.', plat:'Oracle OTM + SAP', avail:'ativar', layer:'auto'}},
+        pain:{txt:'A PR/PO de frete é criada à mão no SAP para cada embarque, o que toma tempo e gera erro de valor e de dados.', ids:['SUP-PRO-01'], src:'M'},
+        pal:{txt:'Exportar os shipments fechados com custo e criar a PR/PO no SAP por RPA a partir dessa lista, seguindo regras de criação definidas.', tools:['pa','script']},
+        best:{txt:'Integração OTM → SAP que gera a PR/PO automaticamente quando o shipment fecha.', plat:'Oracle OTM + SAP', avail:'ativar', layer:'auto'}},
       {t:'Fazer o acerto de frete (settlement)', sys:['OTM'],
-        pain:{txt:'O processo é difícil para quem está chegando.', ids:['SUP-PRO-02'], src:'M'},
-        pal:{txt:'Guia passo a passo e agente para dúvidas.', tools:['copilot']},
-        best:{txt:'Settlement nativo do OTM com aprovação por tolerância.', plat:'Oracle OTM', avail:'agora', layer:'auto'}},
+        pain:{txt:'O acerto de frete (settlement) no OTM é difícil de aprender, e quem chega depende de alguém experiente para cada dúvida.', ids:['SUP-PRO-02'], src:'M'},
+        pal:{txt:'Guia passo a passo do settlement com prints, feito com um usuário experiente. Opcional: um agente no Copilot responde dúvidas sobre o guia.', tools:['copilot']},
+        best:{txt:'Settlement nativo do OTM, com aprovação automática dentro da tolerância e revisão só do que foge dela.', plat:'Oracle OTM', avail:'agora', layer:'auto'}},
       {t:'Aprovar os custos da GEODIS', sys:['OTM'],
-        pain:{txt:'A aprovação automática tira o controle das despesas.', ids:['SUP-PRO-04'], src:'M'},
-        pal:{txt:'Regra de tolerância: o que passar dela vai para aprovação.', tools:['pa']},
-        best:{txt:'Aprovação por tolerância no OTM, com trilha de auditoria.', plat:'Oracle OTM', avail:'agora', layer:'auto'}},
+        pain:{txt:'Os custos da GEODIS são aprovados automaticamente, sem nenhum filtro. Com isso, o time perde o controle das despesas.', ids:['SUP-PRO-04'], src:'M'},
+        pal:{txt:'Tabela de tolerância por tipo de custo. O que estiver dentro é aprovado; o que passar vai para aprovação no Power Automate.', tools:['pa']},
+        best:{txt:'Aprovação por tolerância configurada no OTM, com trilha de auditoria de cada aprovação.', plat:'Oracle OTM', avail:'agora', layer:'auto'}},
       {t:'Registrar revisões do custo de exportação', sys:['Excel'],
-        pain:{txt:'Revisões frequentes sem registro estruturado.', ids:['SUP-KPI-02'], src:'M'},
-        pal:{txt:'Base de custos com histórico de versões.', tools:['pbi']},
-        best:{txt:'Custo de frete com fonte única no OTM.', plat:'OTM Analytics', avail:'agora', layer:'dados'}}
+        pain:{txt:'O custo de exportação é revisado com frequência, mas as revisões não ficam registradas. Não dá para saber quanto custava antes nem por que mudou.', ids:['SUP-KPI-02'], src:'M'},
+        pal:{txt:'Base de custos por rota com a versão e a data de cada revisão, e o histórico visível numa tela.', tools:['pbi']},
+        best:{txt:'Custo de frete com fonte única no OTM, guardando o histórico de cada tarifa.', plat:'OTM Analytics', avail:'agora', layer:'dados'}}
     ]},
   { id:'s9', src:['M','C','K'], lane:'fr', coe:['SUP-TRE-10/11 · Fill rate','SUP-TRE-12 · Fill rate fault codes','SUP-TRE-13 · Freight cost/KPK','SUP-TRE-14 · Fill rate loss'], icon:'chart-column', t:'Indicadores do outbound', who:'Outbound · Gestão', freq:'Mensal', sys:['OTM','PBI','Excel'], out:'',
     acts:[
       {t:'Calcular o fill rate', sys:['Excel','PBI'], qw:'Em validação: cadastro de caminhões com eixos, para melhorar a alocação 3D da carga.',
         pain:{txt:'Não há fórmula padrão, recorte por tipo de caminhão, código de exceção nem apontamento automático.', ids:['SUP-STM-08','SUP-KPI-04','SUP-KPI-05','SUP-KPI-06'], src:'M'},
-        pal:{txt:'Fórmula oficial única no Power BI, por tipo de veículo e com código de exceção.', tools:['pbi']},
+        pal:{txt:'Fechar com o time uma fórmula oficial única (peso, volume ou pallets, por tipo de caminhão) e implementar no Power BI com códigos de exceção, substituindo as planilhas paralelas.', tools:['pbi']},
         best:{txt:'Fill Rate Optimization Agent, escopo da Wave 2: consolida cargas a partir de origem, destino, volume, janelas, SLA, frota e restrições de empilhamento, buscando o maior fill rate.', plat:'Oracle Fusion AI Agent · Fill Rate', avail:'novo', layer:'agente'}},
       {t:'Analisar fill rate × custo antes de aprovar', sys:['PBI'],
-        pain:{txt:'A análise conjunta e a pré-aprovação ainda não existem.', ids:['SUP-KPI-07'], src:'M'},
-        pal:{txt:'Visão fill rate × custo por carga.', tools:['pbi']},
-        best:{txt:'Network Modeling do OTM para what-if de custo e utilização.', plat:'Oracle OTM · Network Modeling', avail:'agora', layer:'simular'}},
+        pain:{txt:'Hoje não se olha fill rate e custo juntos antes de aprovar uma carga, e não existe uma etapa de pré-aprovação.', ids:['SUP-KPI-07'], src:'M'},
+        pal:{txt:'Juntar fill rate e custo por carga e mostrar as cargas com fill rate baixo e custo alto para revisão antes de aprovar.', tools:['pbi']},
+        best:{txt:'Network Modeling do OTM para simular cenários de custo e de utilização da frota antes de decidir.', plat:'Oracle OTM · Network Modeling', avail:'agora', layer:'simular'}},
       {t:'Padronizar KPIs de embarque e saving', sys:['OTM','PBI'],
         pain:{txt:'Cada área e armazém mede de um jeito, e os relatórios do OTM saem inconsistentes por parametrização.', ids:['SUP-KPI-01','SUP-KPI-03','SUP-STM-14','SUP-STM-12'], src:'M'},
-        pal:{txt:'Modelo semântico único com as definições oficiais.', tools:['pbi']},
-        best:{txt:'Parâmetros padronizados no OTM e KPIs com fonte única.', plat:'OTM Analytics + Power BI', avail:'agora', layer:'dados'}},
+        pal:{txt:'Fechar com as áreas a definição oficial de cada KPI e montar um modelo semântico único no Power BI, usado por todas as áreas e armazéns.', tools:['pbi']},
+        best:{txt:'Parâmetros padronizados no OTM e os KPIs calculados a partir de uma fonte única.', plat:'OTM Analytics + Power BI', avail:'agora', layer:'dados'}},
       {t:'Analisar a causa, além do apontamento', sys:[],
-        pain:{txt:'As análises priorizam completar o apontamento em vez de achar a causa.', ids:['SUP-KPI-08'], src:'M'},
-        pal:{txt:'Taxonomia de causas obrigatória no registro.', tools:['papps']},
-        best:{txt:'Rotina de análise de causa como parte do processo.', plat:'Processo', avail:'processo', layer:'processo'}}
+        pain:{txt:'Quando algo dá errado, a análise se preocupa em completar o apontamento e não em achar a causa. Os mesmos problemas voltam.', ids:['SUP-KPI-08'], src:'M'},
+        pal:{txt:'Lista fechada de causas, preenchimento obrigatório no registro e uma análise mensal das principais causas.', tools:['papps']},
+        best:{txt:'A análise de causa passa a fazer parte da rotina do processo, com dono e prazo.', plat:'Processo', avail:'processo', layer:'processo'}}
     ]},
   { id:'s10', src:['M','C'], lane:'otrans', icon:'network', t:'Integração e cadastros', who:'Outbound · TI', freq:'Contínua', sys:['SAP','OTM'], out:'',
     acts:[
       {t:'Registrar a mesma informação em vários sistemas', sys:['SAP','OTM'],
-        pain:{txt:'Retrabalho e inconsistência.', ids:['SUP-STM-09'], src:'M'},
-        pal:{txt:'Replicação automática a partir de um sistema master.', tools:['pa']},
-        best:{txt:'Sistema master por objeto e integração SAP ↔ OTM.', plat:'SAP + Oracle OTM', avail:'ativar', layer:'auto'}},
+        pain:{txt:'A mesma informação é digitada em mais de um sistema (SAP e OTM). Além do retrabalho, os sistemas acabam com dados diferentes.', ids:['SUP-STM-09'], src:'M'},
+        pal:{txt:'Mapear o que é digitado em mais de um sistema, definir qual é o master e replicar a partir dele com Power Automate ou RPA.', tools:['pa']},
+        best:{txt:'Sistema master definido para cada dado e integração SAP ↔ OTM fazendo a replicação.', plat:'SAP + Oracle OTM', avail:'ativar', layer:'auto'}},
       {t:'Migrar dados entre sistemas', sys:['SAP','OTM'],
-        pain:{txt:'Os dados chegam incompletos, alterados ou em outro formato.', ids:['SUP-STM-11'], src:'M'},
-        pal:{txt:'Validação automática de campos na entrada.', tools:['script']},
-        best:{txt:'Integração com regras de validação e retorno de erro.', plat:'SAP + Oracle OTM', avail:'ativar', layer:'auto'}},
+        pain:{txt:'Quando os dados passam de um sistema para outro, chegam incompletos, alterados ou em outro formato, e o erro só aparece depois.', ids:['SUP-STM-11'], src:'M'},
+        pal:{txt:'Regras de validação dos campos na entrada e um relatório dos registros rejeitados para correção.', tools:['script']},
+        best:{txt:'Integração com regras de validação que devolve o erro na hora para quem enviou.', plat:'SAP + Oracle OTM', avail:'ativar', layer:'auto'}},
       {t:'Fazer lançamentos manuais no SAP', sys:['SAP'],
-        pain:{txt:'Processos no SAP ainda exigem digitação.', ids:['SUP-STM-31'], src:'M'},
-        pal:{txt:'RPA para os lançamentos repetitivos.', tools:['script']},
-        best:{txt:'Automação nativa no S/4.', plat:'S/4HANA', avail:'roadmap', layer:'auto'}}
+        pain:{txt:'Vários processos no SAP ainda exigem a digitação manual de lançamentos repetitivos.', ids:['SUP-STM-31'], src:'M'},
+        pal:{txt:'Listar os lançamentos repetitivos e o volume de cada um, e automatizar por RPA os de maior volume.', tools:['script']},
+        best:{txt:'Automação nativa desses lançamentos no S/4HANA.', plat:'S/4HANA', avail:'roadmap', layer:'auto'}}
     ]}
   ]},
 
@@ -1232,36 +1325,36 @@ const SECTORS = [
     acts:[
       {t:'Receber as RO dos mercados e priorizar por prazo', sys:['PBI'], ok:true, note:'O CoE classifica as RO em no prazo, rush, perto do vencimento e atrasadas.'},
       {t:'Acompanhar a demanda dos mercados', sys:['PBI'],
-        pain:{txt:'O dashboard de mercados no Power BI não atualiza de forma precisa ou consistente.', ids:['REP-STM-02'], src:'M'},
-        pal:{txt:'Refazer o modelo de dados e o refresh do dashboard.', tools:['pbi']},
-        best:{txt:'Plataforma de dados do CoE com atualização na frequência que a decisão pede.', plat:'Power BI + plataforma de dados', avail:'ativar', layer:'visib'}}
+        pain:{txt:'O dashboard de demanda dos mercados, em Power BI, não atualiza de forma precisa nem regular. A Repro planeja com um número em que não confia.', ids:['REP-STM-02'], src:'M'},
+        pal:{txt:'Rever o modelo de dados e a origem do dashboard, corrigir o agendamento de atualização e validar os números com o time.', tools:['pbi']},
+        best:{txt:'Plataforma de dados do CoE atualizando o dashboard na frequência que cada decisão pede.', plat:'Power BI + plataforma de dados', avail:'ativar', layer:'visib'}}
     ]},
   { id:'r2', src:['M','C'], lane:'rin', coe:['REP-08 · Capacity','REP-09 · Available team','REP-10 · Global hubs capacity'], icon:'split', t:'Capacidade e distribuição entre hubs', who:'Coordenação das Repros', freq:'Diária', sys:['PBI','Email'], out:'job alocado',
     acts:[
       {t:'Ver o time disponível e a carga do dia', sys:['PBI'], ok:true, note:'Presentes, ausentes e jobs em andamento por pessoa.'},
       {t:'Pedir apoio a outra Repro quando falta capacidade', sys:['Email'],
-        pain:{txt:'Nenhum gatilho automático avisa quando uma Repro precisa de apoio.', ids:['REP-STM-03'], src:'M'},
-        pal:{txt:'Alerta de carga × capacidade que abre uma tarefa para a Repro de apoio.', tools:['pbi','pa']},
-        best:{txt:'O mesmo fluxo com critérios de skill e mercado e SLA de aceite.', plat:'Power Platform', avail:'ativar', layer:'auto'}}
+        pain:{txt:'Quando uma Repro fica sem capacidade, nada avisa. O pedido de apoio a outro hub depende de alguém perceber e mandar e-mail.', ids:['REP-STM-03'], src:'M'},
+        pal:{txt:'Calcular carga × capacidade por hub (a base das telas REP-08 e REP-10). Quando passar do limite, o Power Automate abre uma tarefa para o hub de apoio.', tools:['pbi','pa']},
+        best:{txt:'O mesmo fluxo, com critérios de skill e mercado para escolher o hub de apoio e SLA de aceite.', plat:'Power Platform', avail:'ativar', layer:'auto'}}
     ]},
   { id:'r3', src:['M','C'], lane:'rex', coe:['REP-03 · STD jobs due today','REP-14 · Productivity by area'], icon:'pen-tool', t:'Execução do job por área', who:'Operadores das áreas JV, IR, DA e QC', freq:'Contínua, por turno', sys:['Excel'], out:'desenho pronto',
     acts:[
       {t:'Executar o job nas áreas JV, IR, DA e QC', sys:[], ok:true, note:'Siglas conforme o CoE Design. Confirmar o significado de cada área com o time.'},
       {t:'Registrar início e fim do job', sys:['Excel'],
-        pain:{txt:'O controle é manual e sujeito a erro.', ids:['REP-PRO-02'], src:'M'},
-        pal:{txt:'Botão de início e fim com horário registrado e sequência validada.', tools:['papps']},
-        best:{txt:'Captura por evento no sistema da Repro, sem apontamento manual.', plat:'Integração', avail:'ativar', layer:'auto'}}
+        pain:{txt:'O início e o fim de cada job são anotados à mão em Excel. O registro sai com erro, e a produtividade calculada a partir dele também.', ids:['REP-PRO-02'], src:'M'},
+        pal:{txt:'App simples no Power Apps com botão de início e fim por job, que grava o horário e não deixa fechar um job que não foi aberto.', tools:['papps']},
+        best:{txt:'O sistema da Repro registra início e fim por evento, sem apontamento manual.', plat:'Integração', avail:'ativar', layer:'auto'}}
     ]},
   { id:'r4', src:['M','C'], lane:'rex', coe:['REP-05 · Perfect Repro Order','REP-11 · Repro errors','REP-12 · Rework'], icon:'scan-search', t:'Qualidade e retrabalho', who:'Repro · Qualidade', freq:'Diária', sys:['PBI','Excel'], out:'desenho aprovado',
     acts:[
       {t:'Encontrar desenhos ou entregas com falha', sys:['PBI'],
-        pain:{txt:'Não há acesso rápido às falhas para corrigir a tempo.', ids:['REP-KPI-02'], src:'M'},
-        pal:{txt:'Lista das falhas do dia, com responsável.', tools:['pbi']},
-        best:{txt:'Alerta por exceção no modelo de dados do CoE.', plat:'Power BI + plataforma de dados', avail:'ativar', layer:'visib'}},
+        pain:{txt:'Não há uma forma rápida de ver quais desenhos ou entregas saíram com falha, e a correção chega tarde.', ids:['REP-KPI-02'], src:'M'},
+        pal:{txt:'Lista diária das entregas com falha, com o responsável e a idade de cada uma.', tools:['pbi']},
+        best:{txt:'Alerta por exceção no modelo de dados do CoE assim que a falha é registrada.', plat:'Power BI + plataforma de dados', avail:'ativar', layer:'visib'}},
       {t:'Analisar as reclamações', sys:['Excel'],
-        pain:{txt:'Não há cruzamento entre operador, tipo de job e reclamação.', ids:['REP-STM-04'], src:'M'},
-        pal:{txt:'Modelo que cruza as três dimensões.', tools:['pbi']},
-        best:{txt:'Agente que resume reclamações em texto livre e aponta padrões.', plat:'Power BI + agente', avail:'ativar', layer:'genai'}}
+        pain:{txt:'As reclamações não são cruzadas com o operador e o tipo de job. Não dá para ver onde os problemas se concentram.', ids:['REP-STM-04'], src:'M'},
+        pal:{txt:'Juntar reclamações, operador e tipo de job numa base e montar um painel que cruza as três dimensões.', tools:['pbi']},
+        best:{txt:'Um agente lê as reclamações em texto livre, resume e aponta os padrões que se repetem.', plat:'Power BI + agente', avail:'ativar', layer:'genai'}}
     ]},
   { id:'r5', src:['M','C'], lane:'rex', coe:['REP-15 · Design conversion rate to packing material order'], icon:'package-check', t:'Entrega e conversão em pedido', who:'Repro · Mercados', freq:'Semanal', sys:['PBI'], out:'pedido de material',
     acts:[
@@ -1271,16 +1364,16 @@ const SECTORS = [
     acts:[
       {t:'Calcular a eficiência', sys:['Excel'],
         pain:{txt:'Horas extras, reuniões e indisponibilidade não entram no cálculo, e o indicador sai distorcido.', ids:['REP-KPI-01','REP-KPI-02'], src:'M'},
-        pal:{txt:'Nova fórmula com horas elegíveis, auditável.', tools:['pbi']},
-        best:{txt:'Integração com a base de jornada e a produção entregue.', plat:'Power BI + dados de RH', avail:'ativar', layer:'dados'}},
+        pal:{txt:'Nova fórmula de eficiência com horas elegíveis (desconta reuniões e ausências, inclui horas extras), implementada no Power BI de forma auditável.', tools:['pbi']},
+        best:{txt:'Integração com a base de jornada de RH e com a produção entregue, para o cálculo sair sozinho.', plat:'Power BI + dados de RH', avail:'ativar', layer:'dados'}},
       {t:'Ler os relatórios operacionais', sys:['PBI'],
-        pain:{txt:'Nenhum relatório opera em tempo real; toda análise olha o passado.', ids:['REP-STM-01'], src:'M'},
-        pal:{txt:'Definir quais visões precisam de atualização intradiária e priorizá-las.', tools:['pbi']},
-        best:{txt:'Modelo de dados único do CoE, com alertas por exceção.', plat:'Power BI + plataforma de dados', avail:'ativar', layer:'visib'}},
+        pain:{txt:'Nenhum relatório operacional é em tempo real. Toda análise olha para o passado, e o time reage tarde.', ids:['REP-STM-01'], src:'M'},
+        pal:{txt:'Listar as decisões que dependem do dado e quais visões precisam de atualização dentro do dia. Priorizar essas no refresh e manter as outras diárias.', tools:['pbi']},
+        best:{txt:'Modelo de dados único do CoE, com alertas por exceção nas visões que precisam de atualização rápida.', plat:'Power BI + plataforma de dados', avail:'ativar', layer:'visib'}},
       {t:'Registrar boas práticas', sys:[],
-        pain:{txt:'Não há registro formal de entregas positivas e boas práticas.', ids:['REP-PRO-01'], src:'M'},
-        pal:{txt:'Formulário com aprovação e base pesquisável.', tools:['papps']},
-        best:{txt:'Agente de conhecimento sobre essa base.', plat:'SharePoint + agente', avail:'ativar', layer:'genai'}},
+        pain:{txt:'Entregas bem-sucedidas e boas práticas não são registradas. O que funciona fica com quem fez e não é repetido.', ids:['REP-PRO-01'], src:'M'},
+        pal:{txt:'Formulário com o caso, o benefício e a evidência, aprovação do gestor e uma base pesquisável no SharePoint.', tools:['papps']},
+        best:{txt:'Um agente de conhecimento responde perguntas sobre essa base de boas práticas.', plat:'SharePoint + agente', avail:'ativar', layer:'genai'}},
       {t:'Acompanhar a disponibilidade dos sistemas', sys:[], ok:true, note:'Horas fora do ar e status atual (REP-13).'}
     ]}
   ]}
@@ -1338,6 +1431,44 @@ const HOW = {
 SECTORS.forEach(s=>s.steps.forEach(x=>x.acts.forEach(a=>{ if(a.pal&&!a.pal.how&&HOW[a.t]) a.pal.how=HOW[a.t]; })));
 
 /* ==========================================================
+   IMPACTO DE CADA DOR (proposta a validar com o time)
+   Alto: causa custo extra, ruptura, atraso ao cliente ou trava o pagamento,
+         acontece com frequência, ou é foco declarado da Wave 2.
+   Baixo: pontual, de apoio ou de conhecimento.
+   Médio: todo o resto (retrabalho e tempo do time, sem efeito direto em custo ou serviço).
+   Chave: [id da etapa, início do título da atividade]
+   ========================================================== */
+const IMPACT={
+  alto:[
+    ['ph2','Comercial e CSR lançam','Pedido de importado sai com número desatualizado.'],
+    ['ph2','Gerar o rolling forecast','Forecast que muda sem aviso vira falta de material e frete aéreo.'],
+    ['ph4','Planner avalia','Mais de 50 solicitações por dia, analisadas material a material.'],
+    ['ph7','Revisar cobertura','Alerta de stockout errado e risco de ruptura real.'],
+    ['ph8','Criar a PO respeitando','Atraso só aparece quando o material não chega.'],
+    ['ph9','Medir o atraso real','Atraso médio de cerca de 12 dias, sem saber a causa.'],
+    ['ph10v','Receber as pendências','Horas do planner por semana e pagamento ao fornecedor atrasado.'],
+    ['ph10c','Investigar a diferença','Casos de 3 a 4 dias de análise e pendências paradas há 56 dias.'],
+    ['ph11','Monitorar validade','Material vencido é perda direta.'],
+    ['s1','Saber quando a carga','Limita planejamento, bookings e consolidação.'],
+    ['s2','Montar cargas','Cargas saem com espaço sobrando: fill rate e custo de frete.'],
+    ['s4','Registrar rejeição','Cerca de 700 cargas rejeitadas por mês.'],
+    ['s5','Conferir valores','Divergência devolve caminhões; Nigéria exige zero discrepância.'],
+    ['s8','Aprovar os custos','Sem filtro, o time perde o controle das despesas de frete.'],
+    ['s9','Calcular o fill rate','Foco da Wave 2: sem fórmula única não há como melhorar o fill rate.']
+  ],
+  baixo:[
+    ['ph10v','Cobrir as pendências'],['ph12','Consultar instruções'],['ph12','Padronizar o processo'],
+    ['s1','Tratar pedidos'],['s2','Cumprir o SLA'],['s3','Consultar dados no IRIS'],['s4','Pedir equipes'],
+    ['s6','Alinhar as rotinas'],['s7','Buscar embarque'],['s8','Fazer o acerto'],['s9','Analisar a causa'],
+    ['s10','Fazer lançamentos'],['r6','Registrar boas']
+  ]
+};
+const IMPL={alto:'Alto impacto',medio:'Médio impacto',baixo:'Baixo impacto'};
+SECTORS.forEach(s=>s.steps.forEach(x=>x.acts.forEach(a=>{ if(!a.pain) return; a.pain.imp='medio';
+  for(const lv of ['alto','baixo']) for(const [sid,tp,why] of IMPACT[lv]) if(x.id===sid&&a.t.startsWith(tp)){a.pain.imp=lv; if(why) a.pain.why=why}
+})));
+
+/* ==========================================================
    SIMULAÇÕES — chave = "idDaEtapa:índiceDaAtividade" (a=0, b=1...)
    Cada passo: [de, para, o que acontece]. Atores definidos em ACT.
    ========================================================== */
@@ -1353,8 +1484,8 @@ const ACT = {
   'Power BI':{i:'chart-column',k:'bi'}, 'Power Automate':{i:'workflow',k:'auto'}, 'Plataforma de dados':{i:'database',k:'auto'},
   'Script de conciliação':{i:'cpu',k:'auto'}, 'Agente Fill Rate':{i:'bot',k:'agente'}
 };
-const ACTK = {pessoa:{n:'Pessoa',c:'#E8731A'}, externo:{n:'Externo',c:'#0E9FBF'}, sap:{n:'Sistema SAP',c:'#2F6FE4'}, otm:{n:'Oracle OTM',c:'#E0533F'},
-  excel:{n:'Planilha',c:'#1E9E5A'}, bi:{n:'Visibilidade',c:'#C79A00'}, auto:{n:'Automação',c:'#6FA51A'}, agente:{n:'Agente de IA',c:'#D9468F'}};
+const ACTK = {pessoa:{n:'Pessoa',c:'#E8761C'}, externo:{n:'Externo',c:'#0E9DBF'}, sap:{n:'Sistema SAP',c:'#2C7BE5'}, otm:{n:'Oracle OTM',c:'#E0533F'},
+  excel:{n:'Planilha',c:'#1E9E5A'}, bi:{n:'Visibilidade',c:'#C99A00'}, auto:{n:'Automação',c:'#5E9E0F'}, agente:{n:'Agente de IA',c:'#D9468F'}};
 
 const SIMS = {
 'ph2:2':{kind:'pal',
@@ -1544,7 +1675,7 @@ const painsOf=step=>step.acts.filter(a=>a.pain).length;
 const countSec=s=>({steps:s.steps.length,acts:s.steps.reduce((a,x)=>a+x.acts.length,0),pains:s.steps.reduce((a,x)=>a+painsOf(x),0),ids:new Set(s.steps.flatMap(x=>x.acts.flatMap(a=>a.pain?a.pain.ids:[]))).size});
 
 /* static labels */
-$('#tagHyp').innerHTML=ic('info')+'Soluções são hipóteses: validar com os times de IBP e OTM';
+
 $('#vFlow').innerHTML=ic('workflow')+'Fluxo';
 $('#vTable').innerHTML=ic('table-2')+'Paliativo × melhor cenário';
 $('#bReset').innerHTML=ic('rotate-ccw');
@@ -1645,7 +1776,7 @@ function actHTML(a,j,step){
   let body='';
   if(a.pain&&open){
     body=`<div class="act-b">
-      <div class="pain-b"><div class="k">${ic('circle-alert')}Dor</div>${esc(a.pain.txt)}
+      <div class="pain-b"><div class="k">${ic('circle-alert')}Dor</div>${esc(a.pain.txt)}${a.pain.imp==='alto'?`<div>${impTag('alto')}${a.pain.why?` <small>${esc(a.pain.why)}</small>`:''}</div>`:''}
         <div class="src">${a.pain.ids.map(d=>`<span class="id">${d}</span>`).join('')}<span>${ic('user-round')} ${esc(a.pain.src.split(' ').map(srcName).join(' · '))}</span></div></div>
       <div class="sol">
         <div class="card pal"><div class="k">${ic('zap')}Agora · paliativo</div>${esc(a.pal.txt)}<div class="tags">${a.pal.tools.map(toolChip).join('')}${a.pal.how?effPill(a.pal.how.effort):''}</div>
@@ -1696,7 +1827,6 @@ function renderInsp(){
 function renderStepper(){
   const s=sec();
   $('#sLbl').textContent=st.step===null?`Visão geral · ${s.steps.length} etapas`:`Etapa ${st.step+1} de ${s.steps.length}`;
-  $('#bPlay').innerHTML=st.playing?ic('pause')+'<span class="pt">Pausar</span>':ic('play')+'<span class="pt">Percorrer</span>';
   $('#stepper').style.visibility=st.view==='flow'?'visible':'hidden';
 }
 
@@ -1704,8 +1834,8 @@ function render(){
   renderModes();
   const m=st.mode, isMap=m==='map';
   $('.hero').hidden=!isMap; $('#rail').hidden=!isMap; $('.ws').hidden=!isMap; $('#legend').hidden=!isMap;
-  $('#plan').hidden=m!=='plan'; $('#v-dores').hidden=m!=='dores'; $('#v-coe').hidden=m!=='coe'; $('#ch-inicio').hidden=m!=='inicio'; $('#ch-cadeia').hidden=m!=='cadeia';
-  if(!isMap){ if(m==='plan') renderPlan(); else if(m==='dores') renderDores(); else if(m==='coe') renderCoe(); try{ history.replaceState(null,'','#'+HASH[m]) }catch(e){} renderPager(); return}
+  $('#plan').hidden=m!=='plan'; $('#v-dores').hidden=m!=='dores'; $('#v-coe').hidden=m!=='coe'; $('#ch-inicio').hidden=m!=='inicio'; $('#ch-cadeia').hidden=m!=='cadeia'; $('#ch-diag').hidden=m!=='diag';
+  renderNext(); if(!isMap){ if(m==='plan') renderPlan(); else if(m==='dores') renderDores(); else if(m==='coe') renderCoe(); else if(m==='diag') renderDiag(); try{ history.replaceState(null,'','#'+HASH[m]) }catch(e){} renderPager(); return}
   renderRail(); renderHl(); renderStepper();
   $('#vFlow').setAttribute('aria-pressed',st.view==='flow'); $('#vTable').setAttribute('aria-pressed',st.view==='table');
   if(st.view==='flow') renderCanvas(); else renderTable();
@@ -1735,7 +1865,17 @@ $('#vTable').onclick=()=>{stop();st.view='table';render()};
 $('#bReset').onclick=()=>{stop();go(null)};
 $('#bPrev').onclick=()=>{stop();go(st.step===null?0:st.step-1,true)};
 $('#bNext').onclick=()=>{stop();go(st.step===null?0:st.step+1,true)};
-$('#bPlay').onclick=play;
+/* mapa em tela cheia, com o painel lateral */
+const wsEl=$('.ws');
+function maxLabel(){const on=wsEl.classList.contains('ws-max'); $('#bMax').innerHTML=on?ic('x')+'Sair da tela cheia':ic('layout-grid')+'Mapa em tela cheia'; $('#bMax').setAttribute('aria-pressed',on)}
+function setMax(on){
+  wsEl.classList.toggle('ws-max',on); document.body.classList.toggle('noscroll',on); maxLabel();
+  try{ if(on&&wsEl.requestFullscreen&&!document.fullscreenElement) wsEl.requestFullscreen().catch(()=>{}); else if(!on&&document.fullscreenElement===wsEl) document.exitFullscreen().catch(()=>{}) }catch(e){}
+  requestAnimationFrame(()=>requestAnimationFrame(drawEdges));
+}
+$('#bMax').onclick=()=>setMax(!wsEl.classList.contains('ws-max'));
+document.addEventListener('fullscreenchange',()=>{ if(!document.fullscreenElement&&wsEl.classList.contains('ws-max')) setMax(false); else requestAnimationFrame(drawEdges) });
+maxLabel();
 $('#hl').addEventListener('click',e=>{const b=e.target.closest('[data-hl]'); if(!b) return; st.hl=st.hl===b.dataset.hl?null:b.dataset.hl; render()});
 $('#stageBody').addEventListener('click',e=>{
   const n=e.target.closest('.node'); if(n){stop();go(+n.dataset.i);return}
@@ -1767,7 +1907,7 @@ document.addEventListener('keydown',e=>{
   if(e.target.closest('input,textarea')||st.view!=='flow'||st.mode!=='map') return;
   if(e.key==='ArrowRight'){stop();go(st.step===null?0:st.step+1,true)}
   if(e.key==='ArrowLeft'){stop();go(st.step===null?0:st.step-1,true)}
-  if(e.key==='Escape'){stop();go(null)}
+  if(e.key==='Escape'){ if(wsEl.classList.contains('ws-max')&&st.step===null){setMax(false);return} stop();go(null)}
 });
 let rz; new ResizeObserver(()=>{cancelAnimationFrame(rz);rz=requestAnimationFrame(drawEdges)}).observe(document.body);
 if(document.fonts&&document.fonts.ready) document.fonts.ready.then(drawEdges);
@@ -1879,8 +2019,8 @@ const depPill=d=>`<span class="dep ${d.tipo}">${ic(d.tipo==='time'?'users':'hand
 const valTag=s=>esc(s).replace(/\s*\((proposta a validar[^)]*)\)/g,' <span class="val">a validar</span>');
 const goLink=id=>{const i=stepIdx(id); if(i<0) return ''; return `<button class="golink" data-go="${id}">${ic('map')}${esc(SECTORS[PH].steps[i].t)}</button>`};
 
-const MODES=[['inicio','⌂','Início'],['cadeia','1','Cadeia e CoE'],['map','2','Mapa interativo'],['dores','3','Dores'],['coe','4','Paliativos × CoE'],['plan','5','Plano de ação']];
-const HASH={inicio:'inicio',cadeia:'cadeia',dores:'dores',coe:'coe',plan:'plano'};
+const MODES=[['inicio','⌂','Início'],['cadeia','1','Cadeia e CoE'],['diag','2','Diagnóstico'],['map','3','Mapa interativo'],['dores','4','Dores'],['coe','5','Paliativos × CoE'],['plan','6','Plano de ação']];
+const HASH={inicio:'inicio',cadeia:'cadeia',diag:'diagnostico',dores:'dores',coe:'coe',plan:'plano'};
 function renderModes(){
   $('#modes').innerHTML=MODES.map(([m,i,n])=>`<button class="mode" role="tab" data-mode="${m}" aria-selected="${st.mode===m}"><span class="n">${i}</span><b>${n}</b></button>`).join('');
   return; $('#modes').innerHTML=`
@@ -1984,7 +2124,7 @@ const SEC_SHORT={'planning-hub':'Planning Hub','scct-outbound':'SCCT','repro':'R
 const PROWS=[];
 SECTORS.forEach((s,si)=>s.steps.forEach((x,i)=>x.acts.forEach((a,j)=>{ if(!a.pain) return; const k=x.id+':'+j;
   PROWS.push({k,si,i,j,s,x,a,coe:COE[k]||{c:'fora',l:'',ref:'—',como:''},fila:s.id==='planning-hub'?filaOf(x.id):null}) })));
-st.df={area:'all',coe:'all',src:'all',q:''}; st.cf={coe:'all',area:'all'};
+st.df={area:'all',imp:'all',coe:'all',src:'all',q:''}; st.cf={coe:'all',area:'all'};
 const coePill=c=>`<span class="cpill" style="--pc:${COE_C[c].c}">${ic(COE_C[c].i)}${esc(COE_C[c].s)}</span>`;
 const secTag=s=>`<span class="stag" style="--sc:${s.color}">${esc(SEC_SHORT[s.id]||s.name)}</span>`;
 const norm=v=>String(v||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
@@ -2011,6 +2151,7 @@ function renderDores(){
   </section>
   <section class="fpanel">
     ${chipRow('Área','area',areaOpts,f.area)}
+    ${chipRow('Impacto','imp',[['all','Todos'],['alto','Alto'],['medio','Médio'],['baixo','Baixo']],f.imp)}
     ${chipRow('No CoE','coe',coeOpts,f.coe)}
     ${chipRow('Fonte','src',srcOpts,f.src)}
     <div class="frow"><label class="lab" for="dq">Buscar</label><input id="dq" type="search" placeholder="Ex.: VIM, GEODIS, fill rate" value="${esc(f.q)}" autocomplete="off"><span class="fcount" id="dcount"></span></div>
@@ -2020,11 +2161,11 @@ function renderDores(){
 }
 function renderDoresRows(){
   const f=st.df; const q=norm(f.q);
-  const rows=PROWS.filter(r=>(f.area==='all'||r.s.id===f.area)&&(f.coe==='all'||r.coe.c===f.coe)&&(f.src==='all'||r.a.pain.src===f.src)&&
+  const rows=PROWS.filter(r=>(f.area==='all'||r.s.id===f.area)&&(f.imp==='all'||r.a.pain.imp===f.imp)&&(f.coe==='all'||r.coe.c===f.coe)&&(f.src==='all'||r.a.pain.src===f.src)&&
     (!q||norm([r.x.t,r.a.t,r.a.pain.txt,r.a.pal&&r.a.pal.txt,r.a.best&&r.a.best.txt,r.coe.ref,(r.a.pain.ids||[]).join(' ')].join(' ')).includes(q)));
   $('#dcount').textContent=`${rows.length} de ${PROWS.length} dores`;
   $('#dbody').innerHTML=rows.length?rows.map(r=>`<tr class="go" tabindex="0" data-a="${r.si}:${r.i}:${r.j}">
-    <td>${secTag(r.s)}<span class="stt">${esc(r.x.t)}</span><span class="st">${esc(r.a.t)}</span></td>
+    <td>${secTag(r.s)}<span class="stt">${esc(r.x.t)}</span><span class="st">${esc(r.a.t)}</span>${impTag(r.a.pain.imp)}</td>
     <td><span class="at">${esc(r.a.pain.txt)}</span><span class="st">${esc(SRC[r.a.pain.src]?SRC[r.a.pain.src].n:r.a.pain.src)}</span>${(r.a.pain.ids||[]).length?`<span class="ids">${r.a.pain.ids.map(x=>`<span class="id">${esc(x)}</span>`).join('')}</span>`:''}</td>
     <td>${r.a.pal?esc(r.a.pal.txt):'<span class="st">—</span>'}${r.a.pal&&r.a.pal.how?`<span class="st">Esforço ${esc(String(r.a.pal.how.effort||'').toLowerCase())}</span>`:''}</td>
     <td>${r.a.best?`${esc(r.a.best.txt)}<span class="st">${esc(r.a.best.plat||'')}</span>`:'<span class="st">—</span>'}</td>
@@ -2073,8 +2214,8 @@ function renderCoe(){
   <section class="fpanel">${chipRow('Área','carea',areaOpts,f.area)}</section>
   <div class="ctiles">${tiles}</div>
 
-  <section class="ins"><h3 class="vh3">${ic('lightbulb')}O que o cruzamento mostra</h3>
-    <div class="igrid">${INSIGHTS.map(x=>`<article class="icard"><span class="ii">${ic(x.i)}</span><div><b>${esc(x.t)}</b><p>${esc(x.d)}</p><span class="ie">${x.e.map(v=>`<span class="chip">${esc(v)}</span>`).join('')}</span></div></article>`).join('')}</div>
+  <section class="ins"><h3 class="vh3">${ic('lightbulb')}O que o cruzamento mostra<button type="button" class="lnk instog" data-instog aria-expanded="${st.insOpen!==false}">${st.insOpen!==false?'Ocultar os 8 achados':'Mostrar os 8 achados'}</button></h3>
+    <div class="igrid"${st.insOpen===false?' hidden':''}>${INSIGHTS.map(x=>`<article class="icard"><span class="ii">${ic(x.i)}</span><div><b>${esc(x.t)}</b><p>${esc(x.d)}</p><span class="ie">${x.e.map(v=>`<span class="chip">${esc(v)}</span>`).join('')}</span></div></article>`).join('')}</div>
   </section>
 
   <section><h3 class="vh3">${ic('map')}Onde cada paliativo entra${f.coe!=='all'&&f.coe!=='fora'?` · ${esc(COE_C[f.coe].n)}`:''}</h3>
@@ -2086,11 +2227,86 @@ function renderCoe(){
   </section>`;
 }
 $('#v-coe').addEventListener('click',e=>{
-  const t=e.target.closest('[data-cf]'); if(t){const v=t.dataset.cf; st.cf.coe=(st.cf.coe===v&&v!=='all')?'all':v; renderCoe(); if(v==='fora'){const el=$('#v-coe .pl-sec'); el&&el.scrollIntoView({block:'start',behavior:'smooth'})} return}
+  const g=e.target.closest('[data-instog]'); if(g){st.insOpen=st.insOpen===false; const open=st.insOpen; g.setAttribute('aria-expanded',open); g.textContent=open?'Ocultar os 8 achados':'Mostrar os 8 achados'; const ig=$('#v-coe .igrid'); if(ig) ig.hidden=!open; return}
+  const t=e.target.closest('[data-cf]'); if(t){const v=t.dataset.cf; st.cf.coe=(st.cf.coe===v&&v!=='all')?'all':v; renderCoe(); if(st.cf.coe!=='all'){const lg=$('#v-coe .lgrid'); const el=v==='fora'?$('#v-coe .pl-sec'):(lg&&lg.closest('section')); if(el) requestAnimationFrame(()=>toEl(el))} return}
   const c=e.target.closest('[data-f="carea"]'); if(c){st.cf.area=c.dataset.v; renderCoe(); return}
   const r=e.target.closest('[data-a]'); if(r){const [si,i,j]=r.dataset.a.split(':').map(Number); goAct(si,i,j)}
 });
 
+
+/* ---------- capítulo Diagnóstico (resumo e mapa de impacto) */
+const CATS=[
+  {k:'ia',n:'IA e agentes',d:'Previsão com ML, agentes que recomendam e IA generativa (Joule, Copilot).',layers:['prever','agente','genai'],i:'bot'},
+  {k:'sim',n:'Simulação e otimização',d:'What-if de capacidade e custo, cenários e otimização de carga e estoque.',layers:['simular','otimizar'],i:'git-compare'},
+  {k:'auto',n:'Automação',d:'Regras e fluxos que rodam sozinhos no IBP, OTM, S/4 ou VIM.',layers:['auto'],i:'zap'},
+  {k:'dados',n:'Dados e visibilidade',d:'Fonte única de dado, KPIs e alertas por exceção.',layers:['dados','visib'],i:'eye'},
+  {k:'proc',n:'Processo e governança',d:'Decisão de processo e de dono antes de qualquer tecnologia.',layers:['processo'],i:'git-merge'}];
+const catOf=l=>CATS.find(c=>c.layers.includes(l))||CATS[4];
+const IMP_S={alto:'Alto',medio:'Médio',baixo:'Baixo'};
+const impTag=v=>v?`<span class="imptag imp-${v}">Impacto ${IMP_S[v].toLowerCase()}</span>`:'';
+st.imSec=null;
+function renderDiag(){
+  const O=PROWS.map(r=>({...r,cat:catOf(r.a.best.layer),low:!!(r.a.pal&&r.a.pal.how&&r.a.pal.how.effort==='Baixo'),sim:!!SIMS[r.k]}));
+  const N=O.length, by=f=>O.filter(f).length;
+  const nCoe=by(o=>o.coe.c!=='fora'), nLow=by(o=>o.low), nSim=by(o=>o.sim), nAlto=by(o=>o.a.pain.imp==='alto');
+  const share=n=>`<div class="sbar" title="${n} de ${N}"><i style="width:${n/N*100}%"></i></div>`;
+  const cats=CATS.map(c=>{const L=O.filter(o=>o.cat===c);return `<div class="cat"><span class="cat-h"><span class="ci">${ic(c.i)}</span><b>${esc(c.n)}</b></span><span class="big">${L.length}</span>${share(L.length)}<p>${esc(c.d)}</p></div>`}).join('');
+  const areas=SECTORS.map((s,si)=>{const L=O.filter(o=>o.si===si);return `<button type="button" class="cat cat-go" data-dgsec="${si}" style="--sc:${s.color}"><span class="cat-h"><span class="ci">${ic(s.icon)}</span><b>${esc(s.name)}</b></span><span class="big">${L.length}</span>${share(L.length)}<p>${L.filter(o=>o.a.pain.imp==='alto').length} de alto impacto · ${L.filter(o=>o.coe.c!=='fora').length} no CoE</p></button>`}).join('');
+  const avMax=Math.max(...Object.keys(AVAIL).map(k=>by(o=>o.a.best.avail===k)));
+  const avl=Object.keys(AVAIL).map(k=>{const n=by(o=>o.a.best.avail===k);return `<div class="avr"><span><b>${esc(AVAIL[k].n)}</b><small>${esc(AVAIL[k].d)}</small></span><span class="tr"><i style="width:${n/avMax*100}%"></i></span><b>${n}</b></div>`}).join('');
+  const lvls=['alto','medio','baixo'];
+  const OI=st.imSec===null?O:O.filter(o=>o.si===st.imSec);
+  const cell=(c,lv)=>OI.filter(o=>o.cat===c&&o.a.pain.imp===lv);
+  const maxC=Math.max(1,...CATS.flatMap(c=>lvls.map(lv=>cell(c,lv).length)));
+  const catsSorted=[...CATS].sort((a,b)=>cell(b,'alto').length-cell(a,'alto').length||OI.filter(o=>o.cat===b).length-OI.filter(o=>o.cat===a).length);
+  const imap=`<div class="im-w"><div class="im">
+    <div class="im-hd"></div>${lvls.map(lv=>`<div class="im-hd ${lv}">${IMP_S[lv]} impacto<b>${OI.filter(o=>o.a.pain.imp===lv).length}</b></div>`).join('')}
+    ${catsSorted.map(c=>`<div class="im-rh"><span class="ci">${ic(c.i)}</span><span><b>${esc(c.n)}</b><small>${OI.filter(o=>o.cat===c).length} dores</small></span></div>`+lvls.map(lv=>{const L=cell(c,lv);
+      return `<div class="im-c ${lv}" style="--w:${L.length/maxC}"><span class="im-n">${L.length||'–'}</span>${L.length?`<ul>${L.map(o=>`<li><button type="button" data-a="${o.si}:${o.i}:${o.j}" title="Abrir no mapa"><span>${esc(o.a.t)}</span><small>${[st.imSec===null?(SEC_SHORT[o.s.id]||o.s.name):'',o.a.pain.why||''].filter(Boolean).map(esc).join(' · ')}</small></button></li>`).join('')}</ul>`:''}</div>`}).join('')).join('')}
+  </div></div>`;
+  const qw=O.filter(o=>o.a.pain.imp==='alto'&&o.low);
+  const altoTxt=O.filter(o=>o.a.pain.imp==='alto');
+  $('#ch-diag').innerHTML=`
+  <article class="tp-page" data-title="Resumo"><header class="tp-head"><div class="tp-eb">Diagnóstico</div><h2>${N} dores mapeadas nas três áreas</h2>
+    <p>Cada dor tem um paliativo (o que dá para fazer agora, com as ferramentas do time) e um melhor cenário (IBP, OTM ou S/4). Aqui elas aparecem agrupadas pelo tipo de solução do melhor cenário.</p></header>
+    <div class="dg-kpis">
+      <div class="kpi-c dark"><b>${N}</b><span>dores mapeadas</span></div>
+      <div class="kpi-c"><b>${nAlto}</b><span>de alto impacto</span><em>custo, ruptura, serviço ou foco da Wave 2</em></div>
+      <div class="kpi-c"><b>${nCoe}</b><span>entram no CoE</span><em>telas, KPIs ou alertas · ${N-nCoe} vão para o plano de ação</em></div>
+      <div class="kpi-c"><b>${nLow}</b><span>com paliativo de esforço baixo</span></div>
+      <div class="kpi-c"><b>${nSim}</b><span>com simulação no mapa</span><em>hoje × com a solução</em></div>
+    </div>
+    <section class="ov-sec"><h3>Por tipo de solução do melhor cenário</h3><div class="cats">${cats}</div></section>
+  </article>
+  <article class="tp-page" data-title="Por área e prazo"><header class="tp-head"><div class="tp-eb">Diagnóstico</div><h2>Onde estão as dores e quando dá para resolver</h2>
+    <p>O Planning Hub concentra quase metade das dores e é a única área já entrevistada. Mais de dois terços dos melhores cenários usam o que já está contratado ou só precisam ser ativados.</p></header>
+    <div class="ov-two">
+      <section class="ov-sec"><h3>Por área<small>Clique para abrir no mapa</small></h3><div class="cats cats-3">${areas}</div></section>
+      <section class="ov-sec"><h3>Quando o melhor cenário fica disponível</h3><div class="avl">${avl}</div></section>
+    </div>
+  </article>
+  <article class="tp-page" data-title="Mapa de impacto"><header class="tp-head"><div class="tp-eb">Diagnóstico</div><h2>Mapa de impacto</h2>
+    <p>Alto: custo extra, ruptura, atraso ao cliente ou pagamento travado, com frequência, ou foco declarado da Wave 2. Baixo: pontual, de apoio ou de conhecimento. Médio: retrabalho e tempo do time, sem efeito direto em custo ou serviço. <b>Classificação proposta, a validar com o time.</b></p></header>
+    <div class="seg im-f" role="group" aria-label="Área">${[[null,'Todas as áreas'],...SECTORS.map((s,i)=>[i,SEC_SHORT[s.id]||s.name])].map(([k,n])=>`<button type="button" data-imsec="${k===null?'':k}" aria-pressed="${st.imSec===k}">${esc(n)}</button>`).join('')}</div>
+    ${imap}
+    <section class="ov-sec"><h3>Por onde começar · alto impacto com paliativo de esforço baixo<small>${qw.length} de ${altoTxt.length}</small></h3>
+      <div class="qwl">${qw.map(o=>`<button type="button" class="qw" data-a="${o.si}:${o.i}:${o.j}">${secTag(o.s)}<b>${esc(o.a.t)}</b><span>${esc(o.a.pal.txt)}</span>${o.fila?`<em>Frente ${o.fila} do plano</em>`:''}</button>`).join('')||'<p class="none">Nenhuma.</p>'}</div>
+    </section>
+  </article>`;
+}
+$('#ch-diag').addEventListener('click',e=>{
+  const m=e.target.closest('[data-imsec]'); if(m){st.imSec=m.dataset.imsec===''?null:+m.dataset.imsec; renderDiag(); return}
+  const s=e.target.closest('[data-dgsec]'); if(s){stop(); st.mode='map'; st.si=+s.dataset.dgsec; st.step=null; st.open=null; st.hl=null; st.avail=null; st.view='flow'; render(); window.scrollTo({top:0}); return}
+  const r=e.target.closest('[data-a]'); if(r){const [si,i,j]=r.dataset.a.split(':').map(Number); goAct(si,i,j)}
+});
+
+/* ---------- próximo capítulo */
+function renderNext(){
+  const k=MODES.findIndex(x=>x[0]===st.mode), nx=MODES[k+1];
+  $('#nextch').innerHTML=nx?`<button type="button" class="nextchap" data-mode="${nx[0]}"><small>Próximo capítulo</small><b>${nx[1]} · ${esc(nx[2])}</b><i>→</i></button>`
+    :`<button type="button" class="nextchap" data-mode="inicio"><small>Fim</small><b>Voltar ao início</b><i>↑</i></button>`;
+}
+$('#nextch').addEventListener('click',e=>{const b=e.target.closest('[data-mode]'); if(b) setPageMode(b.dataset.mode)});
 
 /* ---------- linha de páginas por capítulo (template COE) */
 let PG=[];
@@ -2100,7 +2316,7 @@ function setPgH(){document.documentElement.style.setProperty('--pgh',pgH()+'px')
 function toEl(el){ if(!el) return; spyLock=Date.now()+1000; const y=el.getBoundingClientRect().top+window.scrollY-pgH()-8; window.scrollTo({top:Math.max(0,y),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}) }
 function pagerItems(){
   const m=st.mode;
-  if(m==='inicio'||m==='cadeia') return [...document.querySelectorAll('#ch-'+m+' .tp-page')].map(p=>({t:p.dataset.title,act:()=>toEl(p)}));
+  if(m==='inicio'||m==='cadeia'||m==='diag') return [...document.querySelectorAll('#ch-'+m+' .tp-page')].map(p=>({t:p.dataset.title,act:()=>toEl(p)}));
   if(m==='map') return SECTORS.map((s,i)=>({t:s.name,cur:i===st.si,act:()=>{stop();st.si=i;st.step=null;st.open=null;st.hl=null;st.avail=null;render()}}));
   if(m==='dores') return [['all','Todas as áreas'],...SECTORS.map(s=>[s.id,SEC_SHORT[s.id]])].map(([v,n])=>({t:n,cur:st.df.area===v,act:()=>{st.df.area=v;renderDores();renderPager()}}));
   if(m==='coe') return [['O cruzamento','#v-coe .ctiles'],['O que o cruzamento mostra','#v-coe .ins'],['Onde cada paliativo entra','#v-coe .lgrid'],['Fora do CoE','#v-coe .pl-sec']].map(([n,s])=>({t:n,act:()=>toEl($(s))}));
@@ -2122,7 +2338,7 @@ $('#pgPrev').onclick=()=>pgGo((st.pgi[st.mode]||0)-1);
 $('#pgNext').onclick=()=>pgGo((st.pgi[st.mode]||0)+1);
 $('#ch-inicio').addEventListener('click',e=>{const b=e.target.closest('[data-mode]'); if(b) setPageMode(b.dataset.mode)});
 let spyT=false;
-window.addEventListener('scroll',()=>{ if(spyT||Date.now()<spyLock||!(st.mode==='inicio'||st.mode==='cadeia'||st.mode==='coe')) return; spyT=true; requestAnimationFrame(()=>{ spyT=false;
+window.addEventListener('scroll',()=>{ if(spyT||Date.now()<spyLock||!(st.mode==='inicio'||st.mode==='cadeia'||st.mode==='diag'||st.mode==='coe')) return; spyT=true; requestAnimationFrame(()=>{ spyT=false;
   const els=st.mode==='coe'?['#v-coe .ctiles','#v-coe .ins','#v-coe .lgrid','#v-coe .pl-sec'].map(s=>$(s)):[...document.querySelectorAll('#ch-'+st.mode+' .tp-page')];
   let c=0; const lim=pgH()+80; els.forEach((el,i)=>{ if(el&&el.getBoundingClientRect().top<=lim) c=i });
   if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4) c=els.length-1;
@@ -2136,8 +2352,8 @@ fsBtn.addEventListener('click',()=>{ try{ if(!document.fullscreenElement&&docume
 document.addEventListener('fullscreenchange',()=>{ fsLabel(!!document.fullscreenElement); setPgH() });
 
 /* boot */
-const h=(location.hash||'').slice(1); const fi=SECTORS.findIndex(s=>s.id===h); if(fi>=0){ st.si=fi; st.mode='map' } const HM={plano:'plan',dores:'dores',coe:'coe',inicio:'inicio',cadeia:'cadeia'}; if(HM[h]) st.mode=HM[h];
-window.addEventListener('hashchange',()=>{const hh=location.hash.slice(1); const HM={plano:'plan',dores:'dores',coe:'coe',inicio:'inicio',cadeia:'cadeia'}; if(HM[hh]){ if(st.mode!==HM[hh]){stop();st.mode=HM[hh];render()} return } const k=SECTORS.findIndex(s=>s.id===hh); if(k>=0&&(k!==st.si||st.mode!=='map')){stop();st.mode='map';st.si=k;st.step=null;render()}});
+const h=(location.hash||'').slice(1); const fi=SECTORS.findIndex(s=>s.id===h); if(fi>=0){ st.si=fi; st.mode='map' } const HM={plano:'plan',diagnostico:'diag',dores:'dores',coe:'coe',inicio:'inicio',cadeia:'cadeia'}; if(HM[h]) st.mode=HM[h];
+window.addEventListener('hashchange',()=>{const hh=location.hash.slice(1); const HM={plano:'plan',diagnostico:'diag',dores:'dores',coe:'coe',inicio:'inicio',cadeia:'cadeia'}; if(HM[hh]){ if(st.mode!==HM[hh]){stop();st.mode=HM[hh];render()} return } const k=SECTORS.findIndex(s=>s.id===hh); if(k>=0&&(k!==st.si||st.mode!=='map')){stop();st.mode='map';st.si=k;st.step=null;render()}});
 render();
 try{ if(st.mode==='map'&&!localStorage.getItem('tp-atlas-help')) openHelp() }catch(e){}
 })();
