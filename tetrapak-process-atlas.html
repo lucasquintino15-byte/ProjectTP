@@ -597,7 +597,7 @@ tr.go:focus-visible td{background:color-mix(in srgb,var(--cobalt) 8%,transparent
 .tp-question b{font-family:var(--f-display);font-size:clamp(18px,2vw,22px);line-height:1.3;word-spacing:.12em}
 
 /* linha de páginas (template) */
-.pager{position:relative;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding-block:8px}
+.pager{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding-block:8px}
 
 .pages{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
 .pages::-webkit-scrollbar{display:none}
@@ -614,24 +614,35 @@ tr.go:focus-visible td{background:color-mix(in srgb,var(--cobalt) 8%,transparent
 @media (max-width:1100px){.tp-phases{grid-template-columns:repeat(3,minmax(0,1fr))}.tp-chain{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:860px){.tp-hero{grid-template-columns:1fr;gap:28px;padding-block:40px}.tp-g12,.tp-find,.tp-g3,.tp-stat3{grid-template-columns:1fr}.tp-cascade{grid-template-columns:1fr 1fr}.tp-cascade div{clip-path:none}}
 @media (max-width:560px){.tp-phases,.tp-chain{grid-template-columns:1fr}.tp-layers div{grid-template-columns:40px 1fr}.tp-layers small{grid-column:2}.tp-cascade{grid-template-columns:1fr}}
+
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--bg)}
+.insp{top:calc(var(--pgh,52px) + 12px);max-height:calc(100vh - var(--pgh,52px) - 24px)}
+.top .tr{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.fsbtn{border:1px solid color-mix(in srgb,var(--deep-dim) 45%,transparent);color:var(--deep-ink);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:3px;white-space:nowrap}
+.fsbtn:hover{border-color:var(--deep-ink)}
+@media (max-width:620px){.top .tag{display:none}}
+
+.tp-page{min-height:calc(100vh - var(--pgh,52px));min-height:calc(100dvh - var(--pgh,52px));align-content:start}
+.tp-heropage{background:var(--deep);box-shadow:0 0 0 100vmax var(--deep);clip-path:inset(0 -100vmax);display:grid;align-content:center}
+.tp-hero{box-shadow:none;clip-path:none}
 </style>
 
 <div class="wrap">
   <header class="top">
     <div class="top-row"><div class="brand"><span class="k">KPMG</span><span class="sep"></span><span class="ctx">Tetra Pak · Supply Chain CoE (AMER) · Wave 2</span></div>
-    <span class="tag" id="tagHyp"></span></div>
+    <span class="tr"><span class="tag" id="tagHyp"></span><button class="fsbtn" id="fs" type="button" aria-pressed="false">⛶ Tela cheia</button></span></div>
     <nav class="modes" id="modes" role="tablist" aria-label="Visão"></nav>
   </header>
   <nav class="pager" id="pager" aria-label="Páginas do capítulo"><div class="pages" id="pages"></div><div class="parrows"><button id="pgPrev" type="button" aria-label="Página anterior">←</button><button id="pgNext" type="button" aria-label="Próxima página">→</button></div></nav>
-  <section class="chap" id="inicio" hidden aria-label="Início"><article class="tp-page tp-heropage" id="pg-objetivo" data-title="Objetivo"><div class="tp-hero">
-  <div class="tp-ht"><div class="tp-k">Supply Chain CoE (AMER) · Wave 2 · Material de trabalho KPMG</div>
-  <h1>Do diagnóstico à ação.<br><span>Primeiro o processo, depois a automação.</span></h1>
-  <p>Leitura do CoE Design da Wave 1 cruzada com as entrevistas do Planning Hub de 29/10/2026: como a cadeia funciona, onde dói, o que dos paliativos entra no CoE e a fila de frentes para atuar agora, sem depender do comercial nem de desenvolvimento no IBP ou no OTM.</p></div>
-  <div class="tp-espa"><div class="tp-ev" style="--c:var(--pain)"><span>1</span><b>Eliminar</b><small>Esse trabalho precisa existir?</small></div><div class="tp-ev" style="--c:var(--pal)"><span>2</span><b>Simplificar</b><small>Dá para fazer com menos passos?</small></div><div class="tp-ev" style="--c:var(--cobalt)"><span>3</span><b>Padronizar</b><small>Todo mundo faz igual?</small></div><div class="tp-ev" style="--c:var(--best)"><span>4</span><b>Automatizar</b><small>O que sobrou pode rodar sozinho?</small></div></div></div></article><article class="tp-page" id="pg-como-ler" data-title="Como ler este painel"><header class="tp-head"><div class="tp-eb">Como ler este painel</div><h2>Cinco capítulos, do contexto à ação</h2><p>Use as abas no topo ou a linha de páginas logo abaixo. No mapa interativo, clique numa etapa para ver atividades, dores e simulações.</p></header><div class="tp-phases"><button class="tp-phase" type="button" data-mode="cadeia"><span>1</span><b>Cadeia e CoE</b><small>Como a cadeia funciona, o que o CoE prevê e o que ainda não foi visto</small></button><button class="tp-phase" type="button" data-mode="map"><span>2</span><b>Mapa interativo</b><small>Fluxo das três áreas com dores, paliativos, simulações e o modo Percorrer</small></button><button class="tp-phase" type="button" data-mode="dores"><span>3</span><b>Dores</b><small>As 85 dores em tabela, com filtros e busca</small></button><button class="tp-phase" type="button" data-mode="coe"><span>4</span><b>Paliativos × CoE</b><small>O que já está na Wave 1, o que entra no CoE e em qual camada</small></button><button class="tp-phase" type="button" data-mode="plan"><span>5</span><b>Plano de ação</b><small>A fila de seis frentes do Planning Hub, uma de cada vez</small></button></div><div class="tp-facts"><span><b>3</b> áreas do CoE</span><span><b>85</b> dores mapeadas</span><span><b>3</b> entrevistas do Planning Hub</span><span><b>95</b> KPIs e <b>41</b> alertas na Wave 1</span><span><b>6</b> frentes na fila</span></div></article></section>
-  <section class="chap" id="cadeia" hidden aria-label="Cadeia e CoE"><article class="tp-page" id="pg-cadeia" data-title="A cadeia"><header class="tp-head"><div class="tp-eb">Cadeia de suprimentos · Tetra Pak AMER</div><h2>A Tetra Pak fabrica material de embalagem, não a caixinha pronta</h2><p>Bobina de papel cartão laminado com polímero e alumínio, impressa com a arte do cliente. O CoE olha a cadeia em três áreas, na ordem do CoE Design: Planning Hub, SCCT e Repro Design.</p></header><div class="tp-chain"><div class="tp-step"><div class="tp-sh"><span>1</span><b>Repro Design</b></div><p>Arte do cliente vira arquivo e matriz de impressão. Sem arte aprovada não há pedido.</p><small>REP-01…16 · My Repro Tools</small><em>8 dores</em></div><div class="tp-step"><div class="tp-sh"><span>2</span><b>Planning Hub</b></div><p>Planeja matéria-prima (papel cartão, polímero, alumínio), capacidade das fábricas e o inbound via GEODIS.</p><small>PLH-MAT · PCA · ROAD · OCN</small><em>40 dores</em></div><div class="tp-step"><div class="tp-sh"><span>3</span><b>Produção · P2</b></div><p>Impressora → laminadora → slitter. Doctoring repara bobinas antes de liberar. Oito fábricas nas Américas.</p><small>Vancouver e Sikeston fora do P2</small></div><div class="tp-step"><div class="tp-sh"><span>4</span><b>SCCT · outbound</b></div><p>Planeja a carga no OTM, carrega, transporta, rastreia e paga o frete. Fill rate mede o caminhão cheio.</p><small>SUP-PLAN · LDG · TRE · ROAD · OCN</small><em>37 dores</em></div><div class="tp-step"><div class="tp-sh"><span>5</span><b>Clientes</b></div><p>Coca-Cola, Pepsico, Ambev, Nestlé, Parmalat e outros, no Brasil, no Cone Sul, no México e nos EUA.</p><small>OTIF · fill rate · perfect order</small></div></div><p class="tp-note">KPK = mil embalagens. Doctoring = reparo ou rebobinamento de bobinas com defeito. Fill rate = quanto da capacidade do veículo sai ocupada.</p></article><article class="tp-page" id="pg-coe-design" data-title="O CoE em uma página"><header class="tp-head"><div class="tp-eb">CoE Design · Wave 1</div><h2>Três camadas, 95 KPIs e um roteiro em quatro ondas</h2></header><div class="tp-stat3"><div><b>95</b><span>KPIs no video wall (50 SCCT, 29 Planning Hub, 16 Repro)</span></div><div><b>61 / 19 / 15</b><span>KPIs com maturidade de dados alta, intermediária e baixa</span></div><div><b>39</b><span>quick wins de OTM, 9 testados, potencial de ~280 h/mês</span></div></div><div class="tp-g12"><div class="tp-sec"><h3>As camadas</h3><div class="tp-layers"><div class="dk"><span class="tp-ico">VW</span><b>Video wall · 12 telas</b><small>O que está acontecendo agora. 6 SCCT, 4 Planning Hub, 2 Repro. Atualização de 15 minutos a diária.</small></div><div class=""><span class="tp-ico">TÁ</span><b>Camada tática · 19 telas</b><small>Onde está acontecendo e quem age. Listas de ordens, cargas, materiais e designs.</small></div><div class=""><span class="tp-ico">ES</span><b>Camada estratégica · 44 telas</b><small>Por que aconteceu e como melhorar. Histórico, tendências e análises.</small></div><div class=""><span class="tp-ico">AL</span><b>41 alertas</b><small>Gatilhos por limite de KPI, enviados por Teams ou e-mail.</small></div></div></div><div class="tp-sec"><h3>As ondas</h3><div class="tp-cascade"><div class=""><b>Wave 1 · Analyze</b><small>2025 · concluída. Modelo, KPIs, governança e dados.</small></div><div class="cur"><b>Wave 2 · Design &amp; Implementation</b><small>2026 · agora. Dados, telas, alertas e go-live do piloto.</small></div><div class=""><b>Wave 3 · Optimize &amp; Scale</b><small>2027. Exceção, automação e pilotos de simulação.</small></div><div class=""><b>Wave 4 · Augmented</b><small>2028. Modelos preditivos e fluxos semiautônomos.</small></div></div><p class="tp-note">A Wave 2 tem três pilares: governança do projeto, OTM e agentes de IA (quick wins e Fill Rate Agent) e o roadmap de exploração de tecnologia.</p></div></div></article><article class="tp-page" id="pg-nao-visto" data-title="O que ainda não foi visto"><header class="tp-head"><div class="tp-eb">Leitura do PDF da Wave 1</div><h2>Seis pontos que mudam como atuar na Wave 2</h2></header><div class="tp-find"><div><span>1</span><b>Fora do Planning Hub, o Atlas é raso</b><p>SCCT e Repro vieram só da matriz da Wave 1. O SCCT concentra 48 dos 73 desafios e 28 dos 39 quick wins de OTM. O maior volume de dor e de custo está no outbound, que ainda não foi entrevistado.</p></div><div><span>2</span><b>O fill rate parece nascer na produção</b><p>Três dores do SCCT apontam para a costura produção → expedição: horas até a carga ficar pronta, DO sem material em estoque e estimativa de produção. Hipótese a validar com dado real; os números do mockup são ilustrativos.</p></div><div><span>3</span><b>O inbound é o maior risco de go-live do Planning Hub</b><p>Os 12 KPIs de tracking inbound têm fonte &quot;não disponível&quot;. O acompanhamento depende de e-mail da GEODIS e o business case do inbound no OTM está incompleto.</p></div><div><span>4</span><b>41 alertas sem roteiro de resposta</b><p>O desenho define o gatilho, mas não quem age, em quanto tempo e para quem escala. Sem rotina, o video wall vira painel que ninguém usa. Adoção foi avaliada como risco baixo (2 de 5); a leitura aqui é mais cautelosa.</p></div><div><span>5</span><b>Norte e Sul trabalham diferente em toda área</b><p>No GR/IR, o armazém do Sul resolve sozinho e o do Norte pede instrução. No outbound, o Sul tem Dachser e o Norte não. Copiar a prática do Sul é melhoria sem tecnologia.</p></div><div><span>6</span><b>Juan e Thomas pedem a mesma coisa em ordens diferentes</b><p>Operação primeiro e automação depois não brigam: eliminar, simplificar, padronizar e só então automatizar. Automatizar processo quebrado só acelera o desperdício.</p></div></div></article><article class="tp-page" id="pg-como-atuar" data-title="Como atuar"><header class="tp-head"><div class="tp-eb">Supply chain na Wave 2</div><h2>Uma base, três caixas, quem puxa cada uma</h2><p>Cada dor do mapa cai numa das três caixas. Assim o operacional e as automações saem da mesma lista, sem disputa de prioridade.</p></header><div class="tp-g3"><div class="tp-card"><div class="tp-sh"><span>A</span><b>Processo e regra</b></div><p>Sem tecnologia: padrão Sul → Norte, SLA, dono, roteiro de alerta.</p><small>Puxa: Juan (operacional)</small></div><div class="tp-card"><div class="tp-sh"><span>B</span><b>Paliativo leve</b></div><p>Excel, Power Query, Power BI, Power Automate. Nada desenvolvido no IBP.</p><small>Puxa: Thomas (ganho imediato)</small></div><div class="tp-card"><div class="tp-sh"><span>C</span><b>Nativo do sistema</b></div><p>Módulos do IBP e do OTM, com os times de sistema e o Global IM.</p><small>Puxa: Daniel e times IBP/OTM</small></div></div><div class="tp-question"><span>Pergunta-guia</span><b>Esse trabalho precisa existir? Se sim, todo mundo faz igual? Só então: o que sobrou pode rodar sozinho?</b></div></article></section>
+  <section class="chap" id="ch-inicio" hidden aria-label="Início"><article class="tp-page tp-heropage" id="pg-objetivo" data-title="Objetivo"><div class="tp-hero">
+  <div class="tp-ht"><div class="tp-k">KPMG · Material de trabalho · 03/11/2026</div>
+  <h1>Supply Chain CoE<br><span>Tetra Pak AMER · Wave 2</span></h1>
+  <p>Este material reúne a leitura do CoE Design da Wave 1, as entrevistas do Planning Hub de 29/10/2026, o mapa de processos das três áreas, o cruzamento dos paliativos com o CoE e o plano de ação do Planning Hub.</p></div>
+  <div class="tp-espa"><div class="tp-ev" style="--c:var(--pain)"><span>1</span><b>Eliminar</b><small>Esse trabalho precisa existir?</small></div><div class="tp-ev" style="--c:var(--pal)"><span>2</span><b>Simplificar</b><small>Dá para fazer com menos passos?</small></div><div class="tp-ev" style="--c:var(--cobalt)"><span>3</span><b>Padronizar</b><small>Todo mundo faz igual?</small></div><div class="tp-ev" style="--c:var(--best)"><span>4</span><b>Automatizar</b><small>O que sobrou pode rodar sozinho?</small></div></div></div></article><article class="tp-page" id="pg-como-ler" data-title="Como ler este painel"><header class="tp-head"><div class="tp-eb">Como ler este painel</div><h2>Capítulos</h2><p>Use as abas no topo ou a linha de páginas abaixo delas. No mapa interativo, clique numa etapa para ver as atividades, as dores e as simulações.</p></header><div class="tp-phases"><button class="tp-phase" type="button" data-mode="cadeia"><span>1</span><b>Cadeia e CoE</b><small>Como a cadeia funciona, o que o CoE prevê e o que ainda não foi visto</small></button><button class="tp-phase" type="button" data-mode="map"><span>2</span><b>Mapa interativo</b><small>Fluxo das três áreas com dores, paliativos, simulações e o modo Percorrer</small></button><button class="tp-phase" type="button" data-mode="dores"><span>3</span><b>Dores</b><small>As 85 dores em tabela, com filtros e busca</small></button><button class="tp-phase" type="button" data-mode="coe"><span>4</span><b>Paliativos × CoE</b><small>O que já está na Wave 1, o que entra no CoE e em qual camada</small></button><button class="tp-phase" type="button" data-mode="plan"><span>5</span><b>Plano de ação</b><small>A fila de seis frentes do Planning Hub, uma de cada vez</small></button></div><div class="tp-facts"><span><b>3</b> áreas do CoE</span><span><b>85</b> dores mapeadas</span><span><b>3</b> entrevistas do Planning Hub</span><span><b>95</b> KPIs e <b>41</b> alertas na Wave 1</span><span><b>6</b> frentes na fila</span></div></article></section>
+  <section class="chap" id="ch-cadeia" hidden aria-label="Cadeia e CoE"><article class="tp-page" id="pg-cadeia" data-title="A cadeia"><header class="tp-head"><div class="tp-eb">Cadeia e CoE</div><h2>Cadeia de suprimentos da Tetra Pak AMER</h2><p>A Tetra Pak AMER produz material de embalagem: bobinas de papel cartão laminado com polímero e alumínio, impressas com a arte do cliente. O CoE acompanha a cadeia em três áreas, na ordem do CoE Design: Planning Hub, SCCT e Repro Design.</p></header><div class="tp-chain"><div class="tp-step"><div class="tp-sh"><span>1</span><b>Repro Design</b></div><p>Arte do cliente vira arquivo e matriz de impressão. Sem arte aprovada não há pedido.</p><small>REP-01…16 · My Repro Tools</small><em>8 dores</em></div><div class="tp-step"><div class="tp-sh"><span>2</span><b>Planning Hub</b></div><p>Planeja matéria-prima (papel cartão, polímero, alumínio), capacidade das fábricas e o inbound via GEODIS.</p><small>PLH-MAT · PCA · ROAD · OCN</small><em>40 dores</em></div><div class="tp-step"><div class="tp-sh"><span>3</span><b>Produção · P2</b></div><p>Impressora → laminadora → slitter. Doctoring repara bobinas antes de liberar. Oito fábricas nas Américas.</p><small>Vancouver e Sikeston fora do P2</small></div><div class="tp-step"><div class="tp-sh"><span>4</span><b>SCCT · outbound</b></div><p>Planeja a carga no OTM, carrega, transporta, rastreia e paga o frete. Fill rate mede o caminhão cheio.</p><small>SUP-PLAN · LDG · TRE · ROAD · OCN</small><em>37 dores</em></div><div class="tp-step"><div class="tp-sh"><span>5</span><b>Clientes</b></div><p>Coca-Cola, Pepsico, Ambev, Nestlé, Parmalat e outros, no Brasil, no Cone Sul, no México e nos EUA.</p><small>OTIF · fill rate · perfect order</small></div></div><p class="tp-note">KPK = mil embalagens. Doctoring = reparo ou rebobinamento de bobinas com defeito. Fill rate = quanto da capacidade do veículo sai ocupada.</p></article><article class="tp-page" id="pg-coe-design" data-title="O CoE em uma página"><header class="tp-head"><div class="tp-eb">CoE Design · Wave 1</div><h2>CoE Design da Wave 1</h2></header><div class="tp-stat3"><div><b>95</b><span>KPIs no video wall (50 SCCT, 29 Planning Hub, 16 Repro)</span></div><div><b>61 / 19 / 15</b><span>KPIs com maturidade de dados alta, intermediária e baixa</span></div><div><b>39</b><span>quick wins de OTM, 9 testados, potencial de ~280 h/mês</span></div></div><div class="tp-g12"><div class="tp-sec"><h3>As camadas</h3><div class="tp-layers"><div class="dk"><span class="tp-ico">VW</span><b>Video wall · 12 telas</b><small>O que está acontecendo agora. 6 SCCT, 4 Planning Hub, 2 Repro. Atualização de 15 minutos a diária.</small></div><div class=""><span class="tp-ico">TÁ</span><b>Camada tática · 19 telas</b><small>Onde está acontecendo e quem age. Listas de ordens, cargas, materiais e designs.</small></div><div class=""><span class="tp-ico">ES</span><b>Camada estratégica · 44 telas</b><small>Por que aconteceu e como melhorar. Histórico, tendências e análises.</small></div><div class=""><span class="tp-ico">AL</span><b>41 alertas</b><small>Gatilhos por limite de KPI, enviados por Teams ou e-mail.</small></div></div></div><div class="tp-sec"><h3>As ondas</h3><div class="tp-cascade"><div class=""><b>Wave 1 · Analyze</b><small>2025 · concluída. Modelo, KPIs, governança e dados.</small></div><div class="cur"><b>Wave 2 · Design &amp; Implementation</b><small>2026 · agora. Dados, telas, alertas e go-live do piloto.</small></div><div class=""><b>Wave 3 · Optimize &amp; Scale</b><small>2027. Exceção, automação e pilotos de simulação.</small></div><div class=""><b>Wave 4 · Augmented</b><small>2028. Modelos preditivos e fluxos semiautônomos.</small></div></div><p class="tp-note">A Wave 2 tem três pilares: governança do projeto, OTM e agentes de IA (quick wins e Fill Rate Agent) e o roadmap de exploração de tecnologia.</p></div></div></article><article class="tp-page" id="pg-nao-visto" data-title="O que ainda não foi visto"><header class="tp-head"><div class="tp-eb">Leitura do CoE Design</div><h2>Pontos de atenção para a Wave 2</h2></header><div class="tp-find"><div><span>1</span><b>Fora do Planning Hub, o Atlas é raso</b><p>SCCT e Repro vieram só da matriz da Wave 1. O SCCT concentra 48 dos 73 desafios e 28 dos 39 quick wins de OTM. O maior volume de dor e de custo está no outbound, que ainda não foi entrevistado.</p></div><div><span>2</span><b>O fill rate parece nascer na produção</b><p>Três dores do SCCT apontam para a costura produção → expedição: horas até a carga ficar pronta, DO sem material em estoque e estimativa de produção. Hipótese a validar com dado real; os números do mockup são ilustrativos.</p></div><div><span>3</span><b>O inbound é o maior risco de go-live do Planning Hub</b><p>Os 12 KPIs de tracking inbound têm fonte &quot;não disponível&quot;. O acompanhamento depende de e-mail da GEODIS e o business case do inbound no OTM está incompleto.</p></div><div><span>4</span><b>41 alertas sem roteiro de resposta</b><p>O desenho define o gatilho, mas não quem age, em quanto tempo e para quem escala. Sem essa rotina, os alertas não geram ação. O CoE Design avaliou adoção como risco baixo (2 de 5); pela experiência das entrevistas, o risco parece maior.</p></div><div><span>5</span><b>Norte e Sul trabalham diferente em toda área</b><p>No GR/IR, o armazém do Sul resolve sozinho e o do Norte pede instrução. No outbound, o Sul tem Dachser e o Norte não. Copiar a prática do Sul é melhoria sem tecnologia.</p></div><div><span>6</span><b>Melhoria operacional e automação seguem a mesma ordem</b><p>O foco operacional pedido pelo Juan e as automações pedidas pelo Thomas usam a mesma lista de dores, na ordem eliminar, simplificar, padronizar e automatizar.</p></div></div></article><article class="tp-page" id="pg-como-atuar" data-title="Como atuar"><header class="tp-head"><div class="tp-eb">Supply chain na Wave 2</div><h2>Como atuar na Wave 2</h2><p>Cada dor do mapa entra numa das três categorias abaixo. As melhorias operacionais e as automações saem da mesma lista.</p></header><div class="tp-g3"><div class="tp-card"><div class="tp-sh"><span>A</span><b>Processo e regra</b></div><p>Sem tecnologia: padrão Sul → Norte, SLA, dono, roteiro de alerta.</p><small>Puxa: Juan (operacional)</small></div><div class="tp-card"><div class="tp-sh"><span>B</span><b>Paliativo leve</b></div><p>Excel, Power Query, Power BI, Power Automate. Nada desenvolvido no IBP.</p><small>Puxa: Thomas (ganho imediato)</small></div><div class="tp-card"><div class="tp-sh"><span>C</span><b>Nativo do sistema</b></div><p>Módulos do IBP e do OTM, com os times de sistema e o Global IM.</p><small>Puxa: Daniel e times IBP/OTM</small></div></div><div class="tp-question"><span>Perguntas para cada dor</span><b>Esse trabalho precisa existir? Dá para fazer com menos passos? Todos fazem igual? O que sobrou pode ser automatizado?</b></div></article></section>
   <section class="hero">
     <div>
-      <h1>Mapa de processos e <em>oportunidades</em></h1>
+      <h1>Mapa de processos</h1>
       <p>As três áreas do Center of Excellence (CoE), na ordem do CoE Design: como cada uma trabalha hoje, em quais sistemas, onde dói, o que dá para fazer agora e qual é o melhor cenário com IBP e OTM.</p>
     </div>
     <div class="principle"><b>IBP</b> planeja. <b>OTM</b> executa o transporte. <b>Automação</b> aplica regra. <b>Agente</b> interpreta e recomenda. <b>Power BI</b> dá visibilidade. Primeiro o nativo, depois integração, e só então IA. Paliativos não exigem desenvolvimento no IBP.</div>
@@ -661,8 +672,8 @@ tr.go:focus-visible td{background:color-mix(in srgb,var(--cobalt) 8%,transparent
     <aside class="insp" id="insp" aria-live="polite"></aside>
   </div>
 
-  <section class="view" id="dores" hidden aria-label="Painel de dores"></section>
-  <section class="view" id="coe" hidden aria-label="Paliativos × CoE"></section>
+  <section class="view" id="v-dores" hidden aria-label="Painel de dores"></section>
+  <section class="view" id="v-coe" hidden aria-label="Paliativos × CoE"></section>
   <section class="plan" id="plan" hidden aria-label="Plano de ação"></section>
   <section class="legend" id="legend"></section>
   <div class="foot"><span>Fontes: CoE Design (mar/2026) · Kick-off Wave 2 (out/2026) · entrevistas de 29/10/2026 (Daniel e Iranildes, Lia, Elizabeth) · Plano de ação do Planning Hub (03/11/2026) · Technology Assessment Matrix · deck “AI, Simulation and Digital Twin for the E2E Supply Chain” (out/2026)</span><span>KPMG Confidential · material de trabalho</span></div>
@@ -1693,7 +1704,7 @@ function render(){
   renderModes();
   const m=st.mode, isMap=m==='map';
   $('.hero').hidden=!isMap; $('#rail').hidden=!isMap; $('.ws').hidden=!isMap; $('#legend').hidden=!isMap;
-  $('#plan').hidden=m!=='plan'; $('#dores').hidden=m!=='dores'; $('#coe').hidden=m!=='coe'; $('#inicio').hidden=m!=='inicio'; $('#cadeia').hidden=m!=='cadeia';
+  $('#plan').hidden=m!=='plan'; $('#v-dores').hidden=m!=='dores'; $('#v-coe').hidden=m!=='coe'; $('#ch-inicio').hidden=m!=='inicio'; $('#ch-cadeia').hidden=m!=='cadeia';
   if(!isMap){ if(m==='plan') renderPlan(); else if(m==='dores') renderDores(); else if(m==='coe') renderCoe(); try{ history.replaceState(null,'','#'+HASH[m]) }catch(e){} renderPager(); return}
   renderRail(); renderHl(); renderStepper();
   $('#vFlow').setAttribute('aria-pressed',st.view==='flow'); $('#vTable').setAttribute('aria-pressed',st.view==='table');
@@ -1888,9 +1899,9 @@ function renderPlan(){
   $('#plan').innerHTML=`
   <section class="pl-intro">
     <div>
-      <div class="eyebrow" style="--lc:var(--plan)">${ic('list-checks')}Planning Hub · uma frente de cada vez</div>
-      <h2 style="margin-top:6px">Eliminar, simplificar, padronizar e só depois automatizar</h2>
-      <p>Automatizar um processo quebrado só acelera o desperdício. Cada frente passa por quatro perguntas, nesta ordem. Fora da fila ficam o que depende do comercial e o que exige mexer no IBP ou no OTM.</p>
+      <div class="eyebrow" style="--lc:var(--plan)">${ic('list-checks')}Plano de ação · Planning Hub</div>
+      <h2 style="margin-top:6px">Plano de ação do Planning Hub</h2>
+      <p>Cada frente passa por quatro etapas, nesta ordem: eliminar, simplificar, padronizar e automatizar. Ficam fora da fila os itens que dependem do comercial ou de mudanças no IBP e no OTM.</p>
       <div class="keys"><span class="dep time">${ic('users')}Só o time de planejamento</span><span class="dep parcial">${ic('handshake')}Combinado com área parceira, sem sistema novo</span></div>
     </div>
     <ol class="espa">${espaStrip}</ol>
@@ -1944,7 +1955,7 @@ function renderPlan(){
 function setPageMode(m){
   stop(); st.mode=m;
   render();
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0,behavior:'auto'});
   if(m==='map'){ try{ if(!localStorage.getItem('tp-atlas-help')) openHelp() }catch(e){} }
 }
 function goStep(id){
@@ -1992,9 +2003,9 @@ function renderDores(){
   const areaOpts=[['all','Todas'],...SECTORS.map(s=>[s.id,SEC_SHORT[s.id]||s.name,s.color])];
   const coeOpts=[['all','Todas'],...Object.keys(COE_C).map(k=>[k,COE_C[k].s,COE_C[k].c])];
   const srcOpts=[['all','Todas'],...['R1','R2','R3','M'].map(k=>[k,SRC[k].n])];
-  $('#dores').innerHTML=`
+  $('#v-dores').innerHTML=`
   <section class="vhead">
-    <div><div class="eyebrow">${ic('table-2')}Painel de dores</div><h2>Todas as dores, num só lugar</h2>
+    <div><div class="eyebrow">${ic('table-2')}Painel de dores</div><h2>Painel de dores</h2>
     <p>As ${PROWS.length} dores do mapa, das três áreas, com o paliativo, o melhor cenário, onde entram no CoE e a frente do plano de ação. Clique numa linha para abrir a etapa no mapa.</p></div>
     <div class="vstats">${SECTORS.map(s=>`<div class="vst" style="--sc:${s.color}"><b>${PROWS.filter(r=>r.s===s).length}</b><span>${esc(SEC_SHORT[s.id])}</span></div>`).join('')}</div>
   </section>
@@ -2020,21 +2031,21 @@ function renderDoresRows(){
     <td>${coePill(r.coe.c)}${r.coe.l?`<span class="st">${esc(LAY[r.coe.l].n)}</span>`:''}${r.coe.ref&&r.coe.ref!=='—'?`<span class="st">${esc(r.coe.ref)}</span>`:''}</td>
     <td>${r.fila?`<span class="fila">${r.fila}</span>`:'<span class="st">—</span>'}</td></tr>`).join(''):`<tr><td colspan="6" class="empty">Nenhuma dor com esses filtros. Limpe a busca ou escolha "Todas".</td></tr>`;
 }
-$('#dores').addEventListener('click',e=>{
+$('#v-dores').addEventListener('click',e=>{
   const c=e.target.closest('[data-f]'); if(c){st.df[c.dataset.f]=c.dataset.v; renderDores(); return}
   const r=e.target.closest('tr[data-a]'); if(r){const [si,i,j]=r.dataset.a.split(':').map(Number); goAct(si,i,j)}
 });
-$('#dores').addEventListener('keydown',e=>{const r=e.target.closest('tr[data-a]'); if(r&&(e.key==='Enter'||e.key===' ')){e.preventDefault(); const [si,i,j]=r.dataset.a.split(':').map(Number); goAct(si,i,j)}});
-$('#dores').addEventListener('input',e=>{if(e.target.id==='dq'){st.df.q=e.target.value; renderDoresRows()}});
+$('#v-dores').addEventListener('keydown',e=>{const r=e.target.closest('tr[data-a]'); if(r&&(e.key==='Enter'||e.key===' ')){e.preventDefault(); const [si,i,j]=r.dataset.a.split(':').map(Number); goAct(si,i,j)}});
+$('#v-dores').addEventListener('input',e=>{if(e.target.id==='dq'){st.df.q=e.target.value; renderDoresRows()}});
 
 const INSIGHTS=[
-  {i:'circle-alert',t:'As maiores dores do Planning Hub não têm tela no CoE',d:'VIM, conciliação GR/IR, confirmação de PO e PO colocada tarde não aparecem em nenhum KPI, tela ou alerta da Wave 1. O CoE mede o resultado do planejamento (cobertura, forecast, capacidade), não o trabalho que trava o planner.',e:['9 novos no Planning Hub','Frentes 1 e 2 do plano']},
-  {i:'layers',t:'No Planning Hub, quase tudo é ampliar, não desenhar do zero',d:'13 paliativos completam telas que já existem: projeção de fechamento no PLH-PCA-03, motivo do extra forecast no INB-STR-13, quality size no INB-STR-12. Parte do que a Lia pediu, como histórico e ritmo, já está desenhada e depende da construção da Wave 2.',e:['PLH-PCA-03','INB-STR-06/07','INB-STR-12/13']},
+  {i:'circle-alert',t:'As maiores dores do Planning Hub não têm tela no CoE',d:'VIM, conciliação GR/IR, confirmação de PO e PO colocada tarde não aparecem em nenhum KPI, tela ou alerta da Wave 1. O CoE acompanha cobertura, forecast e capacidade, mas não as tarefas de compra e fatura que ocupam o planner.',e:['9 novos no Planning Hub','Frentes 1 e 2 do plano']},
+  {i:'layers',t:'No Planning Hub, 13 paliativos ampliam telas que já existem',d:'Exemplos: projeção de fechamento no PLH-PCA-03, motivo do extra forecast no INB-STR-13, quality size no INB-STR-12. Parte do que a Lia pediu, como histórico e ritmo, já está desenhada e depende da construção da Wave 2.',e:['PLH-PCA-03','INB-STR-06/07','INB-STR-12/13']},
   {i:'database',t:'12 paliativos são a fonte de KPIs já desenhados',d:'Os 12 KPIs de tracking inbound estão com fonte "não disponível", o fill rate não tem fórmula oficial, FourKites e project44 não têm relatório formal e Vancouver e Sikeston estão fora do P2. Sem esses paliativos, o video wall vai ao ar incompleto. Qualidade de dado é o maior risco da Wave 1 (probabilidade 4 de 5).',e:['PLH-ROAD/OCN','SUP-TRE-10/11','PLH-PCA']},
-  {i:'triangle-alert',t:'O alerta de materiais críticos herda um problema conhecido',d:'As telas PLH-MAT e os alertas de 14 dias e 9 semanas usam o Stock Projection do APO. Os planners disseram que o alerta do APO acusa stockout que não existe, porque não desconta o consumo realizado. Se a regra não mudar antes do go-live, a tela nasce sem credibilidade.',e:['PLH-MAT-03…09','Reunião 1']},
-  {i:'circle-check',t:'No SCCT, parte das dores já tem resposta desenhada',d:'A tela OUT-TAC-01 já traz etapa de produção, % pronto e atraso por DO, o que responde à dor de não ver a carga em produção. Rejeições já vêm do Power Apps, e os alertas por exceção do tracking estão mapeados. O ganho vem de priorizar a construção dessas telas.',e:['OUT-TAC-01','SUP-LDG-02','Alertas de tracking']},
+  {i:'triangle-alert',t:'O alerta de materiais críticos usa uma fonte que os planners questionam',d:'As telas PLH-MAT e os alertas de 14 dias e 9 semanas usam o Stock Projection do APO. Os planners disseram que o alerta do APO acusa stockout que não existe, porque não desconta o consumo realizado. Se a regra não mudar antes do go-live, a tela nasce sem credibilidade.',e:['PLH-MAT-03…09','Reunião 1']},
+  {i:'circle-check',t:'No SCCT, parte das dores já tem resposta desenhada',d:'A tela OUT-TAC-01 já traz etapa de produção, % pronto e atraso por DO, o que responde à dor de não ver a carga em produção. Rejeições já vêm do Power Apps, e os alertas por exceção do tracking estão mapeados. Nesses casos, o próximo passo é priorizar a construção das telas.',e:['OUT-TAC-01','SUP-LDG-02','Alertas de tracking']},
   {i:'git-compare',t:'APAC já desenhou telas que AMER está pedindo',d:'Planning & capacity overview (order intake × capacidade e carteira por planta), production OTIF e inventory days estão nos KPIs adicionais de APAC. Reaproveitar é mais rápido do que desenhar de novo para AMER.',e:['Anexo IV · APAC']},
-  {i:'split',t:'Quatro em cada dez paliativos ficam fora do CoE',d:'34 de 85 são ferramenta de trabalho ou regra de processo: guias, formulários, automações de envio, desenho de processo. Eles vão para o plano de ação, não para o video wall. O CoE mostra o problema; esses paliativos tiram o trabalho.',e:['Plano de ação']},
+  {i:'split',t:'34 dos 85 paliativos ficam fora do CoE',d:'São ferramentas de trabalho ou regras de processo: guias, formulários, automações de envio e desenho de processo. Entram no plano de ação, e não no video wall.',e:['Plano de ação']},
   {i:'zap',t:'Cada alerta novo precisa de dono',d:'8 paliativos viram alerta novo ou ampliado. Somados aos 41 da Wave 1, o CoE precisa de uma matriz de quem recebe, em quanto tempo responde e para quem escala. Isso já está no escopo de governança da Wave 2.',e:['41 alertas da Wave 1','Governança Wave 2']}
 ];
 
@@ -2054,9 +2065,9 @@ function renderCoe(){
   const fora=PROWS.filter(r=>r.coe.c==='fora'&&inArea(r));
   const foraBy=SECTORS.map(s=>({s,items:fora.filter(r=>r.s===s)})).filter(g=>g.items.length);
   const areaOpts=[['all','Todas'],...SECTORS.map(s=>[s.id,SEC_SHORT[s.id]||s.name,s.color])];
-  $('#coe').innerHTML=`
+  $('#v-coe').innerHTML=`
   <section class="vhead">
-    <div><div class="eyebrow">${ic('layers')}Paliativos × CoE</div><h2>O que dos paliativos entra no CoE, e de que forma</h2>
+    <div><div class="eyebrow">${ic('layers')}Paliativos × CoE</div><h2>Paliativos × CoE da Wave 1</h2>
     <p>Cruzamento dos ${PROWS.length} paliativos do mapa com o CoE Design da Wave 1: 95 KPIs do video wall, 19 telas táticas, 44 estratégicas e 41 alertas. Cada paliativo foi lido contra os IDs do PDF.</p></div>
   </section>
   <section class="fpanel">${chipRow('Área','carea',areaOpts,f.area)}</section>
@@ -2074,8 +2085,8 @@ function renderCoe(){
     <div class="fgrid">${foraBy.map(g=>`<div><div class="fg-h">${secTag(g.s)}<span>${g.items.length}</span></div><ul>${g.items.map(r=>`<li><button class="lnk" data-a="${r.si}:${r.i}:${r.j}">${esc(r.a.pal?r.a.pal.txt:r.a.t)}</button><small>${esc(r.coe.como)}</small></li>`).join('')}</ul></div>`).join('')}</div>
   </section>`;
 }
-$('#coe').addEventListener('click',e=>{
-  const t=e.target.closest('[data-cf]'); if(t){const v=t.dataset.cf; st.cf.coe=(st.cf.coe===v&&v!=='all')?'all':v; renderCoe(); if(v==='fora'){const el=$('#coe .pl-sec'); el&&el.scrollIntoView({block:'start',behavior:'smooth'})} return}
+$('#v-coe').addEventListener('click',e=>{
+  const t=e.target.closest('[data-cf]'); if(t){const v=t.dataset.cf; st.cf.coe=(st.cf.coe===v&&v!=='all')?'all':v; renderCoe(); if(v==='fora'){const el=$('#v-coe .pl-sec'); el&&el.scrollIntoView({block:'start',behavior:'smooth'})} return}
   const c=e.target.closest('[data-f="carea"]'); if(c){st.cf.area=c.dataset.v; renderCoe(); return}
   const r=e.target.closest('[data-a]'); if(r){const [si,i,j]=r.dataset.a.split(':').map(Number); goAct(si,i,j)}
 });
@@ -2083,13 +2094,16 @@ $('#coe').addEventListener('click',e=>{
 
 /* ---------- linha de páginas por capítulo (template COE) */
 let PG=[];
-function toEl(el){ if(!el) return; const y=el.getBoundingClientRect().top+window.scrollY-10; window.scrollTo({top:Math.max(0,y),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}) }
+let spyLock=0;
+const pgH=()=>{const p=$('#pager'); return p?p.offsetHeight:0};
+function setPgH(){document.documentElement.style.setProperty('--pgh',pgH()+'px')}
+function toEl(el){ if(!el) return; spyLock=Date.now()+1000; const y=el.getBoundingClientRect().top+window.scrollY-pgH()-8; window.scrollTo({top:Math.max(0,y),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}) }
 function pagerItems(){
   const m=st.mode;
-  if(m==='inicio'||m==='cadeia') return [...document.querySelectorAll('#'+m+' .tp-page')].map(p=>({t:p.dataset.title,act:()=>toEl(p)}));
+  if(m==='inicio'||m==='cadeia') return [...document.querySelectorAll('#ch-'+m+' .tp-page')].map(p=>({t:p.dataset.title,act:()=>toEl(p)}));
   if(m==='map') return SECTORS.map((s,i)=>({t:s.name,cur:i===st.si,act:()=>{stop();st.si=i;st.step=null;st.open=null;st.hl=null;st.avail=null;render()}}));
   if(m==='dores') return [['all','Todas as áreas'],...SECTORS.map(s=>[s.id,SEC_SHORT[s.id]])].map(([v,n])=>({t:n,cur:st.df.area===v,act:()=>{st.df.area=v;renderDores();renderPager()}}));
-  if(m==='coe') return [['O cruzamento','#coe .ctiles'],['O que o cruzamento mostra','#coe .ins'],['Onde cada paliativo entra','#coe .lgrid'],['Fora do CoE','#coe .pl-sec']].map(([n,s])=>({t:n,act:()=>toEl($(s))}));
+  if(m==='coe') return [['O cruzamento','#v-coe .ctiles'],['O que o cruzamento mostra','#v-coe .ins'],['Onde cada paliativo entra','#v-coe .lgrid'],['Fora do CoE','#v-coe .pl-sec']].map(([n,s])=>({t:n,act:()=>toEl($(s))}));
   if(m==='plan') return [{t:'A lógica e a fila',act:()=>toEl($('#plan .pl-intro'))},...PLAN.frentes.map((f,i)=>({t:'Frente '+f.n+' · '+f.curto,cur:st.fi===i,act:()=>{st.fi=i;renderPlan();renderPager();toEl($('#fd'))}})),{t:'Próximos passos',act:()=>toEl($('#plan .pl-two'))}];
   return [];
 }
@@ -2098,19 +2112,28 @@ function renderPager(){
   let cur=PG.findIndex(x=>x.cur); if(cur<0) cur=Math.min(st.pgi[m]||0,PG.length-1); st.pgi[m]=cur;
   $('#pages').innerHTML=PG.map((x,i)=>`<button type="button" data-pg="${i}" aria-current="${i===cur}">${i+1} · ${esc(x.t)}</button>`).join('');
   $('#pgPrev').disabled=cur<=0; $('#pgNext').disabled=cur>=PG.length-1;
-  const b=$('#pages [aria-current="true"]'); b&&b.scrollIntoView({block:'nearest',inline:'nearest'});
+  const pc=$('#pages'), b=$('#pages [aria-current="true"]');
+  if(b){ const l=b.offsetLeft-pc.offsetLeft, r=l+b.offsetWidth; if(l<pc.scrollLeft) pc.scrollLeft=l-8; else if(r>pc.scrollLeft+pc.clientWidth) pc.scrollLeft=r-pc.clientWidth+8; }
+  setPgH();
 }
 function pgGo(i){ if(i<0||i>=PG.length) return; st.pgi[st.mode]=i; PG[i].act(); renderPager() }
 $('#pages').addEventListener('click',e=>{const b=e.target.closest('[data-pg]'); if(b) pgGo(+b.dataset.pg)});
 $('#pgPrev').onclick=()=>pgGo((st.pgi[st.mode]||0)-1);
 $('#pgNext').onclick=()=>pgGo((st.pgi[st.mode]||0)+1);
-$('#inicio').addEventListener('click',e=>{const b=e.target.closest('[data-mode]'); if(b) setPageMode(b.dataset.mode)});
+$('#ch-inicio').addEventListener('click',e=>{const b=e.target.closest('[data-mode]'); if(b) setPageMode(b.dataset.mode)});
 let spyT=false;
-window.addEventListener('scroll',()=>{ if(spyT||!(st.mode==='inicio'||st.mode==='cadeia'||st.mode==='coe')) return; spyT=true; requestAnimationFrame(()=>{ spyT=false;
-  const els=st.mode==='coe'?['#coe .ctiles','#coe .ins','#coe .lgrid','#coe .pl-sec'].map(s=>$(s)):[...document.querySelectorAll('#'+st.mode+' .tp-page')];
-  let c=0; els.forEach((el,i)=>{ if(el&&el.getBoundingClientRect().top<=140) c=i });
+window.addEventListener('scroll',()=>{ if(spyT||Date.now()<spyLock||!(st.mode==='inicio'||st.mode==='cadeia'||st.mode==='coe')) return; spyT=true; requestAnimationFrame(()=>{ spyT=false;
+  const els=st.mode==='coe'?['#v-coe .ctiles','#v-coe .ins','#v-coe .lgrid','#v-coe .pl-sec'].map(s=>$(s)):[...document.querySelectorAll('#ch-'+st.mode+' .tp-page')];
+  let c=0; const lim=pgH()+80; els.forEach((el,i)=>{ if(el&&el.getBoundingClientRect().top<=lim) c=i });
   if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4) c=els.length-1;
   if(c!==st.pgi[st.mode]){ st.pgi[st.mode]=c; renderPager() } }) },{passive:true});
+window.addEventListener('scrollend',()=>{spyLock=0});
+window.addEventListener('resize',setPgH);
+/* tela cheia */
+const fsBtn=$('#fs');
+function fsLabel(on){ fsBtn.textContent=on?'✕ Sair da tela cheia':'⛶ Tela cheia'; fsBtn.setAttribute('aria-pressed',on) }
+fsBtn.addEventListener('click',()=>{ try{ if(!document.fullscreenElement&&document.documentElement.requestFullscreen){ document.documentElement.requestFullscreen().catch(()=>{fsBtn.title='O navegador bloqueou a tela cheia nesta visualização. Abra o arquivo direto no navegador ou use F11.'}) } else if(document.fullscreenElement){ document.exitFullscreen().catch(()=>{}) } }catch(e){} });
+document.addEventListener('fullscreenchange',()=>{ fsLabel(!!document.fullscreenElement); setPgH() });
 
 /* boot */
 const h=(location.hash||'').slice(1); const fi=SECTORS.findIndex(s=>s.id===h); if(fi>=0){ st.si=fi; st.mode='map' } const HM={plano:'plan',dores:'dores',coe:'coe',inicio:'inicio',cadeia:'cadeia'}; if(HM[h]) st.mode=HM[h];
