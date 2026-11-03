@@ -4,12 +4,19 @@ Tetra Pak — Supply Chain CoE (AMER) Wave 2 · KPMG
 
 ## Arquivos
 
-- `tetrapak-process-atlas.html` — **Tetra Pak Process Atlas**: mapa interativo dos processos do CoE (Planning Hub → SCCT → Repro Design). Quatro abas: Mapa de processos, Painel de dores (tabela com filtros), Paliativos × CoE (o que já está na Wave 1, o que entra e em qual camada) e Plano de ação do Planning Hub.
-- `painel-coe-tetrapak.html` — **Painel CoE Tetra Pak**: o mesmo conteúdo em capítulos e páginas, no template do painel COE (Início, Cadeia e CoE, Dores, Paliativos × CoE, Plano de ação).
-- `Plano_de_Acao_Planning_Hub_TetraPak.docx` — documento Word do plano de ação: seis frentes no formato eliminar → simplificar → padronizar → automatizar.
+- `tetrapak-process-atlas.html` — **Tetra Pak Process Atlas**, a versão oficial e única do painel. Seis capítulos, com uma linha de páginas em cada um:
+  - **Início**: objetivo e como ler o painel.
+  - **Cadeia e CoE**: como a cadeia funciona, o CoE Design da Wave 1, o que ainda não foi visto e como atuar.
+  - **Mapa interativo**: fluxo das três áreas (Planning Hub, SCCT, Repro Design) com atividades, dores, paliativos, melhor cenário, simulações e o modo Percorrer.
+  - **Dores**: as 85 dores em tabela, com filtros e busca.
+  - **Paliativos × CoE**: o que já está na Wave 1, o que entra no CoE e em qual camada, com insights.
+  - **Plano de ação**: fila de seis frentes do Planning Hub (eliminar → simplificar → padronizar → automatizar).
+- `Plano_de_Acao_Planning_Hub_TetraPak.docx` — documento Word do plano de ação.
 
 ## Como usar
 
-- Para ver: baixe o HTML e abra no navegador (Chrome/Edge), de preferência no computador. Os dois HTMLs funcionam sozinhos, sem internet.
-- Para editar: abra num editor de texto (ex.: VS Code). No Atlas, o conteúdo fica nos blocos `<script>` no fim do arquivo (`SECTORS`, `PLAN`, `COE`); o visual fica no `<style>` do início. No painel, cada capítulo é uma `<section class="panel">` e cada página um `<article class="page">`.
-- Fonte KPMG só em títulos e destaques; o restante usa Arial. Os dois HTMLs seguem o tema claro ou escuro do sistema.
+- Para ver: baixe o HTML e abra no navegador (Chrome/Edge), de preferência no computador. O arquivo funciona sozinho, sem internet.
+- Para editar: abra num editor de texto (ex.: VS Code).
+  - Conteúdo do mapa, das dores e dos paliativos: blocos `<script>` no fim do arquivo (`SECTORS`, `SIMS`, `COE`, `PLAN`).
+  - Capítulos Início e Cadeia e CoE: HTML nas seções `<section class="chap" id="inicio">` e `id="cadeia"`.
+  - Visual: bloco `<style>` do início. Fonte KPMG só em títulos e destaques; o restante usa Arial. Segue o tema claro ou escuro do sistema.

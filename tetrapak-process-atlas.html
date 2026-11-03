@@ -526,6 +526,94 @@ tr.go:focus-visible td{background:color-mix(in srgb,var(--cobalt) 8%,transparent
 @media (max-width:1180px){.ctiles{grid-template-columns:repeat(3,minmax(0,1fr))}.lgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:900px){.igrid{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr}}
 @media (max-width:620px){.ctiles{grid-template-columns:1fr 1fr}.lgrid{grid-template-columns:1fr}.vstats{width:100%}.vst{flex:1;min-width:0}.frow .lab{min-width:0;width:100%}.top-row{padding-block:12px 6px}.brand .ctx{font-size:11px}.hero h1{font-size:30px}.fcount{margin-left:0}}
+
+/* ================= capítulos estáticos (Início, Cadeia e CoE) ================= */
+.chap{display:flex;flex-direction:column}
+.tp-page{padding-block:30px 34px;border-top:1px solid var(--line);display:grid;gap:18px;scroll-margin-top:12px}
+.tp-page:first-child{border-top:0}
+.tp-heropage{padding-block:0;border-top:0}
+.tp-hero{background:var(--deep);color:var(--deep-ink);box-shadow:0 0 0 100vmax var(--deep);clip-path:inset(0 -100vmax);display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.75fr);gap:48px;align-items:center;padding-block:64px 60px}
+.tp-ht{display:grid;gap:20px}
+.tp-k,.tp-eb{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--tab-line)}
+.tp-eb{color:var(--cobalt)}
+.tp-hero h1{margin:0;font-family:var(--f-display);font-weight:700;font-size:clamp(36px,5vw,64px);line-height:1.02;word-spacing:.16em;text-wrap:balance}
+.tp-hero h1 span{color:var(--tab-line)}
+.tp-hero p{margin:0;font-size:17px;line-height:1.6;color:var(--deep-dim);max-width:60ch}
+.tp-espa{display:grid;gap:8px}
+.tp-ev{display:grid;grid-template-columns:44px 1fr;column-gap:12px;align-items:center;border:1px solid color-mix(in srgb,var(--deep-dim) 30%,transparent);border-left:4px solid var(--c);border-radius:4px;padding:12px 14px;background:color-mix(in srgb,var(--deep-ink) 4%,transparent)}
+.tp-ev span{grid-row:span 2;font-family:var(--f-display);font-size:30px;color:var(--c);line-height:1}
+.tp-ev b{font-size:17px}
+.tp-ev small{font-size:13px;color:var(--deep-dim)}
+.tp-head h2{margin:4px 0 0;font-family:var(--f-display);font-weight:700;font-size:clamp(28px,3.2vw,40px);line-height:1.08;word-spacing:.16em;text-wrap:balance}
+.tp-head p{margin:8px 0 0;font-size:16px;color:var(--muted);max-width:90ch}
+.tp-phases{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.tp-phase{display:grid;gap:4px;align-content:start;text-align:left;background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--deep);border-radius:4px;padding:12px 14px;box-shadow:0 1px 2px var(--shadow)}
+.tp-phase:hover{border-top-color:var(--cobalt)}
+.tp-phase span{font-family:var(--f-display);font-size:26px;color:var(--cobalt);line-height:1}
+.tp-phase b{font-size:15px}
+.tp-phase small{font-size:13px;color:var(--muted)}
+.tp-facts{display:flex;flex-wrap:wrap;gap:8px}
+.tp-facts span{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 12px;font-size:13px;color:var(--muted)}
+.tp-facts b{color:var(--fg)}
+.tp-chain{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.tp-step{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--deep);border-radius:4px;padding:14px 12px;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 2px var(--shadow)}
+.tp-sh{display:flex;align-items:baseline;gap:8px}
+.tp-sh span{font-family:var(--f-display);font-size:24px;color:var(--cobalt);line-height:1}
+.tp-sh b{font-size:15.5px}
+.tp-step p,.tp-card p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.45}
+.tp-step small{font-size:11.5px;color:var(--cobalt);font-weight:700;margin-top:auto}
+.tp-step em{font-style:normal;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--pain)}
+.tp-note{margin:0;font-size:13px;color:var(--muted)}
+.tp-stat3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tp-stat3 div{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--cobalt);border-radius:4px;padding:14px 16px;display:grid;gap:2px}
+.tp-stat3 b{font-family:var(--f-display);font-size:32px;line-height:1.05}
+.tp-stat3 span{font-size:13.5px;color:var(--muted)}
+.tp-g12{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px}
+.tp-sec{display:grid;gap:12px;align-content:start;min-width:0}
+.tp-sec h3{margin:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:700;border-bottom:1px solid var(--fg);padding-bottom:6px}
+.tp-layers{display:grid;gap:4px}
+.tp-layers div{display:grid;grid-template-columns:40px minmax(0,34%) 1fr;gap:14px;align-items:center;background:var(--raised);padding:10px 14px;border-radius:3px}
+.tp-layers div.dk{background:var(--deep);color:var(--deep-ink)}
+.tp-layers div.dk small{color:var(--deep-dim)}
+.tp-layers small{font-size:13px;color:var(--muted)}
+.tp-ico{width:34px;height:26px;display:grid;place-items:center;border-radius:3px;font-size:10.5px;font-weight:700;background:var(--surface);color:var(--fg)}
+.tp-layers .dk .tp-ico{background:var(--tab-line);color:var(--deep)}
+.tp-cascade{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.tp-cascade div{background:var(--raised);padding:12px 20px 12px 12px;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,0 100%);display:grid;gap:3px}
+.tp-cascade b{font-size:14px;line-height:1.25}
+.tp-cascade small{font-size:12.5px;color:var(--muted)}
+.tp-cascade .cur{background:var(--cobalt);color:#fff}
+.tp-cascade .cur small{color:color-mix(in srgb,#fff 82%,transparent)}
+.tp-find{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tp-find div{background:var(--deep);color:var(--deep-ink);border-radius:4px;padding:16px 18px;display:grid;gap:6px;align-content:start}
+.tp-find span{font-family:var(--f-display);font-size:24px;color:var(--tab-line);line-height:1}
+.tp-find b{font-size:15.5px;line-height:1.3}
+.tp-find p{margin:0;font-size:13.5px;color:var(--deep-dim);line-height:1.5}
+.tp-g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tp-card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px 16px;display:grid;gap:8px;align-content:start;box-shadow:0 1px 2px var(--shadow)}
+.tp-card small{font-size:13px;font-weight:700;color:var(--fg)}
+.tp-question{background:var(--deep);color:var(--deep-ink);border-radius:4px;padding:16px 18px;display:grid;gap:4px}
+.tp-question span{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--tab-line)}
+.tp-question b{font-family:var(--f-display);font-size:clamp(18px,2vw,22px);line-height:1.3;word-spacing:.12em}
+
+/* linha de páginas (template) */
+.pager{position:relative;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;padding-block:8px}
+
+.pages{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.pages::-webkit-scrollbar{display:none}
+.pages button{flex:0 0 auto;border:1px solid transparent;color:var(--muted);font-size:13.5px;padding:6px 12px;border-radius:999px;white-space:nowrap}
+.pages button:hover{color:var(--fg);border-color:var(--line)}
+.pages button[aria-current="true"]{background:color-mix(in srgb,var(--cobalt) 12%,transparent);color:var(--cobalt);font-weight:700}
+.parrows{display:flex;gap:6px;flex:0 0 auto}
+.parrows button{width:34px;height:34px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:50%;font-size:16px;line-height:1;display:grid;place-items:center}
+.parrows button:hover:not(:disabled){border-color:var(--cobalt);color:var(--cobalt)}
+.parrows button:disabled{opacity:.35;cursor:default}
+.mode .n{font-family:var(--f-display);font-size:15px}
+.mode[aria-selected="true"] .n{color:var(--tab-line)}
+
+@media (max-width:1100px){.tp-phases{grid-template-columns:repeat(3,minmax(0,1fr))}.tp-chain{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:860px){.tp-hero{grid-template-columns:1fr;gap:28px;padding-block:40px}.tp-g12,.tp-find,.tp-g3,.tp-stat3{grid-template-columns:1fr}.tp-cascade{grid-template-columns:1fr 1fr}.tp-cascade div{clip-path:none}}
+@media (max-width:560px){.tp-phases,.tp-chain{grid-template-columns:1fr}.tp-layers div{grid-template-columns:40px 1fr}.tp-layers small{grid-column:2}.tp-cascade{grid-template-columns:1fr}}
 </style>
 
 <div class="wrap">
@@ -534,6 +622,13 @@ tr.go:focus-visible td{background:color-mix(in srgb,var(--cobalt) 8%,transparent
     <span class="tag" id="tagHyp"></span></div>
     <nav class="modes" id="modes" role="tablist" aria-label="Visão"></nav>
   </header>
+  <nav class="pager" id="pager" aria-label="Páginas do capítulo"><div class="pages" id="pages"></div><div class="parrows"><button id="pgPrev" type="button" aria-label="Página anterior">←</button><button id="pgNext" type="button" aria-label="Próxima página">→</button></div></nav>
+  <section class="chap" id="inicio" hidden aria-label="Início"><article class="tp-page tp-heropage" id="pg-objetivo" data-title="Objetivo"><div class="tp-hero">
+  <div class="tp-ht"><div class="tp-k">Supply Chain CoE (AMER) · Wave 2 · Material de trabalho KPMG</div>
+  <h1>Do diagnóstico à ação.<br><span>Primeiro o processo, depois a automação.</span></h1>
+  <p>Leitura do CoE Design da Wave 1 cruzada com as entrevistas do Planning Hub de 29/10/2026: como a cadeia funciona, onde dói, o que dos paliativos entra no CoE e a fila de frentes para atuar agora, sem depender do comercial nem de desenvolvimento no IBP ou no OTM.</p></div>
+  <div class="tp-espa"><div class="tp-ev" style="--c:var(--pain)"><span>1</span><b>Eliminar</b><small>Esse trabalho precisa existir?</small></div><div class="tp-ev" style="--c:var(--pal)"><span>2</span><b>Simplificar</b><small>Dá para fazer com menos passos?</small></div><div class="tp-ev" style="--c:var(--cobalt)"><span>3</span><b>Padronizar</b><small>Todo mundo faz igual?</small></div><div class="tp-ev" style="--c:var(--best)"><span>4</span><b>Automatizar</b><small>O que sobrou pode rodar sozinho?</small></div></div></div></article><article class="tp-page" id="pg-como-ler" data-title="Como ler este painel"><header class="tp-head"><div class="tp-eb">Como ler este painel</div><h2>Cinco capítulos, do contexto à ação</h2><p>Use as abas no topo ou a linha de páginas logo abaixo. No mapa interativo, clique numa etapa para ver atividades, dores e simulações.</p></header><div class="tp-phases"><button class="tp-phase" type="button" data-mode="cadeia"><span>1</span><b>Cadeia e CoE</b><small>Como a cadeia funciona, o que o CoE prevê e o que ainda não foi visto</small></button><button class="tp-phase" type="button" data-mode="map"><span>2</span><b>Mapa interativo</b><small>Fluxo das três áreas com dores, paliativos, simulações e o modo Percorrer</small></button><button class="tp-phase" type="button" data-mode="dores"><span>3</span><b>Dores</b><small>As 85 dores em tabela, com filtros e busca</small></button><button class="tp-phase" type="button" data-mode="coe"><span>4</span><b>Paliativos × CoE</b><small>O que já está na Wave 1, o que entra no CoE e em qual camada</small></button><button class="tp-phase" type="button" data-mode="plan"><span>5</span><b>Plano de ação</b><small>A fila de seis frentes do Planning Hub, uma de cada vez</small></button></div><div class="tp-facts"><span><b>3</b> áreas do CoE</span><span><b>85</b> dores mapeadas</span><span><b>3</b> entrevistas do Planning Hub</span><span><b>95</b> KPIs e <b>41</b> alertas na Wave 1</span><span><b>6</b> frentes na fila</span></div></article></section>
+  <section class="chap" id="cadeia" hidden aria-label="Cadeia e CoE"><article class="tp-page" id="pg-cadeia" data-title="A cadeia"><header class="tp-head"><div class="tp-eb">Cadeia de suprimentos · Tetra Pak AMER</div><h2>A Tetra Pak fabrica material de embalagem, não a caixinha pronta</h2><p>Bobina de papel cartão laminado com polímero e alumínio, impressa com a arte do cliente. O CoE olha a cadeia em três áreas, na ordem do CoE Design: Planning Hub, SCCT e Repro Design.</p></header><div class="tp-chain"><div class="tp-step"><div class="tp-sh"><span>1</span><b>Repro Design</b></div><p>Arte do cliente vira arquivo e matriz de impressão. Sem arte aprovada não há pedido.</p><small>REP-01…16 · My Repro Tools</small><em>8 dores</em></div><div class="tp-step"><div class="tp-sh"><span>2</span><b>Planning Hub</b></div><p>Planeja matéria-prima (papel cartão, polímero, alumínio), capacidade das fábricas e o inbound via GEODIS.</p><small>PLH-MAT · PCA · ROAD · OCN</small><em>40 dores</em></div><div class="tp-step"><div class="tp-sh"><span>3</span><b>Produção · P2</b></div><p>Impressora → laminadora → slitter. Doctoring repara bobinas antes de liberar. Oito fábricas nas Américas.</p><small>Vancouver e Sikeston fora do P2</small></div><div class="tp-step"><div class="tp-sh"><span>4</span><b>SCCT · outbound</b></div><p>Planeja a carga no OTM, carrega, transporta, rastreia e paga o frete. Fill rate mede o caminhão cheio.</p><small>SUP-PLAN · LDG · TRE · ROAD · OCN</small><em>37 dores</em></div><div class="tp-step"><div class="tp-sh"><span>5</span><b>Clientes</b></div><p>Coca-Cola, Pepsico, Ambev, Nestlé, Parmalat e outros, no Brasil, no Cone Sul, no México e nos EUA.</p><small>OTIF · fill rate · perfect order</small></div></div><p class="tp-note">KPK = mil embalagens. Doctoring = reparo ou rebobinamento de bobinas com defeito. Fill rate = quanto da capacidade do veículo sai ocupada.</p></article><article class="tp-page" id="pg-coe-design" data-title="O CoE em uma página"><header class="tp-head"><div class="tp-eb">CoE Design · Wave 1</div><h2>Três camadas, 95 KPIs e um roteiro em quatro ondas</h2></header><div class="tp-stat3"><div><b>95</b><span>KPIs no video wall (50 SCCT, 29 Planning Hub, 16 Repro)</span></div><div><b>61 / 19 / 15</b><span>KPIs com maturidade de dados alta, intermediária e baixa</span></div><div><b>39</b><span>quick wins de OTM, 9 testados, potencial de ~280 h/mês</span></div></div><div class="tp-g12"><div class="tp-sec"><h3>As camadas</h3><div class="tp-layers"><div class="dk"><span class="tp-ico">VW</span><b>Video wall · 12 telas</b><small>O que está acontecendo agora. 6 SCCT, 4 Planning Hub, 2 Repro. Atualização de 15 minutos a diária.</small></div><div class=""><span class="tp-ico">TÁ</span><b>Camada tática · 19 telas</b><small>Onde está acontecendo e quem age. Listas de ordens, cargas, materiais e designs.</small></div><div class=""><span class="tp-ico">ES</span><b>Camada estratégica · 44 telas</b><small>Por que aconteceu e como melhorar. Histórico, tendências e análises.</small></div><div class=""><span class="tp-ico">AL</span><b>41 alertas</b><small>Gatilhos por limite de KPI, enviados por Teams ou e-mail.</small></div></div></div><div class="tp-sec"><h3>As ondas</h3><div class="tp-cascade"><div class=""><b>Wave 1 · Analyze</b><small>2025 · concluída. Modelo, KPIs, governança e dados.</small></div><div class="cur"><b>Wave 2 · Design &amp; Implementation</b><small>2026 · agora. Dados, telas, alertas e go-live do piloto.</small></div><div class=""><b>Wave 3 · Optimize &amp; Scale</b><small>2027. Exceção, automação e pilotos de simulação.</small></div><div class=""><b>Wave 4 · Augmented</b><small>2028. Modelos preditivos e fluxos semiautônomos.</small></div></div><p class="tp-note">A Wave 2 tem três pilares: governança do projeto, OTM e agentes de IA (quick wins e Fill Rate Agent) e o roadmap de exploração de tecnologia.</p></div></div></article><article class="tp-page" id="pg-nao-visto" data-title="O que ainda não foi visto"><header class="tp-head"><div class="tp-eb">Leitura do PDF da Wave 1</div><h2>Seis pontos que mudam como atuar na Wave 2</h2></header><div class="tp-find"><div><span>1</span><b>Fora do Planning Hub, o Atlas é raso</b><p>SCCT e Repro vieram só da matriz da Wave 1. O SCCT concentra 48 dos 73 desafios e 28 dos 39 quick wins de OTM. O maior volume de dor e de custo está no outbound, que ainda não foi entrevistado.</p></div><div><span>2</span><b>O fill rate parece nascer na produção</b><p>Três dores do SCCT apontam para a costura produção → expedição: horas até a carga ficar pronta, DO sem material em estoque e estimativa de produção. Hipótese a validar com dado real; os números do mockup são ilustrativos.</p></div><div><span>3</span><b>O inbound é o maior risco de go-live do Planning Hub</b><p>Os 12 KPIs de tracking inbound têm fonte &quot;não disponível&quot;. O acompanhamento depende de e-mail da GEODIS e o business case do inbound no OTM está incompleto.</p></div><div><span>4</span><b>41 alertas sem roteiro de resposta</b><p>O desenho define o gatilho, mas não quem age, em quanto tempo e para quem escala. Sem rotina, o video wall vira painel que ninguém usa. Adoção foi avaliada como risco baixo (2 de 5); a leitura aqui é mais cautelosa.</p></div><div><span>5</span><b>Norte e Sul trabalham diferente em toda área</b><p>No GR/IR, o armazém do Sul resolve sozinho e o do Norte pede instrução. No outbound, o Sul tem Dachser e o Norte não. Copiar a prática do Sul é melhoria sem tecnologia.</p></div><div><span>6</span><b>Juan e Thomas pedem a mesma coisa em ordens diferentes</b><p>Operação primeiro e automação depois não brigam: eliminar, simplificar, padronizar e só então automatizar. Automatizar processo quebrado só acelera o desperdício.</p></div></div></article><article class="tp-page" id="pg-como-atuar" data-title="Como atuar"><header class="tp-head"><div class="tp-eb">Supply chain na Wave 2</div><h2>Uma base, três caixas, quem puxa cada uma</h2><p>Cada dor do mapa cai numa das três caixas. Assim o operacional e as automações saem da mesma lista, sem disputa de prioridade.</p></header><div class="tp-g3"><div class="tp-card"><div class="tp-sh"><span>A</span><b>Processo e regra</b></div><p>Sem tecnologia: padrão Sul → Norte, SLA, dono, roteiro de alerta.</p><small>Puxa: Juan (operacional)</small></div><div class="tp-card"><div class="tp-sh"><span>B</span><b>Paliativo leve</b></div><p>Excel, Power Query, Power BI, Power Automate. Nada desenvolvido no IBP.</p><small>Puxa: Thomas (ganho imediato)</small></div><div class="tp-card"><div class="tp-sh"><span>C</span><b>Nativo do sistema</b></div><p>Módulos do IBP e do OTM, com os times de sistema e o Global IM.</p><small>Puxa: Daniel e times IBP/OTM</small></div></div><div class="tp-question"><span>Pergunta-guia</span><b>Esse trabalho precisa existir? Se sim, todo mundo faz igual? Só então: o que sobrou pode rodar sozinho?</b></div></article></section>
   <section class="hero">
     <div>
       <h1>Mapa de processos e <em>oportunidades</em></h1>
@@ -586,7 +681,8 @@ tr.go:focus-visible td{background:color-mix(in srgb,var(--cobalt) 8%,transparent
 </div>
 <div class="ov" id="help" hidden role="dialog" aria-modal="true" aria-label="Como usar">
   <div class="howto"><h3>Como usar o mapa</h3><ol>
-    <li><b>Escolha a área</b> no topo. A ordem é a do CoE Design: Planning Hub, SCCT e Repro Design.</li>
+    <li><b>Os capítulos</b> ficam no topo: Início, Cadeia e CoE, Mapa interativo, Dores, Paliativos × CoE e Plano de ação. A linha logo abaixo mostra as páginas de cada capítulo.</li>
+    <li><b>No mapa, escolha a área</b> nos cartões ou na linha de páginas. A ordem é a do CoE Design: Planning Hub, SCCT e Repro Design.</li>
     <li><b>Clique numa etapa</b> do fluxo. O painel à direita mostra quem faz, a frequência, os sistemas, os KPIs que já existem no CoE e as atividades.</li>
     <li><b>Atividades com ⚠ abrem</b> com a dor e a fonte (Reunião 1, 2 ou 3, ou a matriz), o paliativo com o passo a passo de “como chegar” e o melhor cenário em IBP, OTM ou S/4.</li>
     <li><b>No Planning Hub, as faixas são as fases</b> do processo: Início (planejar), Meio (comprar e trazer) e Fim (receber, pagar, estocar e consumir).</li>
@@ -1430,7 +1526,7 @@ const srcName=c=>{const s=SRC[c];return s?`${s.n} · ${s.d.split(' · ')[0]}`:c}
 const effPill=e=>`<span class="pill" style="--pc:${e==='Baixo'?'var(--best)':e==='Médio'?'var(--pal)':'var(--pain)'}">Esforço ${esc(e.toLowerCase())}</span>`;
 const layerPill=k=>{const l=LAYER[k];return l?`<span class="pill" style="--pc:var(--muted)">${ic(l.i)}${esc(l.n)}</span>`:''};
 
-const st={mode:'map',fi:0,si:0,step:null,open:null,view:'flow',hl:null,avail:null,playing:false,timer:null};
+const st={mode:'inicio',pgi:{},fi:0,si:0,step:null,open:null,view:'flow',hl:null,avail:null,playing:false,timer:null};
 const sec=()=>SECTORS[st.si];
 const laneOf=(s,id)=>s.lanes.find(l=>l.id===id)||{c:'var(--faint)',n:''};
 const painsOf=step=>step.acts.filter(a=>a.pain).length;
@@ -1597,13 +1693,14 @@ function render(){
   renderModes();
   const m=st.mode, isMap=m==='map';
   $('.hero').hidden=!isMap; $('#rail').hidden=!isMap; $('.ws').hidden=!isMap; $('#legend').hidden=!isMap;
-  $('#plan').hidden=m!=='plan'; $('#dores').hidden=m!=='dores'; $('#coe').hidden=m!=='coe';
-  if(!isMap){ if(m==='plan') renderPlan(); else if(m==='dores') renderDores(); else renderCoe(); try{ history.replaceState(null,'','#'+HASH[m]) }catch(e){} return}
+  $('#plan').hidden=m!=='plan'; $('#dores').hidden=m!=='dores'; $('#coe').hidden=m!=='coe'; $('#inicio').hidden=m!=='inicio'; $('#cadeia').hidden=m!=='cadeia';
+  if(!isMap){ if(m==='plan') renderPlan(); else if(m==='dores') renderDores(); else if(m==='coe') renderCoe(); try{ history.replaceState(null,'','#'+HASH[m]) }catch(e){} renderPager(); return}
   renderRail(); renderHl(); renderStepper();
   $('#vFlow').setAttribute('aria-pressed',st.view==='flow'); $('#vTable').setAttribute('aria-pressed',st.view==='table');
   if(st.view==='flow') renderCanvas(); else renderTable();
   renderInsp();
   try{ history.replaceState(null,'','#'+sec().id) }catch(e){}
+  renderPager();
 }
 
 function firstPain(i){const x=sec().steps[i]; const s=x.acts.findIndex((a,j)=>SIMS[x.id+':'+j]); if(s>=0) return s; const a=x.acts.findIndex(a=>a.pain); return a<0?null:a}
@@ -1771,10 +1868,10 @@ const depPill=d=>`<span class="dep ${d.tipo}">${ic(d.tipo==='time'?'users':'hand
 const valTag=s=>esc(s).replace(/\s*\((proposta a validar[^)]*)\)/g,' <span class="val">a validar</span>');
 const goLink=id=>{const i=stepIdx(id); if(i<0) return ''; return `<button class="golink" data-go="${id}">${ic('map')}${esc(SECTORS[PH].steps[i].t)}</button>`};
 
-const MODES=[['map','workflow','Mapa de processos'],['dores','table-2','Painel de dores'],['coe','layers','Paliativos × CoE'],['plan','list-checks','Plano de ação']];
-const HASH={dores:'dores',coe:'coe',plan:'plano'};
+const MODES=[['inicio','⌂','Início'],['cadeia','1','Cadeia e CoE'],['map','2','Mapa interativo'],['dores','3','Dores'],['coe','4','Paliativos × CoE'],['plan','5','Plano de ação']];
+const HASH={inicio:'inicio',cadeia:'cadeia',dores:'dores',coe:'coe',plan:'plano'};
 function renderModes(){
-  $('#modes').innerHTML=MODES.map(([m,i,n])=>`<button class="mode" role="tab" data-mode="${m}" aria-selected="${st.mode===m}"><span class="m-ic">${ic(i)}</span><b>${n}</b></button>`).join('');
+  $('#modes').innerHTML=MODES.map(([m,i,n])=>`<button class="mode" role="tab" data-mode="${m}" aria-selected="${st.mode===m}"><span class="n">${i}</span><b>${n}</b></button>`).join('');
   return; $('#modes').innerHTML=`
     <button class="mode" role="tab" data-mode="map" aria-selected="${st.mode!=='plan'}"><span class="m-ic">${ic('workflow')}</span><span><b>Mapa de processos</b><small>3 áreas · dores, paliativos e melhor cenário</small></span></button>
     <button class="mode" role="tab" data-mode="plan" aria-selected="${st.mode==='plan'}"><span class="m-ic">${ic('list-checks')}</span><span><b>Plano de ação</b><small>Planning Hub · ${PLAN.frentes.length} frentes em fila</small></span><span class="m-new">novo</span></button>`;
@@ -1846,9 +1943,9 @@ function renderPlan(){
 
 function setPageMode(m){
   stop(); st.mode=m;
-  if(m==='map'){ st.si=PH; }
   render();
-  window.scrollTo({top:$('#modes').offsetTop-8,behavior:'smooth'});
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(m==='map'){ try{ if(!localStorage.getItem('tp-atlas-help')) openHelp() }catch(e){} }
 }
 function goStep(id){
   st.mode='map'; st.si=PH; const i=stepIdx(id); go(i<0?null:i,true);
@@ -1856,8 +1953,8 @@ function goStep(id){
 }
 $('#modes').addEventListener('click',e=>{const b=e.target.closest('[data-mode]'); if(b&&b.dataset.mode!==st.mode) setPageMode(b.dataset.mode)});
 $('#plan').addEventListener('click',e=>{
-  const q=e.target.closest('[data-fi]'); if(q){st.fi=+q.dataset.fi; renderPlan(); if(window.innerWidth<=900) $('#fd').scrollIntoView({block:'start',behavior:'smooth'}); return}
-  const n=e.target.closest('[data-step]'); if(n){st.fi=Math.max(0,Math.min(PLAN.frentes.length-1,st.fi+ +n.dataset.step)); renderPlan(); $('#fd').scrollIntoView({block:'start',behavior:'smooth'}); return}
+  const q=e.target.closest('[data-fi]'); if(q){st.fi=+q.dataset.fi; renderPlan(); renderPager(); if(window.innerWidth<=900) $('#fd').scrollIntoView({block:'start',behavior:'smooth'}); return}
+  const n=e.target.closest('[data-step]'); if(n){st.fi=Math.max(0,Math.min(PLAN.frentes.length-1,st.fi+ +n.dataset.step)); renderPlan(); renderPager(); $('#fd').scrollIntoView({block:'start',behavior:'smooth'}); return}
   const g=e.target.closest('[data-go]'); if(g){goStep(g.dataset.go)}
 });
 
@@ -1983,11 +2080,43 @@ $('#coe').addEventListener('click',e=>{
   const r=e.target.closest('[data-a]'); if(r){const [si,i,j]=r.dataset.a.split(':').map(Number); goAct(si,i,j)}
 });
 
+
+/* ---------- linha de páginas por capítulo (template COE) */
+let PG=[];
+function toEl(el){ if(!el) return; const y=el.getBoundingClientRect().top+window.scrollY-10; window.scrollTo({top:Math.max(0,y),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}) }
+function pagerItems(){
+  const m=st.mode;
+  if(m==='inicio'||m==='cadeia') return [...document.querySelectorAll('#'+m+' .tp-page')].map(p=>({t:p.dataset.title,act:()=>toEl(p)}));
+  if(m==='map') return SECTORS.map((s,i)=>({t:s.name,cur:i===st.si,act:()=>{stop();st.si=i;st.step=null;st.open=null;st.hl=null;st.avail=null;render()}}));
+  if(m==='dores') return [['all','Todas as áreas'],...SECTORS.map(s=>[s.id,SEC_SHORT[s.id]])].map(([v,n])=>({t:n,cur:st.df.area===v,act:()=>{st.df.area=v;renderDores();renderPager()}}));
+  if(m==='coe') return [['O cruzamento','#coe .ctiles'],['O que o cruzamento mostra','#coe .ins'],['Onde cada paliativo entra','#coe .lgrid'],['Fora do CoE','#coe .pl-sec']].map(([n,s])=>({t:n,act:()=>toEl($(s))}));
+  if(m==='plan') return [{t:'A lógica e a fila',act:()=>toEl($('#plan .pl-intro'))},...PLAN.frentes.map((f,i)=>({t:'Frente '+f.n+' · '+f.curto,cur:st.fi===i,act:()=>{st.fi=i;renderPlan();renderPager();toEl($('#fd'))}})),{t:'Próximos passos',act:()=>toEl($('#plan .pl-two'))}];
+  return [];
+}
+function renderPager(){
+  PG=pagerItems(); const m=st.mode;
+  let cur=PG.findIndex(x=>x.cur); if(cur<0) cur=Math.min(st.pgi[m]||0,PG.length-1); st.pgi[m]=cur;
+  $('#pages').innerHTML=PG.map((x,i)=>`<button type="button" data-pg="${i}" aria-current="${i===cur}">${i+1} · ${esc(x.t)}</button>`).join('');
+  $('#pgPrev').disabled=cur<=0; $('#pgNext').disabled=cur>=PG.length-1;
+  const b=$('#pages [aria-current="true"]'); b&&b.scrollIntoView({block:'nearest',inline:'nearest'});
+}
+function pgGo(i){ if(i<0||i>=PG.length) return; st.pgi[st.mode]=i; PG[i].act(); renderPager() }
+$('#pages').addEventListener('click',e=>{const b=e.target.closest('[data-pg]'); if(b) pgGo(+b.dataset.pg)});
+$('#pgPrev').onclick=()=>pgGo((st.pgi[st.mode]||0)-1);
+$('#pgNext').onclick=()=>pgGo((st.pgi[st.mode]||0)+1);
+$('#inicio').addEventListener('click',e=>{const b=e.target.closest('[data-mode]'); if(b) setPageMode(b.dataset.mode)});
+let spyT=false;
+window.addEventListener('scroll',()=>{ if(spyT||!(st.mode==='inicio'||st.mode==='cadeia'||st.mode==='coe')) return; spyT=true; requestAnimationFrame(()=>{ spyT=false;
+  const els=st.mode==='coe'?['#coe .ctiles','#coe .ins','#coe .lgrid','#coe .pl-sec'].map(s=>$(s)):[...document.querySelectorAll('#'+st.mode+' .tp-page')];
+  let c=0; els.forEach((el,i)=>{ if(el&&el.getBoundingClientRect().top<=140) c=i });
+  if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4) c=els.length-1;
+  if(c!==st.pgi[st.mode]){ st.pgi[st.mode]=c; renderPager() } }) },{passive:true});
+
 /* boot */
-const h=(location.hash||'').slice(1); const fi=SECTORS.findIndex(s=>s.id===h); if(fi>=0) st.si=fi; const HM={plano:'plan',dores:'dores',coe:'coe'}; if(HM[h]) st.mode=HM[h];
-window.addEventListener('hashchange',()=>{const hh=location.hash.slice(1); const HM={plano:'plan',dores:'dores',coe:'coe'}; if(HM[hh]){ if(st.mode!==HM[hh]){stop();st.mode=HM[hh];render()} return } const k=SECTORS.findIndex(s=>s.id===hh); if(k>=0&&(k!==st.si||st.mode!=='map')){stop();st.mode='map';st.si=k;st.step=null;render()}});
+const h=(location.hash||'').slice(1); const fi=SECTORS.findIndex(s=>s.id===h); if(fi>=0){ st.si=fi; st.mode='map' } const HM={plano:'plan',dores:'dores',coe:'coe',inicio:'inicio',cadeia:'cadeia'}; if(HM[h]) st.mode=HM[h];
+window.addEventListener('hashchange',()=>{const hh=location.hash.slice(1); const HM={plano:'plan',dores:'dores',coe:'coe',inicio:'inicio',cadeia:'cadeia'}; if(HM[hh]){ if(st.mode!==HM[hh]){stop();st.mode=HM[hh];render()} return } const k=SECTORS.findIndex(s=>s.id===hh); if(k>=0&&(k!==st.si||st.mode!=='map')){stop();st.mode='map';st.si=k;st.step=null;render()}});
 render();
-try{ if(!localStorage.getItem('tp-atlas-help')) openHelp() }catch(e){}
+try{ if(st.mode==='map'&&!localStorage.getItem('tp-atlas-help')) openHelp() }catch(e){}
 })();
 </script>
 
