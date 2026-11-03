@@ -593,10 +593,10 @@ button.avr:hover{background:var(--surface)}
 .avr .tr i{background:var(--cobalt)}
 .ov-h h1 span{color:var(--cobalt)}
 .ov-l{display:flex;flex-wrap:wrap;gap:6px 20px;margin-top:-14px}
-.ov-l button{font-size:14.5px;color:var(--muted);padding:2px 0;border-bottom:1px solid transparent}
-.ov-l button b{color:var(--fg);font-weight:700}
-.ov-l button:hover{color:var(--fg);border-bottom-color:var(--cobalt)}
-.ov-l button:first-child{color:var(--cobalt);font-weight:700}
+.ov-l span{font-size:14.5px;color:var(--muted)}
+.ov-l span b{color:var(--fg);font-weight:700}
+.cat-s{cursor:default}
+.cat-s:hover{border-color:var(--line)}
 .op{display:block;padding:0}
 .op-h{width:100%;text-align:left;display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:16px;row-gap:4px;padding:14px 18px}
 .op-h > span{grid-column:1;min-width:0}
@@ -683,12 +683,11 @@ button.avr:hover{background:var(--surface)}
 </div>
 <div class="ov" id="help" hidden role="dialog" aria-modal="true" aria-label="Como usar">
   <div class="howto"><h3>Como usar</h3><ol>
-    <li><b>Visão geral</b>: clique num número ou tipo para filtrar a lista; clique numa linha para abrir a etapa.</li>
+    <li><b>Visão geral</b>: clique numa área para abrir as dores dela no mapa.</li>
     <li><b>Mapa</b>: escolha a área e clique numa etapa. Atividades com ⚠ abrem a dor, o paliativo e o melhor cenário.</li>
     <li><b>▶ Simulação</b>: mostra o processo hoje e com a solução, passo a passo.</li>
     <li><b>← →</b> percorrem as etapas; <b>Esc</b> volta.</li>
-    <li><b>Oportunidades</b>: todas as dores, com busca, filtros e agrupamento.</li>
-    <li><b>Plano de ação</b>: as frentes do Planning Hub em fila.</li>
+        <li><b>Plano de ação</b>: as frentes do Planning Hub em fila.</li>
   </ol><div class="act"><button class="simbtn" id="helpOk">Entendi</button></div></div>
 </div>
 <script>
@@ -1855,7 +1854,7 @@ const valTag=s=>esc(s).replace(/\s*\((proposta a validar[^)]*)\)/g,' <span class
 const goLink=id=>{const i=stepIdx(id); if(i<0) return ''; return `<button class="golink" data-go="${id}">${ic('map')}${esc(SECTORS[PH].steps[i].t)}</button>`};
 
 function renderModes(){
-  const T=[['overview','Visão geral'],['map','Mapa de processos'],['opps','Oportunidades'],['plan','Plano de ação']];
+  const T=[['overview','Visão geral'],['map','Mapa de processos'],['plan','Plano de ação']];
   $('#modes').innerHTML=T.map(([k,n],i)=>`<button class="tab" role="tab" data-mode="${k}" aria-selected="${st.mode===k}"><span class="n">${i+1}</span>${esc(n)}</button>`).join('');
 }
 
@@ -1963,10 +1962,10 @@ function renderOv(){
   const kpi=(v,l,e,c,act,dark)=>`<${act?'button type="button" data-ovf="'+act+'"':'div'} class="kpi-c ${dark?'dark':''}" style="--kc:${c||'var(--cobalt)'}"><b>${v}</b><span>${l}</span>${e?`<em>${e}</em>`:''}</${act?'button':'div'}>`;
   const share=n=>`<div class="sbar" title="${n} de ${N}"><i style="width:${n/N*100}%"></i></div>`;
   const sleg=list=>`<div class="sleg">${SECTORS.map(s=>`<span><i style="background:${s.color}"></i>${esc(s.name)} ${list.filter(o=>o.s===s).length}</span>`).join('')}</div>`;
-  const cats=CATS.map(c=>{const L=O.filter(o=>o.cat===c);return `<button type="button" class="cat" data-ovf="${c.k}">
+  const cats=CATS.map(c=>{const L=O.filter(o=>o.cat===c);return `<div class="cat cat-s">
     <span class="cat-h"><span class="ci">${ic(c.i)}</span><b>${esc(c.n)}</b></span>
     <span class="big">${L.length}</span>
-    ${share(L.length)}</button>`}).join('');
+    ${share(L.length)}</div>`}).join('');
   const tbar=list=>`<div class="sbar">${CATS.map(c=>{const n=list.filter(o=>o.cat===c).length;return n?`<i style="width:${n/list.length*100}%;background:${c.c}" title="${esc(c.n)}: ${n}"></i>`:''}).join('')}</div>`;
   const areas=SECTORS.map((s,si)=>{const L=O.filter(o=>o.s===s);return `<button type="button" class="cat" data-ovsec="${si}">
     <span class="cat-h"><span class="ci">${ic(s.icon)}</span><b>${esc(s.name)}</b></span>
@@ -1976,21 +1975,20 @@ function renderOv(){
   const rows=SECTORS.map((s,si)=>{const L=O.filter(o=>o.s===s);return `<tr class="go" data-ovsec="${si}" tabindex="0"><td><span class="an"><i style="background:${s.color}"></i><span>${esc(s.name)}</span></span></td>${cols.map(([,f])=>`<td class="n">${L.filter(f).length}</td>`).join('')}</tr>`}).join('');
   const foot=`<tr><td>Total</td>${cols.map(([,f])=>`<td class="n">${O.filter(f).length}</td>`).join('')}</tr>`;
   const avMax=Math.max(...Object.keys(AVAIL).map(k=>by(o=>o.a.best.avail===k)));
-  const avl=Object.keys(AVAIL).map(k=>{const n=by(o=>o.a.best.avail===k);return `<button type="button" class="avr" data-ovav="${k}"><span title="${esc(AVAIL[k].d)}">${esc(AVAIL[k].n)}</span><span class="tr"><i style="width:${n/avMax*100}%"></i></span><b>${n}</b></button>`}).join('');
+  const avl=Object.keys(AVAIL).map(k=>{const n=by(o=>o.a.best.avail===k);return `<div class="avr"><span title="${esc(AVAIL[k].d)}">${esc(AVAIL[k].n)}</span><span class="tr"><i style="width:${n/avMax*100}%"></i></span><b>${n}</b></div>`}).join('');
   $('#ov').innerHTML=`
   <div class="ov-h"><h1><span>${N}</span> dores mapeadas</h1></div>
-  <div class="ov-l"><button type="button" data-ovf="all">Ver todas</button><button type="button" data-ovf="coe"><b>${nCoe}</b> vão para o CoE</button><button type="button" data-ovf="low"><b>${nLow}</b> com esforço baixo</button><button type="button" data-ovf="simv"><b>${nSimAnim}</b> com simulação</button></div>
+  <div class="ov-l"><span><b>${nCoe}</b> vão para o CoE</span><span><b>${nLow}</b> com esforço baixo</span><span><b>${nSimAnim}</b> com simulação</span></div>
   <section class="ov-sec"><h3>Por tipo de solução</h3><div class="cats">${cats}</div></section>
   <div class="ov-two">
     <section class="ov-sec"><h3>Por área</h3><div class="cats cats-3">${areas}</div></section>
     <section class="ov-sec"><h3>Quando dá para fazer</h3><div class="avl">${avl}</div></section>
   </div>`;
 }
+function openArea(si){stop(); st.mode='map'; st.si=si; st.step=null; st.open=null; st.hl=null; st.avail=null; st.view='table'; render(); window.scrollTo({top:0,behavior:'smooth'})}
 function openOpps(patch){st.oq={...OQ0,...patch}; st.mode='opps'; render(); window.scrollTo({top:0,behavior:'smooth'})}
 $('#ov').addEventListener('click',e=>{
-  const f=e.target.closest('[data-ovf]'); if(f){const k=f.dataset.ovf; openOpps(k==='all'?{}:k==='coe'?{coe:true}:k==='low'?{eff:'Baixo'}:k==='simv'?{sim:true}:{cat:k}); return}
-  const r=e.target.closest('[data-ovsec]'); if(r){openOpps({sec:r.dataset.ovsec}); return}
-  const v=e.target.closest('[data-ovav]'); if(v){openOpps({av:v.dataset.ovav}); return}
+  const r=e.target.closest('[data-ovsec]'); if(r){openArea(+r.dataset.ovsec); return}
 });
 $('#ov').addEventListener('keydown',e=>{const g=e.target.closest('[data-ovsec]'); if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();g.click()}});
 
@@ -2075,8 +2073,8 @@ function setToph(){document.documentElement.style.setProperty('--toph',$('#top')
 new ResizeObserver(setToph).observe($('#top')); setToph();
 
 /* boot */
-const h=(location.hash||'').slice(1); const fi=SECTORS.findIndex(s=>s.id===h); if(fi>=0){st.si=fi;st.mode='map'} if(h==='plano') st.mode='plan'; if(h==='oportunidades') st.mode='opps';
-window.addEventListener('hashchange',()=>{const hh=location.hash.slice(1); const HM={'plano':'plan','visao-geral':'overview','oportunidades':'opps'}; if(HM[hh]){const m=HM[hh]; if(st.mode!==m){stop();st.mode=m;render()} return } const k=SECTORS.findIndex(s=>s.id===hh); if(k>=0&&(k!==st.si||st.mode!=='map')){stop();st.mode='map';st.si=k;st.step=null;render()}});
+const h=(location.hash||'').slice(1); const fi=SECTORS.findIndex(s=>s.id===h); if(fi>=0){st.si=fi;st.mode='map'} if(h==='plano') st.mode='plan'; 
+window.addEventListener('hashchange',()=>{const hh=location.hash.slice(1); const HM={'plano':'plan','visao-geral':'overview'}; if(HM[hh]){const m=HM[hh]; if(st.mode!==m){stop();st.mode=m;render()} return } const k=SECTORS.findIndex(s=>s.id===hh); if(k>=0&&(k!==st.si||st.mode!=='map')){stop();st.mode='map';st.si=k;st.step=null;render()}});
 render();
 })();
 </script>
