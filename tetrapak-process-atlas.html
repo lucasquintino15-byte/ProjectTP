@@ -630,7 +630,11 @@ button.avr:hover{background:var(--surface)}
 .t-eff{font-size:13px;font-weight:700;color:var(--fg)}
 .t-type{display:inline-flex;align-items:flex-start;gap:6px;font-size:13px;font-weight:700;color:var(--fg);line-height:1.3}
 .t-type .ic{margin-top:2px;color:var(--muted);flex:none}
-.tview table{min-width:1040px}
+.tview table{min-width:1160px}
+.t-src{display:block;font-size:12.5px;color:var(--muted);line-height:1.35}
+.t-src+.t-src{margin-top:8px}
+.t-src b{display:block;color:var(--fg);font-size:13px}
+.t-src small{display:block;color:var(--faint);font-size:12px}
 </style>
 
 <header class="top" id="top"><div class="wrap">
@@ -720,12 +724,12 @@ const TOOLS = {
   excel:{n:'Excel',i:'table-2'}, bpmn:{n:'Desenho BPMN',i:'git-merge'}, sp:{n:'SharePoint',i:'book-open'}
 };
 const SRC = {
-  R1:{n:'Reunião 1',d:'Daniel (Sul) e Iranildes (Norte) · planejamento de materiais',f:'1. PlanningHub_Daniel_Ira – Resumo.docx e Transcrição.docx'},
-  R2:{n:'Reunião 2',d:'Lia · capacidade de produção',f:'Tetra Pak - Planning Hub - Lia.docx (transcrição)'},
-  R3:{n:'Reunião 3',d:'Elizabeth · alumínio',f:'2. PlanningHub_Elizabeth – Resumo.docx e Transcrição.docx'},
-  M:{n:'Matriz de desafios',d:'desafios levantados na Wave 1',f:'TetraPak_Operational_Challenges_Technology_Assessment.xlsx'},
-  C:{n:'CoE Design',d:'módulos e KPIs do CoE',f:'CoE Design - Tetra Pak.pdf'},
-  K:{n:'Kick-off Wave 2',d:'escopo da Wave 2',f:'TetraPak_COE_Wave_2 - kick off.pptx'}
+  R1:{dt:'29/10/2026',n:'Reunião 1',d:'Daniel (Sul) e Iranildes (Norte) · planejamento de materiais',f:'1. PlanningHub_Daniel_Ira – Resumo.docx e Transcrição.docx'},
+  R2:{dt:'29/10/2026',n:'Reunião 2',d:'Lia · capacidade de produção',f:'Tetra Pak - Planning Hub - Lia.docx (transcrição)'},
+  R3:{dt:'29/10/2026',n:'Reunião 3',d:'Elizabeth · alumínio',f:'2. PlanningHub_Elizabeth – Resumo.docx e Transcrição.docx'},
+  M:{dt:'Wave 1 · mar/2026',n:'Matriz de desafios',d:'desafios levantados na Wave 1',f:'TetraPak_Operational_Challenges_Technology_Assessment.xlsx'},
+  C:{dt:'mar/2026',n:'CoE Design',d:'módulos e KPIs do CoE',f:'CoE Design - Tetra Pak.pdf'},
+  K:{dt:'out/2026',n:'Kick-off Wave 2',d:'escopo da Wave 2',f:'TetraPak_COE_Wave_2 - kick off.pptx'}
 };
 const AVAIL = {
   agora:{n:'Usar agora',d:'Incluído nas licenças atuais de IBP ou OTM. Confirmar módulos contratados.',c:'var(--best)'},
@@ -1621,13 +1625,14 @@ function renderTable(){
       <button class="chip" data-av="" aria-pressed="${!st.avail}" style="--dc:var(--muted)"><span class="d"></span>Todas</button>
       ${Object.keys(AVAIL).filter(k=>used.includes(k)).map(k=>`<button class="chip" data-av="${k}" aria-pressed="${st.avail===k}" style="--dc:${AVAIL[k].c}" title="${esc(AVAIL[k].d)}"><span class="d"></span>${esc(AVAIL[k].n)}</button>`).join('')}
     </div>
-    <div class="tscroll"><table><thead><tr><th style="width:13%">Etapa</th><th style="width:27%">Atividade e dor</th><th style="width:22%">Agora · paliativo</th><th style="width:22%">Melhor cenário</th><th style="width:8%">Esforço</th><th style="width:8%">Tipo</th></tr></thead><tbody>
+    <div class="tscroll"><table><thead><tr><th style="width:12%">Etapa</th><th style="width:24%">Atividade e dor</th><th style="width:20%">Agora · paliativo</th><th style="width:20%">Melhor cenário</th><th style="width:7%">Esforço</th><th style="width:8%">Tipo</th><th style="width:9%">Fonte</th></tr></thead><tbody>
     ${rows.map(({x,i,a})=>`<tr class="go" data-go="${i}" tabindex="0"><td><span class="st">${pad(i+1)}</span><span class="stt">${esc(x.t)}</span></td>
       <td><span class="at">${esc(a.t)}</span>${esc(a.pain.txt)}<div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap">${a.pain.ids.map(d=>`<span class="id">${d}</span>`).join('')}</div></td>
       <td>${esc(a.pal.txt)}${a.qw?`<div style="margin-top:6px;font-size:12.5px"><b style="color:var(--fg)">Quick win OTM:</b> ${esc(a.qw)}</div>`:''}<div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap">${a.pal.tools.map(toolChip).join('')}</div></td>
       <td><span class="pl">${esc(a.best.plat)}</span>${esc(a.best.txt)}<div class="t-when">${availPill(a.best.avail)}</div></td>
       <td>${a.pal.how?`<span class="t-eff">${esc(a.pal.how.effort)}</span>`:'–'}</td>
-      <td><span class="t-type">${ic(LAYER[a.best.layer].i)}${esc(LAYER[a.best.layer].n)}</span></td></tr>`).join('')}
+      <td><span class="t-type">${ic(LAYER[a.best.layer].i)}${esc(LAYER[a.best.layer].n)}</span></td>
+      <td>${a.pain.src.split(' ').map(c=>SRC[c]?`<span class="t-src"><b>${esc(SRC[c].n)}</b>${c==='M'?'':esc(SRC[c].d.split(' · ')[0])}<small>${esc(SRC[c].dt)}</small></span>`:'').join('')}</td></tr>`).join('')}
     </tbody></table></div></div>`;
 }
 
