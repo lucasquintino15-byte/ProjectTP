@@ -1577,7 +1577,7 @@ function renderCanvas(){
         <span class="n-top"><span class="n-ic">${ic(x.icon)}</span><span class="n-num">${pad(i+1)}</span><span class="n-flag ${p?'':'zero'}">${p?ic('triangle-alert')+p+(p>1?' dores':' dor'):ic('circle-check')+'sem gap'}</span></span>
         <span class="n-title">${esc(x.t)}</span>
         <span class="n-sys">${sys}</span>
-        <span class="n-foot">${x.acts.length} atividade${x.acts.length>1?'s':''}${x.acts.some((a,j)=>SIMS[x.id+':'+j])?`<span class="simtag">▶ simulação</span>`:''}${s.id==='planning-hub'&&filaOf(x.id)?`<span class="n-fila">fila ${filaOf(x.id)}</span>`:''}</span>
+        ${x.acts.some((a,j)=>SIMS[x.id+':'+j])?`<span class="n-foot"><span class="simtag" style="margin-left:0">▶ simulação</span></span>`:''}
       </button>`}).join('')}</div></section>`}).join('');
   $('#stageBody').innerHTML=`<div class="canvas" id="canvas"><svg class="edges" id="edges"></svg><div class="lanes">${lanes}</div><div id="elabel"></div><div id="tip"></div></div>`;
   requestAnimationFrame(drawEdges);
