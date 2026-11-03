@@ -624,6 +624,13 @@ button.avr:hover{background:var(--surface)}
 .og-h{font-size:18px}
 @media (max-width:760px){.op-x{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.op-chev{transition:none}}
+
+/* tabela paliativo × melhor cenário: esforço e tipo separados */
+.t-when{margin-top:8px}
+.t-eff{font-size:13px;font-weight:700;color:var(--fg)}
+.t-type{display:inline-flex;align-items:flex-start;gap:6px;font-size:13px;font-weight:700;color:var(--fg);line-height:1.3}
+.t-type .ic{margin-top:2px;color:var(--muted);flex:none}
+.tview table{min-width:1040px}
 </style>
 
 <header class="top" id="top"><div class="wrap">
@@ -728,9 +735,9 @@ const AVAIL = {
   novo:{n:'Nova licença',d:'Exige licença fora do contrato atual, como o Oracle Fusion Cloud Enterprise Contracts para o agente de fill rate.',c:'var(--pal)'}
 };
 const LAYER = {
-  dados:{n:'Dados e KPIs',i:'database'}, visib:{n:'Visibilidade',i:'eye'}, auto:{n:'Automação',i:'zap'},
-  prever:{n:'Prever (ML)',i:'trending-up'}, otimizar:{n:'Otimizar',i:'scale'}, simular:{n:'Simular',i:'git-compare'},
-  agente:{n:'Agente',i:'bot'}, genai:{n:'IA generativa',i:'sparkles'}, processo:{n:'Processo',i:'git-merge'}
+  dados:{n:'Dados e KPIs',i:'database'}, visib:{n:'Visibilidade (BI)',i:'eye'}, auto:{n:'Automação',i:'zap'},
+  prever:{n:'Previsão com ML',i:'trending-up'}, otimizar:{n:'Otimização',i:'scale'}, simular:{n:'Simulação',i:'git-compare'},
+  agente:{n:'Agente de IA',i:'bot'}, genai:{n:'AI Gen',i:'sparkles'}, processo:{n:'Processo',i:'git-merge'}
 };
 
 const SECTORS = [
@@ -1614,12 +1621,13 @@ function renderTable(){
       <button class="chip" data-av="" aria-pressed="${!st.avail}" style="--dc:var(--muted)"><span class="d"></span>Todas</button>
       ${Object.keys(AVAIL).filter(k=>used.includes(k)).map(k=>`<button class="chip" data-av="${k}" aria-pressed="${st.avail===k}" style="--dc:${AVAIL[k].c}" title="${esc(AVAIL[k].d)}"><span class="d"></span>${esc(AVAIL[k].n)}</button>`).join('')}
     </div>
-    <div class="tscroll"><table><thead><tr><th style="width:15%">Etapa</th><th style="width:30%">Atividade e dor</th><th style="width:22%">Agora · paliativo</th><th style="width:23%">Melhor cenário</th><th style="width:10%">Status</th></tr></thead><tbody>
+    <div class="tscroll"><table><thead><tr><th style="width:13%">Etapa</th><th style="width:27%">Atividade e dor</th><th style="width:22%">Agora · paliativo</th><th style="width:22%">Melhor cenário</th><th style="width:8%">Esforço</th><th style="width:8%">Tipo</th></tr></thead><tbody>
     ${rows.map(({x,i,a})=>`<tr class="go" data-go="${i}" tabindex="0"><td><span class="st">${pad(i+1)}</span><span class="stt">${esc(x.t)}</span></td>
       <td><span class="at">${esc(a.t)}</span>${esc(a.pain.txt)}<div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap">${a.pain.ids.map(d=>`<span class="id">${d}</span>`).join('')}</div></td>
       <td>${esc(a.pal.txt)}${a.qw?`<div style="margin-top:6px;font-size:12.5px"><b style="color:var(--fg)">Quick win OTM:</b> ${esc(a.qw)}</div>`:''}<div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap">${a.pal.tools.map(toolChip).join('')}</div></td>
-      <td><span class="pl">${esc(a.best.plat)}</span>${esc(a.best.txt)}</td>
-      <td style="display:flex;flex-direction:column;gap:5px;align-items:flex-start">${a.pal.how?effPill(a.pal.how.effort):''}${availPill(a.best.avail)}${layerPill(a.best.layer)}</td></tr>`).join('')}
+      <td><span class="pl">${esc(a.best.plat)}</span>${esc(a.best.txt)}<div class="t-when">${availPill(a.best.avail)}</div></td>
+      <td>${a.pal.how?`<span class="t-eff">${esc(a.pal.how.effort)}</span>`:'–'}</td>
+      <td><span class="t-type">${ic(LAYER[a.best.layer].i)}${esc(LAYER[a.best.layer].n)}</span></td></tr>`).join('')}
     </tbody></table></div></div>`;
 }
 
