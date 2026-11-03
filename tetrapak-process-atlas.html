@@ -638,6 +638,7 @@ button.avr:hover{background:var(--surface)}
 
 /* mapa de impacto */
 .im-w{overflow-x:auto}
+.im-f{justify-self:start;flex-wrap:wrap}
 .im{display:grid;grid-template-columns:minmax(130px,.45fr) repeat(3,minmax(220px,1fr));gap:6px;min-width:860px}
 .im-hd{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted);padding:2px 12px 6px;display:flex;align-items:baseline;gap:8px}
 .im-hd b{font-family:var(--f-display);font-size:18px;letter-spacing:0;color:var(--fg);font-weight:600}
@@ -1596,7 +1597,7 @@ const layerPill=k=>{const l=LAYER[k];return l?`<span class="pill" style="--pc:va
 
 const OQOPEN=new Set();
 const OQ0={q:'',sec:'',cat:'',av:'',eff:'',coe:false,sim:false,grp:'area'};
-const st={oq:{...OQ0},mode:'overview',fi:0,si:0,step:null,open:null,view:'flow',hl:null,avail:null,playing:false,timer:null};
+const st={imSec:null,oq:{...OQ0},mode:'overview',fi:0,si:0,step:null,open:null,view:'flow',hl:null,avail:null,playing:false,timer:null};
 const sec=()=>SECTORS[st.si];
 const laneOf=(s,id)=>s.lanes.find(l=>l.id===id)||{c:'#8D9CC2',n:''};
 const painsOf=step=>step.acts.filter(a=>a.pain).length;
@@ -2051,13 +2052,14 @@ function renderOv(){
   const avMax=Math.max(...Object.keys(AVAIL).map(k=>by(o=>o.a.best.avail===k)));
   const avl=Object.keys(AVAIL).map(k=>{const n=by(o=>o.a.best.avail===k);return `<div class="avr"><span title="${esc(AVAIL[k].d)}">${esc(AVAIL[k].n)}</span><span class="tr"><i style="width:${n/avMax*100}%"></i></span><b>${n}</b></div>`}).join('');
   const lvls=['alto','medio','baixo'];
-  const cell=(c,lv)=>O.filter(o=>o.cat===c&&o.a.pain.imp===lv);
-  const maxC=Math.max(...CATS.flatMap(c=>lvls.map(lv=>cell(c,lv).length)));
-  const catsSorted=[...CATS].sort((a,b)=>cell(b,'alto').length-cell(a,'alto').length||O.filter(o=>o.cat===b).length-O.filter(o=>o.cat===a).length);
+  const OI=st.imSec===null?O:O.filter(o=>o.si===st.imSec);
+  const cell=(c,lv)=>OI.filter(o=>o.cat===c&&o.a.pain.imp===lv);
+  const maxC=Math.max(1,...CATS.flatMap(c=>lvls.map(lv=>cell(c,lv).length)));
+  const catsSorted=[...CATS].sort((a,b)=>cell(b,'alto').length-cell(a,'alto').length||OI.filter(o=>o.cat===b).length-OI.filter(o=>o.cat===a).length);
   const imap=`<div class="im-w"><div class="im">
-    <div class="im-hd"></div>${lvls.map(lv=>`<div class="im-hd ${lv}">${IMPL[lv]}<b>${by(o=>o.a.pain.imp===lv)}</b></div>`).join('')}
-    ${catsSorted.map(c=>`<div class="im-rh"><span class="ci">${ic(c.i)}</span><span><b>${esc(c.n)}</b><small>${O.filter(o=>o.cat===c).length} dores</small></span></div>`+lvls.map(lv=>{const L=cell(c,lv);
-      return `<div class="im-c ${lv}" style="--w:${L.length/maxC}"><span class="im-n">${L.length||'–'}</span>${L.length?`<ul>${L.map(o=>`<li><button type="button" data-ovgo="${o.x.id}" title="${esc(o.a.pain.why||'')}"><span>${esc(o.a.t)}</span><small>${esc(o.s.name)}${o.a.pain.why?' · '+esc(o.a.pain.why):''}</small></button></li>`).join('')}</ul>`:''}</div>`}).join('')).join('')}
+    <div class="im-hd"></div>${lvls.map(lv=>`<div class="im-hd ${lv}">${IMPL[lv]}<b>${OI.filter(o=>o.a.pain.imp===lv).length}</b></div>`).join('')}
+    ${catsSorted.map(c=>`<div class="im-rh"><span class="ci">${ic(c.i)}</span><span><b>${esc(c.n)}</b><small>${OI.filter(o=>o.cat===c).length} dores</small></span></div>`+lvls.map(lv=>{const L=cell(c,lv);
+      return `<div class="im-c ${lv}" style="--w:${L.length/maxC}"><span class="im-n">${L.length||'–'}</span>${L.length?`<ul>${L.map(o=>`<li><button type="button" data-ovgo="${o.x.id}" title="${esc(o.a.pain.why||'')}"><span>${esc(o.a.t)}</span><small>${[st.imSec===null?o.s.name:'',o.a.pain.why||''].filter(Boolean).map(esc).join(' · ')}</small></button></li>`).join('')}</ul>`:''}</div>`}).join('')).join('')}
   </div></div>`;
   $('#ov').innerHTML=`
   <div class="ov-h"><h1><span>${N}</span> dores mapeadas</h1></div>
@@ -2067,11 +2069,14 @@ function renderOv(){
     <section class="ov-sec"><h3>Por área</h3><div class="cats cats-3">${areas}</div></section>
     <section class="ov-sec"><h3>Quando dá para fazer</h3><div class="avl">${avl}</div></section>
   </div>
-  <section class="ov-sec"><h3>Mapa de impacto<small>Proposta a validar com o time</small></h3>${imap}</section>`;
+  <section class="ov-sec" id="imSec"><h3>Mapa de impacto<small>Proposta a validar com o time</small></h3>
+    <div class="seg im-f" role="group" aria-label="Área">${[[null,'Todas as áreas'],...SECTORS.map((s,i)=>[i,s.name])].map(([k,n])=>`<button type="button" data-imsec="${k===null?'':k}" aria-pressed="${st.imSec===k}">${esc(n)}</button>`).join('')}</div>
+    ${imap}</section>`;
 }
 function openArea(si){stop(); st.mode='map'; st.si=si; st.step=null; st.open=null; st.hl=null; st.avail=null; st.view='table'; render(); window.scrollTo({top:0,behavior:'smooth'})}
 function openOpps(patch){st.oq={...OQ0,...patch}; st.mode='opps'; render(); window.scrollTo({top:0,behavior:'smooth'})}
 $('#ov').addEventListener('click',e=>{
+  const m=e.target.closest('[data-imsec]'); if(m){st.imSec=m.dataset.imsec===''?null:+m.dataset.imsec; renderOv(); return}
   const r=e.target.closest('[data-ovsec]'); if(r){openArea(+r.dataset.ovsec); return}
   const g=e.target.closest('[data-ovgo]'); if(g){goStep(g.dataset.ovgo); return}
 });
