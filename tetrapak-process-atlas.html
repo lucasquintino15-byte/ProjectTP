@@ -659,6 +659,39 @@ button.avr:hover{background:var(--surface)}
 .im-c li small{font-size:12px;color:var(--muted);line-height:1.35}
 .t-imp{display:block;margin-top:6px;font-size:12px;color:var(--faint)}
 .t-imp.alto{color:var(--cobalt);font-weight:700}
+
+/* ---------- páginas de tela inteira (modelo do painel COE) ---------- */
+.pager{background:var(--bg);border-bottom:1px solid var(--line);color:var(--fg)}
+.pager .wrap{display:flex;align-items:center;gap:10px;padding-block:7px}
+.pages{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0}
+.pages::-webkit-scrollbar{display:none}
+.pages button{flex:0 0 auto;border:1px solid transparent;color:var(--muted);font-size:13.5px;padding:5px 12px;border-radius:999px;white-space:nowrap}
+.pages button:hover{color:var(--fg);border-color:var(--line)}
+.pages button[aria-current="true"]{background:var(--accent-soft);color:var(--cobalt);font-weight:700}
+.arrows{display:flex;gap:6px;flex:0 0 auto}
+.arrows button{width:34px;height:34px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:50%;font-size:15px;line-height:1}
+.arrows button:disabled{opacity:.35;cursor:default}
+.ovw,.plan,.ch{display:block;padding:0;gap:0}
+.page{position:relative;display:flex;flex-direction:column;justify-content:center;gap:24px;
+  min-height:calc(100vh - var(--toph,140px) - env(safe-area-inset-top,0px));min-height:calc(100dvh - var(--toph,140px) - env(safe-area-inset-top,0px));
+  padding-block:28px 92px;border-top:1px solid var(--line);scroll-margin-top:calc(var(--toph,140px) + env(safe-area-inset-top,0px))}
+.ovw > .page:first-child,.plan > .page:first-child,.ch > .page:first-child{border-top:0}
+#chMap > .page{justify-content:flex-start;gap:0}
+#chMap .hero{padding-top:20px}
+.plan > .page{gap:16px}
+.nextsec{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--fg);font-size:19px;line-height:1;animation:bob 2.2s ease-in-out infinite;box-shadow:0 2px 10px rgba(5,28,44,.08)}
+.nextsec:hover{border-color:var(--cobalt);color:var(--cobalt)}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,5px)}}
+.nextchap{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);display:flex;align-items:center;gap:10px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:7px 8px 7px 18px;white-space:nowrap;box-shadow:0 2px 10px rgba(5,28,44,.08)}
+.nextchap small{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted)}
+.nextchap b{font-size:14px}
+.nextchap i{font-style:normal;width:32px;height:32px;border-radius:50%;background:var(--deep);color:#fff;display:grid;place-items:center;font-size:16px}
+.nextchap:hover{border-color:var(--cobalt)}
+.nextchap:hover i{background:var(--cobalt)}
+html{scroll-snap-type:y proximity}
+.page{scroll-snap-align:start}
+@media (prefers-reduced-motion:reduce){.nextsec{animation:none}html{scroll-snap-type:none}}
+@media (max-width:620px){.pages button{font-size:12.5px;padding:4px 10px}.page{padding-block:22px 84px}}
 </style>
 
 <header class="top" id="top"><div class="wrap">
@@ -667,10 +700,13 @@ button.avr:hover{background:var(--surface)}
     <div class="top-r"><button class="fsbtn" id="bFull" type="button"></button></div>
   </div>
   <nav class="tabs" id="modes" role="tablist" aria-label="Visão"></nav>
-</div></header>
+</div>
+<div class="pager"><div class="wrap"><nav class="pages" id="pages" aria-label="Páginas"></nav><div class="arrows"><button type="button" id="pgPrev" aria-label="Página anterior">↑</button><button type="button" id="pgNext" aria-label="Próxima página">↓</button></div></div></div>
+</header>
 <div class="wrap">
   <section class="ovw" id="ov" hidden aria-label="Visão geral"></section>
   <section class="ovw" id="opps" hidden aria-label="Oportunidades"></section>
+  <div class="ch" id="chMap"><div class="page" data-title="Fluxo das três áreas">
   <section class="hero" id="hero">
     <div>
       <h1>Mapa de processos e <em>oportunidades</em></h1>
@@ -700,6 +736,7 @@ button.avr:hover{background:var(--surface)}
     </section>
     <aside class="insp" id="insp" aria-live="polite"></aside>
   </div>
+  </div></div>
 
   <section class="plan" id="plan" hidden aria-label="Plano de ação"></section>
     <div class="foot"><span>Fontes: CoE Design, Kick-off Wave 2, entrevistas de 29/10/2026 e matriz de desafios. Soluções são hipóteses a validar com os times de IBP e OTM.</span><span>KPMG Confidential</span></div>
@@ -1760,11 +1797,12 @@ function renderStepper(){
 function render(){
   renderModes();
   const plan=st.mode==='plan', ov=st.mode==='overview', map=st.mode==='map', op=st.mode==='opps';
-  $('#hero').hidden=!map; $('#rail').hidden=!map; $('.ws').hidden=!map; $('#plan').hidden=!plan; $('#ov').hidden=!ov; $('#opps').hidden=!op;
+  $('#chMap').hidden=!map; $('#hero').hidden=!map; $('#rail').hidden=!map; $('.ws').hidden=!map; $('#plan').hidden=!plan; $('#ov').hidden=!ov; $('#opps').hidden=!op;
   if(op){renderOpps(); try{ history.replaceState(null,'','#oportunidades') }catch(e){} return}
   if(plan){renderPlan(); try{ history.replaceState(null,'','#plano') }catch(e){} return}
   if(ov){renderOv(); try{ history.replaceState(null,'','#visao-geral') }catch(e){} return}
   renderRail(); renderHl(); renderStepper();
+  $('#chMap').hidden=false; buildPages();
   $('#vFlow').setAttribute('aria-pressed',st.view==='flow'); $('#vTable').setAttribute('aria-pressed',st.view==='table');
   if(st.view==='flow') renderCanvas(); else renderTable();
   renderInsp();
@@ -1941,7 +1979,7 @@ function renderPlan(){
       <span class="qt">${esc(q.curto)}</span>
       <span class="qm">${depPill(q.dep)}<span>Esforço ${esc(q.esforco.toLowerCase())}</span></span></button></li>`).join('');
   const espaBlocks=PLAN.espa.map((e,i)=>`<div class="eb" style="--x:${ESPA_X[e.k]}"><div class="eb-h"><i>${i+1}</i><b>${esc(e.n)}</b><span>${esc(e.q)}</span></div><ul>${f.acoes[e.k].map(a=>`<li>${valTag(a)}</li>`).join('')}</ul></div>`).join('');
-  $('#plan').innerHTML=`
+  $('#plan').innerHTML=`<div class="page" data-title="A fila">
   <section class="pl-intro">
     <div>
       <div class="eyebrow" style="--lc:var(--plan)">${ic('list-checks')}Planning Hub · uma frente de cada vez</div>
@@ -1954,6 +1992,7 @@ function renderPlan(){
   <div class="queue-h"><h3>A fila</h3></div>
   <ol class="queue">${queue}</ol>
 
+  </div><div class="page" data-title="Frente ${f.n}: ${esc(f.curto)}">
   <article class="fd" id="fd" style="--lc:var(--plan)">
     <header class="fd-h">
       <div>
@@ -1984,7 +2023,7 @@ function renderPlan(){
       <div class="best"><h3>${ic('goal')}Depois, no melhor cenário</h3><p>${esc(f.melhor)}</p></div>
     </div>
   </article>
-
+  </div><div class="page" data-title="Fora da fila e próximos passos">
   <section class="pl-sec">
     <h3>Fora da fila por enquanto</h3>
     <div class="outs">${PLAN.filtro.fora.map(o=>`<div class="out"><b>${esc(o.t)}</b><span>${esc(o.por)}</span>${goLink(o.steps[0])}</div>`).join('')}</div>
@@ -1993,7 +2032,8 @@ function renderPlan(){
   <section class="pl-sec pl-two">
     <div><h3 style="margin-bottom:10px">Próximos passos</h3><ol>${PLAN.proximos.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>
     <div><h3 style="margin-bottom:10px">Premissas</h3><ul>${PLAN.premissas.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
-  </section>`;
+  </section></div>`;
+  buildPages();
 }
 
 function setPageMode(m){
@@ -2023,6 +2063,7 @@ const CATS=[
   {k:'proc',n:'Processo e governança',d:'Decisão de processo e de dono antes de qualquer tecnologia.',layers:['processo'],i:'git-merge',c:'var(--c-proc)'}];
 const catOf=l=>CATS.find(c=>c.layers.includes(l))||CATS[4];
 const isCoe=a=>a.pal.tools.includes('core')||a.pal.tools.includes('pbi');
+const firstSentence=s=>{const m=String(s).match(/^.*?[.!?](\s|$)/);return (m?m[0]:s).trim()};
 let OPPS=null;
 function allOpps(){ if(OPPS) return OPPS; OPPS=[];
   SECTORS.forEach((s,si)=>s.steps.forEach((x,i)=>x.acts.forEach((a,j)=>{ if(!a.pain) return;
@@ -2059,19 +2100,21 @@ function renderOv(){
   const imap=`<div class="im-w"><div class="im">
     <div class="im-hd"></div>${lvls.map(lv=>`<div class="im-hd ${lv}">${IMPL[lv]}<b>${OI.filter(o=>o.a.pain.imp===lv).length}</b></div>`).join('')}
     ${catsSorted.map(c=>`<div class="im-rh"><span class="ci">${ic(c.i)}</span><span><b>${esc(c.n)}</b><small>${OI.filter(o=>o.cat===c).length} dores</small></span></div>`+lvls.map(lv=>{const L=cell(c,lv);
-      return `<div class="im-c ${lv}" style="--w:${L.length/maxC}"><span class="im-n">${L.length||'–'}</span>${L.length?`<ul>${L.map(o=>`<li><button type="button" data-ovgo="${o.x.id}" title="${esc(o.a.pain.why||'')}"><span>${esc(o.a.t)}</span><small>${[st.imSec===null?o.s.name:'',o.a.pain.why||''].filter(Boolean).map(esc).join(' · ')}</small></button></li>`).join('')}</ul>`:''}</div>`}).join('')).join('')}
+      return `<div class="im-c ${lv}" style="--w:${L.length/maxC}"><span class="im-n">${L.length||'–'}</span>${L.length?`<ul>${L.map(o=>`<li><button type="button" data-ovgo="${o.x.id}" title="${esc(o.a.pain.why||'')}"><span>${esc(o.a.t)}</span><small>${[st.imSec===null?o.s.name:'',o.a.pain.why||firstSentence(o.a.pain.txt)].filter(Boolean).map(esc).join(' · ')}</small></button></li>`).join('')}</ul>`:''}</div>`}).join('')).join('')}
   </div></div>`;
-  $('#ov').innerHTML=`
+  $('#ov').innerHTML=`<div class="page" data-title="Resumo">
   <div class="ov-h"><h1><span>${N}</span> dores mapeadas</h1></div>
   <div class="ov-l"><span><b>${nCoe}</b> vão para o CoE</span><span><b>${nLow}</b> com esforço baixo</span><span><b>${nSimAnim}</b> com simulação</span></div>
   <section class="ov-sec"><h3>Por tipo de solução</h3><div class="cats">${cats}</div></section>
+  </div><div class="page" data-title="Por área">
   <div class="ov-two">
     <section class="ov-sec"><h3>Por área</h3><div class="cats cats-3">${areas}</div></section>
     <section class="ov-sec"><h3>Quando dá para fazer</h3><div class="avl">${avl}</div></section>
-  </div>
+  </div></div><div class="page" data-title="Mapa de impacto">
   <section class="ov-sec" id="imSec"><h3>Mapa de impacto<small>Proposta a validar com o time</small></h3>
     <div class="seg im-f" role="group" aria-label="Área">${[[null,'Todas as áreas'],...SECTORS.map((s,i)=>[i,s.name])].map(([k,n])=>`<button type="button" data-imsec="${k===null?'':k}" aria-pressed="${st.imSec===k}">${esc(n)}</button>`).join('')}</div>
-    ${imap}</section>`;
+    ${imap}</section></div>`;
+  buildPages();
 }
 function openArea(si){stop(); st.mode='map'; st.si=si; st.step=null; st.open=null; st.hl=null; st.avail=null; st.view='table'; render(); window.scrollTo({top:0,behavior:'smooth'})}
 function openOpps(patch){st.oq={...OQ0,...patch}; st.mode='opps'; render(); window.scrollTo({top:0,behavior:'smooth'})}
@@ -2161,6 +2204,52 @@ document.addEventListener('fullscreenchange',fsLabel); document.addEventListener
 /* altura do topo fixo, para o painel e as âncoras */
 function setToph(){document.documentElement.style.setProperty('--toph',$('#top').offsetHeight+'px')}
 new ResizeObserver(setToph).observe($('#top')); setToph();
+
+
+/* ---------- páginas de tela inteira, como um site ---------- */
+let PAGES=[], PIDX=0, PLOCK=0, PMODE=null;
+const reduceMo=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const pOff=()=>$('#top').offsetHeight+(parseFloat(getComputedStyle(document.documentElement).paddingTop)||0);
+const chEl=()=>st.mode==='overview'?$('#ov'):st.mode==='plan'?$('#plan'):$('#chMap');
+const CHN={overview:'Visão geral',map:'Mapa de processos',plan:'Plano de ação'}, CHO=['overview','map','plan'];
+function buildPages(){
+  const ch=chEl(); if(!ch) return;
+  PAGES=[...ch.querySelectorAll(':scope > .page')];
+  PAGES.forEach((pg,i)=>{ pg.querySelectorAll(':scope > .nextsec,:scope > .nextchap').forEach(b=>b.remove());
+    const b=document.createElement('button'); b.type='button';
+    if(i<PAGES.length-1){ b.className='nextsec'; b.setAttribute('aria-label','Próxima página: '+PAGES[i+1].dataset.title); b.textContent='↓'; b.dataset.pg=i+1 }
+    else { const k=CHO.indexOf(st.mode), nx=CHO[k+1]; b.className='nextchap';
+      b.innerHTML=nx?`<small>Próximo capítulo</small><b>${esc(CHN[nx])}</b><i>↓</i>`:`<small>Fim</small><b>Voltar à Visão geral</b><i>↑</i>`; b.dataset.ch=nx||'overview' }
+    pg.appendChild(b) });
+  $('#pages').innerHTML=PAGES.map((pg,i)=>`<button type="button" data-pg="${i}">${i+1} · ${esc(pg.dataset.title)}</button>`).join('');
+  if(PMODE!==st.mode){PMODE=st.mode; PIDX=0}
+  spyPage(true);
+}
+function markPage(i){ PIDX=i; [...$('#pages').children].forEach((b,k)=>b.setAttribute('aria-current',k===i));
+  const b=$('#pages').children[i]; if(b){const P=$('#pages'); const l=b.offsetLeft-P.offsetLeft, r=l+b.offsetWidth; if(l<P.scrollLeft) P.scrollLeft=l-8; else if(r>P.scrollLeft+P.clientWidth) P.scrollLeft=r-P.clientWidth+8}
+  $('#pgPrev').disabled=i===0&&window.scrollY<10; $('#pgNext').disabled=i>=PAGES.length-1 }
+function goPage(i){ const pg=PAGES[i]; if(!pg) return; markPage(i); PLOCK=Date.now()+1000;
+  window.scrollTo({top:Math.max(0,pg.getBoundingClientRect().top+window.scrollY-pOff()+1),behavior:reduceMo?'auto':'smooth'}) }
+function spyPage(force){ if(!PAGES.length||(!force&&Date.now()<PLOCK)) return; const o=pOff()+40; let c=0;
+  PAGES.forEach((pg,i)=>{ if(pg.getBoundingClientRect().top<=o) c=i });
+  if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-4) c=PAGES.length-1;
+  markPage(c) }
+function stepPage(d){ if(!PAGES.length) return; const cur=PAGES[PIDX];
+  if(d<0&&cur&&cur.getBoundingClientRect().top<pOff()-8) return goPage(PIDX);
+  goPage(Math.max(0,Math.min(PAGES.length-1,PIDX+d))) }
+let ptick=false; window.addEventListener('scroll',()=>{ if(!ptick){ptick=true; requestAnimationFrame(()=>{ptick=false; spyPage()})} },{passive:true});
+window.addEventListener('scrollend',()=>{PLOCK=0; spyPage()});
+$('#pages').addEventListener('click',e=>{const b=e.target.closest('[data-pg]'); if(b) goPage(+b.dataset.pg)});
+$('#pgPrev').onclick=()=>stepPage(-1); $('#pgNext').onclick=()=>stepPage(1);
+document.addEventListener('click',e=>{
+  const n=e.target.closest('.page > .nextsec'); if(n){goPage(+n.dataset.pg); return}
+  const c=e.target.closest('.page > .nextchap'); if(c){setPageMode(c.dataset.ch)}
+});
+document.addEventListener('keydown',e=>{
+  if(!$('#help').hidden||!$('#sim').hidden||e.target.closest('input,textarea,select')) return;
+  if(e.key==='PageDown'||(st.mode!=='map'&&e.key==='ArrowRight')){e.preventDefault(); stepPage(1)}
+  if(e.key==='PageUp'||(st.mode!=='map'&&e.key==='ArrowLeft')){e.preventDefault(); stepPage(-1)}
+});
 
 /* boot */
 const h=(location.hash||'').slice(1); const fi=SECTORS.findIndex(s=>s.id===h); if(fi>=0){st.si=fi;st.mode='map'} if(h==='plano') st.mode='plan'; 
