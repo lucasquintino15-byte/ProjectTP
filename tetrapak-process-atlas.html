@@ -625,7 +625,7 @@ button.avr:hover{background:var(--surface)}
 @media (max-width:760px){.op-x{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.op-chev{transition:none}}
 
-/* tabela paliativo × melhor cenário: esforço e tipo separados */
+/* tabela dores e soluções: esforço e tipo separados */
 .t-when{margin-top:8px}
 .t-eff{font-size:13px;font-weight:700;color:var(--fg)}
 .t-type{display:inline-flex;align-items:flex-start;gap:6px;font-size:13px;font-weight:700;color:var(--fg);line-height:1.3}
@@ -635,6 +635,29 @@ button.avr:hover{background:var(--surface)}
 .t-src+.t-src{margin-top:8px}
 .t-src b{display:block;color:var(--fg);font-size:13px}
 .t-src small{display:block;color:var(--faint);font-size:12px}
+
+/* mapa de impacto */
+.im-w{overflow-x:auto}
+.im{display:grid;grid-template-columns:minmax(200px,.9fr) minmax(300px,1.6fr) minmax(110px,.5fr) minmax(110px,.5fr);gap:6px;min-width:760px}
+.im-hd{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted);padding:2px 12px 6px;display:flex;align-items:baseline;gap:8px}
+.im-hd b{font-family:var(--f-display);font-size:18px;letter-spacing:0;color:var(--fg);font-weight:600}
+.im-hd.alto{color:var(--cobalt)}
+.im-rh{display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.im-rh .ci{width:30px;height:30px;border-radius:6px;display:grid;place-items:center;background:var(--raised);color:var(--fg);flex:none}
+.im-rh b{display:block;font-size:14px;line-height:1.25}
+.im-rh small{display:block;font-size:12px;color:var(--faint)}
+.im-c{border-radius:6px;border:1px solid var(--line);padding:10px 12px;display:grid;gap:8px;align-content:start;background:color-mix(in srgb,var(--cobalt) calc(var(--w) * 14%),var(--surface))}
+.im-c.medio,.im-c.baixo{background:color-mix(in srgb,var(--muted) calc(var(--w) * 14%),var(--surface))}
+.im-c.alto{border-color:color-mix(in srgb,var(--cobalt) 35%,var(--line))}
+.im-n{font-family:var(--f-display);font-weight:600;font-size:24px;line-height:1;color:var(--fg);font-variant-numeric:tabular-nums}
+.im-c.alto .im-n{color:var(--cobalt)}
+.im-c ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.im-c li button{width:100%;text-align:left;display:grid;gap:1px;padding:5px 6px;margin:0 -6px;border-radius:4px}
+.im-c li button:hover{background:var(--surface)}
+.im-c li span{font-size:13.5px;font-weight:700;line-height:1.3;color:var(--fg)}
+.im-c li small{font-size:12px;color:var(--muted);line-height:1.35}
+.t-imp{display:block;margin-top:6px;font-size:12px;color:var(--faint)}
+.t-imp.alto{color:var(--cobalt);font-weight:700}
 </style>
 
 <header class="top" id="top"><div class="wrap">
@@ -1334,6 +1357,44 @@ const HOW = {
 SECTORS.forEach(s=>s.steps.forEach(x=>x.acts.forEach(a=>{ if(a.pal&&!a.pal.how&&HOW[a.t]) a.pal.how=HOW[a.t]; })));
 
 /* ==========================================================
+   IMPACTO DE CADA DOR (proposta a validar com o time)
+   Alto: causa custo extra, ruptura, atraso ao cliente ou trava o pagamento,
+         acontece com frequência, ou é foco declarado da Wave 2.
+   Baixo: pontual, de apoio ou de conhecimento.
+   Médio: todo o resto (retrabalho e tempo do time, sem efeito direto em custo ou serviço).
+   Chave: [id da etapa, início do título da atividade]
+   ========================================================== */
+const IMPACT={
+  alto:[
+    ['ph2','Comercial e CSR lançam','Pedido de importado sai com número desatualizado.'],
+    ['ph2','Gerar o rolling forecast','Forecast que muda sem aviso vira falta de material e frete aéreo.'],
+    ['ph4','Planner avalia','Mais de 50 solicitações por dia, analisadas material a material.'],
+    ['ph7','Revisar cobertura','Alerta de stockout errado e risco de ruptura real.'],
+    ['ph8','Criar a PO respeitando','Atraso só aparece quando o material não chega.'],
+    ['ph9','Medir o atraso real','Atraso médio de cerca de 12 dias, sem saber a causa.'],
+    ['ph10v','Receber as pendências','Horas do planner por semana e pagamento ao fornecedor atrasado.'],
+    ['ph10c','Investigar a diferença','Casos de 3 a 4 dias de análise e pendências paradas há 56 dias.'],
+    ['ph11','Monitorar validade','Material vencido é perda direta.'],
+    ['s1','Saber quando a carga','Limita planejamento, bookings e consolidação.'],
+    ['s2','Montar cargas','Cargas saem com espaço sobrando: fill rate e custo de frete.'],
+    ['s4','Registrar rejeição','Cerca de 700 cargas rejeitadas por mês.'],
+    ['s5','Conferir valores','Divergência devolve caminhões; Nigéria exige zero discrepância.'],
+    ['s8','Aprovar os custos','Sem filtro, o time perde o controle das despesas de frete.'],
+    ['s9','Calcular o fill rate','Foco da Wave 2: sem fórmula única não há como melhorar o fill rate.']
+  ],
+  baixo:[
+    ['ph10v','Cobrir as pendências'],['ph12','Consultar instruções'],['ph12','Padronizar o processo'],
+    ['s1','Tratar pedidos'],['s2','Cumprir o SLA'],['s3','Consultar dados no IRIS'],['s4','Pedir equipes'],
+    ['s6','Alinhar as rotinas'],['s7','Buscar embarque'],['s8','Fazer o acerto'],['s9','Analisar a causa'],
+    ['s10','Fazer lançamentos'],['r6','Registrar boas']
+  ]
+};
+const IMPL={alto:'Alto impacto',medio:'Médio impacto',baixo:'Baixo impacto'};
+SECTORS.forEach(s=>s.steps.forEach(x=>x.acts.forEach(a=>{ if(!a.pain) return; a.pain.imp='medio';
+  for(const lv of ['alto','baixo']) for(const [sid,tp,why] of IMPACT[lv]) if(x.id===sid&&a.t.startsWith(tp)){a.pain.imp=lv; if(why) a.pain.why=why}
+})));
+
+/* ==========================================================
    SIMULAÇÕES — chave = "idDaEtapa:índiceDaAtividade" (a=0, b=1...)
    Cada passo: [de, para, o que acontece]. Atores definidos em ACT.
    ========================================================== */
@@ -1543,7 +1604,7 @@ const countSec=s=>({steps:s.steps.length,acts:s.steps.reduce((a,x)=>a+x.acts.len
 
 /* static labels */
 $('#vFlow').innerHTML=ic('workflow')+'Fluxo';
-$('#vTable').innerHTML=ic('table-2')+'Paliativo × melhor cenário';
+$('#vTable').innerHTML=ic('table-2')+'Dores e soluções';
 $('#bReset').innerHTML=ic('rotate-ccw');
 $('#bHelp').innerHTML=ic('info')+'Como usar';
 $('#bPrev').innerHTML=ic('skip-back');
@@ -1631,7 +1692,7 @@ function renderTable(){
       <td>${esc(a.pal.txt)}${a.qw?`<div style="margin-top:6px;font-size:12.5px"><b style="color:var(--fg)">Quick win OTM:</b> ${esc(a.qw)}</div>`:''}<div style="margin-top:6px;display:flex;gap:4px;flex-wrap:wrap">${a.pal.tools.map(toolChip).join('')}</div></td>
       <td><span class="pl">${esc(a.best.plat)}</span>${esc(a.best.txt)}<div class="t-when">${availPill(a.best.avail)}</div></td>
       <td>${a.pal.how?`<span class="t-eff">${esc(a.pal.how.effort)}</span>`:'–'}</td>
-      <td><span class="t-type">${ic(LAYER[a.best.layer].i)}${esc(LAYER[a.best.layer].n)}</span></td>
+      <td><span class="t-type">${ic(LAYER[a.best.layer].i)}${esc(LAYER[a.best.layer].n)}</span><span class="t-imp ${a.pain.imp}">${esc(IMPL[a.pain.imp])}</span></td>
       <td>${a.pain.src.split(' ').map(c=>SRC[c]?`<span class="t-src"><b>${esc(SRC[c].n)}</b>${c==='M'?'':esc(SRC[c].d.split(' · ')[0])}<small>${esc(SRC[c].dt)}</small></span>`:'').join('')}</td></tr>`).join('')}
     </tbody></table></div></div>`;
 }
@@ -1989,6 +2050,15 @@ function renderOv(){
   const foot=`<tr><td>Total</td>${cols.map(([,f])=>`<td class="n">${O.filter(f).length}</td>`).join('')}</tr>`;
   const avMax=Math.max(...Object.keys(AVAIL).map(k=>by(o=>o.a.best.avail===k)));
   const avl=Object.keys(AVAIL).map(k=>{const n=by(o=>o.a.best.avail===k);return `<div class="avr"><span title="${esc(AVAIL[k].d)}">${esc(AVAIL[k].n)}</span><span class="tr"><i style="width:${n/avMax*100}%"></i></span><b>${n}</b></div>`}).join('');
+  const lvls=['alto','medio','baixo'];
+  const cell=(c,lv)=>O.filter(o=>o.cat===c&&o.a.pain.imp===lv);
+  const maxC=Math.max(...CATS.flatMap(c=>lvls.map(lv=>cell(c,lv).length)));
+  const catsSorted=[...CATS].sort((a,b)=>cell(b,'alto').length-cell(a,'alto').length||O.filter(o=>o.cat===b).length-O.filter(o=>o.cat===a).length);
+  const imap=`<div class="im-w"><div class="im">
+    <div class="im-hd"></div>${lvls.map(lv=>`<div class="im-hd ${lv}">${IMPL[lv]}<b>${by(o=>o.a.pain.imp===lv)}</b></div>`).join('')}
+    ${catsSorted.map(c=>`<div class="im-rh"><span class="ci">${ic(c.i)}</span><span><b>${esc(c.n)}</b><small>${O.filter(o=>o.cat===c).length} dores</small></span></div>`+lvls.map(lv=>{const L=cell(c,lv);
+      return `<div class="im-c ${lv}" style="--w:${L.length/maxC}"><span class="im-n">${L.length||'–'}</span>${lv==='alto'&&L.length?`<ul>${L.map(o=>`<li><button type="button" data-ovgo="${o.x.id}" title="${esc(o.a.pain.why||'')}"><span>${esc(o.a.t)}</span><small>${esc(o.s.name)}${o.a.pain.why?' · '+esc(o.a.pain.why):''}</small></button></li>`).join('')}</ul>`:''}</div>`}).join('')).join('')}
+  </div></div>`;
   $('#ov').innerHTML=`
   <div class="ov-h"><h1><span>${N}</span> dores mapeadas</h1></div>
   <div class="ov-l"><span><b>${nCoe}</b> vão para o CoE</span><span><b>${nLow}</b> com esforço baixo</span><span><b>${nSimAnim}</b> com simulação</span></div>
@@ -1996,12 +2066,14 @@ function renderOv(){
   <div class="ov-two">
     <section class="ov-sec"><h3>Por área</h3><div class="cats cats-3">${areas}</div></section>
     <section class="ov-sec"><h3>Quando dá para fazer</h3><div class="avl">${avl}</div></section>
-  </div>`;
+  </div>
+  <section class="ov-sec"><h3>Mapa de impacto<small>Proposta a validar com o time</small></h3>${imap}</section>`;
 }
 function openArea(si){stop(); st.mode='map'; st.si=si; st.step=null; st.open=null; st.hl=null; st.avail=null; st.view='table'; render(); window.scrollTo({top:0,behavior:'smooth'})}
 function openOpps(patch){st.oq={...OQ0,...patch}; st.mode='opps'; render(); window.scrollTo({top:0,behavior:'smooth'})}
 $('#ov').addEventListener('click',e=>{
   const r=e.target.closest('[data-ovsec]'); if(r){openArea(+r.dataset.ovsec); return}
+  const g=e.target.closest('[data-ovgo]'); if(g){goStep(g.dataset.ovgo); return}
 });
 $('#ov').addEventListener('keydown',e=>{const g=e.target.closest('[data-ovsec]'); if(g&&(e.key==='Enter'||e.key===' ')){e.preventDefault();g.click()}});
 
