@@ -925,13 +925,39 @@ const IMPACT={
     ['ph10c','Investigar a diferença','Casos de 3 a 4 dias de análise e pendências paradas há 56 dias.'],
     ['ph11','Monitorar validade','Material vencido é perda direta.']
   ],
+  medio:[
+    ['ph1','Negociar volume e preço','Fornecedor sem fôlego quando o volume sobe; o efeito chega aos poucos, não a cada pedido.'],
+    ['ph2','Acompanhar consumo contra forecast','Ordem futura fica sobrando ou faltando até a próxima revisão do planner.'],
+    ['ph3','Adicionar volumes negociados','Lançamento manual e novo check de capacidade; não é frequente.'],
+    ['ph3','Conferir se APO e IBP','Trabalho dobrado enquanto o IBP não vira oficial.'],
+    ['ph5','Checar se o plano cabe','Controle em planilha, sem efeito direto em custo ou serviço.'],
+    ['ph5','Simular cenários','Decisão de capacidade fica para depois da reunião.'],
+    ['ph5','Decidir em qual fábrica realocar','Depende de duas pessoas; as realocações não são frequentes.'],
+    ['ph5','Acompanhar o ritmo do mês','Conta feita à mão para prever o fechamento do mês.'],
+    ['ph6','Acompanhar se o mercado colocou','Conferência no SAP, ordem a ordem, sem visão por mercado e cliente.'],
+    ['ph4','CSR abre a solicitação','Gera o volume de extra forecast; a causa está no comercial.'],
+    ['ph7','Explodir o forecast','Cópia de planilha a cada nova versão do forecast.'],
+    ['ph7','Explicar o desvio','Investigação manual e avisos repetidos ao CSR sobre o mesmo desvio.'],
+    ['ph7','Validar master data e MOQ','Retrabalho do hypercare; tende a cair quando o IBP estabilizar.'],
+    ['ph8','Enviar a PO e um e-mail','E-mail manual a cada PO.'],
+    ['ph8','Cobrar a confirmação','Relatório gerado todo dia à mão no Norte.'],
+    ['ph10a','Warehouse registra o recebimento','Sem validade no GR, o alerta de vencimento não funciona.'],
+    ['ph10a','Conferir o que chegou','Diferença só aparece na conciliação e vira pendência de GR/IR.'],
+    ['ph10v','Responder dúvidas da Capgemini','Casos repetidos respondidos um a um pelo planner.'],
+    ['ph10v','Conferir o preço da fatura','Fatura trava até o planner corrigir a PO.'],
+    ['ph10v','Tratar faturas de fornecedores locais','Pendência aberta antes de o material chegar.'],
+    ['ph10c','Receber da controladoria','Fila quinzenal inflada por POs antigas, sem histórico.'],
+    ['ph10c','Pedir correção ao armazém','No Norte, o planner precisa instruir o armazém caso a caso.'],
+    ['ph10c','Pedir clearing financeiro','Caso a caso, com aprovação da diretoria; é o último recurso.']
+  ],
   baixo:[
-    ['ph10v','Cobrir as pendências'],['ph12','Consultar instruções']
+    ['ph10v','Cobrir as pendências','Acontece só nas férias, mas trava o pagamento se ninguém assumir.'],
+    ['ph12','Consultar instruções','Dúvidas de quem chegou há pouco; atrasa, mas não para o processo.']
   ]
 };
 const IMPL={alto:'Alto impacto',medio:'Médio impacto',baixo:'Baixo impacto'};
 SECTORS.forEach(s=>s.steps.forEach(x=>x.acts.forEach(a=>{ if(!a.pain) return; a.pain.imp='medio';
-  for(const lv of ['alto','baixo']) for(const [sid,tp,why] of IMPACT[lv]) if(x.id===sid&&a.t.startsWith(tp)){a.pain.imp=lv; if(why) a.pain.why=why}
+  for(const lv of ['alto','medio','baixo']) for(const [sid,tp,why] of IMPACT[lv]) if(x.id===sid&&a.t.startsWith(tp)){a.pain.imp=lv; if(why) a.pain.why=why}
 })));
 
 /* ==========================================================
