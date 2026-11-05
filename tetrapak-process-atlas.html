@@ -758,6 +758,9 @@ body.noscroll{overflow:hidden}
 .qc-list{margin:0;padding-left:18px;display:grid;gap:8px;font-size:14px;color:var(--fg)}
 .qc-list li{line-height:1.5}
 @media (max-width:860px){.qc-tbl td:first-child{width:auto}}
+
+.im-c li small.im-why{display:none}
+.im-c li button:hover small.im-why,.im-c li button:focus-visible small.im-why{display:block}
 </style>
 
 <div class="wrap">
@@ -1739,7 +1742,7 @@ function renderDiag(){
   const imap=`<div class="im-w"><div class="im">
     <div class="im-hd"></div>${lvls.map(lv=>`<div class="im-hd ${lv}">${IMP_S[lv]} impacto<b>${OI.filter(o=>o.a.pain.imp===lv).length}</b></div>`).join('')}
     ${catsSorted.map(c=>`<div class="im-rh"><span class="ci">${ic(c.i)}</span><span><b>${esc(c.n)}</b><small>${OI.filter(o=>o.cat===c).length} dores</small></span></div>`+lvls.map(lv=>{const L=cell(c,lv);
-      return `<div class="im-c ${lv}" style="--w:${L.length/maxC}"><span class="im-n">${L.length||'–'}</span>${L.length?`<ul>${L.map(o=>`<li><button type="button" data-a="${o.si}:${o.i}:${o.j}" title="Abrir no mapa"><span>${esc(o.a.t)}</span><small>${[st.imSec===null?(SEC_SHORT[o.s.id]||o.s.name):'',o.a.pain.why||''].filter(Boolean).map(esc).join(' · ')}</small></button></li>`).join('')}</ul>`:''}</div>`}).join('')).join('')}
+      return `<div class="im-c ${lv}" style="--w:${L.length/maxC}"><span class="im-n">${L.length||'–'}</span>${L.length?`<ul>${L.map(o=>`<li><button type="button" data-a="${o.si}:${o.i}:${o.j}" title="Abrir no mapa"><span>${esc(o.a.t)}</span><small${lv==='alto'?'':' class="im-why"'}>${[st.imSec===null&&PAIN_SECS().length>1?(SEC_SHORT[o.s.id]||o.s.name):'',o.a.pain.why||''].filter(Boolean).map(esc).join(' · ')}</small></button></li>`).join('')}</ul>`:''}</div>`}).join('')).join('')}
   </div></div>`;
   const qw=O.filter(o=>o.a.pain.imp==='alto'&&o.low);
   const altoTxt=O.filter(o=>o.a.pain.imp==='alto');
@@ -1763,7 +1766,7 @@ function renderDiag(){
     </div>
   </article>
   <article class="tp-page" data-title="Mapa de impacto"><header class="tp-head"><div class="tp-eb">Diagnóstico</div><h2>Mapa de impacto</h2>
-    <p>Alto: custo extra, ruptura, atraso ao cliente ou pagamento travado, com frequência, ou foco declarado da Wave 2. Baixo: pontual, de apoio ou de conhecimento. Médio: retrabalho e tempo do time, sem efeito direto em custo ou serviço. <b>Classificação proposta, a validar com o time.</b></p></header>
+    <p>Alto: custo extra, ruptura, atraso ao cliente ou pagamento travado, com frequência, ou foco declarado da Wave 2. Baixo: pontual, de apoio ou de conhecimento. Médio: retrabalho e tempo do time, sem efeito direto em custo ou serviço. <b>Classificação proposta, a validar com o time.</b> No médio e no baixo impacto, passe o mouse sobre a dor para ver o motivo.</p></header>
     <div class="seg im-f" role="group" aria-label="Área">${[[null,'Todas as áreas'],...SECTORS.map((s,i)=>[i,SEC_SHORT[s.id]||s.name])].map(([k,n])=>`<button type="button" data-imsec="${k===null?'':k}" aria-pressed="${st.imSec===k}">${esc(n)}</button>`).join('')}</div>
     ${imap}
     <section class="ov-sec"><h3>Por onde começar · alto impacto com paliativo de esforço baixo<small>${qw.length} de ${altoTxt.length}</small></h3>
