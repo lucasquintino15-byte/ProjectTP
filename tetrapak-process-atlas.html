@@ -829,6 +829,32 @@ body.noscroll{overflow:hidden}
 #pg-objetivo .tp-hero{grid-template-columns:1fr}
 #pg-objetivo .tp-ht{max-width:820px}
 #pg-objetivo .tp-hero p{max-width:70ch}
+
+/* alcance na cadeia */
+.alc{display:grid;gap:3px;min-width:120px}
+.alc-top{display:flex;align-items:center;gap:8px}
+.alc-top b{font-family:var(--f-display);font-size:22px;line-height:1;color:var(--ac)}
+.alc{--ac:#7A8699}.alc[data-n="3"]{--ac:#C99A00}.alc[data-n="4"]{--ac:#E8761C}.alc[data-n="5"]{--ac:#D8432E}.alc[data-n="2"]{--ac:#5B8DB8}
+.alc-m{display:inline-flex;gap:2px}.alc-m i{width:9px;height:9px;border-radius:2px;background:var(--line)}.alc-m i.on{background:var(--ac)}
+.alc-t{font-size:12px;font-weight:700;color:var(--fg)}
+.alc-chain{display:inline-flex;gap:2px;margin:2px 0}.alc-chain i{width:12px;height:6px;border-radius:2px;background:color-mix(in srgb,var(--line) 70%,transparent)}.alc-chain i.on{background:var(--ac,var(--cobalt))}
+.alc-why{display:none;font-size:12px;line-height:1.4;color:var(--muted);margin-top:2px}
+tr.go:hover .alc-why,tr.go:focus .alc-why{display:block}
+.alcleg{border:1px solid var(--line);background:var(--surface);border-radius:4px;margin:0 0 14px}
+.alcleg summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;font-size:14px;color:var(--muted)}
+.alcleg summary::-webkit-details-marker{display:none}
+.alcleg summary b{color:var(--fg)}.alcleg summary .ic{width:17px;height:17px;color:var(--cobalt);flex:none}
+.alcleg summary .chev{margin-left:auto;display:inline-flex;transition:transform .2s}.alcleg[open] summary .chev{transform:rotate(180deg)}
+.alcleg-b{padding:0 14px 14px}
+.alcleg-b ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.alcleg-b li{display:grid;grid-template-columns:28px 150px 1fr auto;gap:10px;align-items:baseline;font-size:13.5px;color:var(--muted)}
+.alcleg-b li b{color:var(--fg)}.alcleg-b li em{font-style:normal;font-size:12px;color:var(--faint)}
+.alc-n{font-family:var(--f-display);font-size:18px;color:var(--ac)}
+.alc-n{--ac:#7A8699}.alc-n[data-n="3"]{--ac:#C99A00}.alc-n[data-n="4"]{--ac:#E8761C}.alc-n[data-n="5"]{--ac:#D8432E}.alc-n[data-n="2"]{--ac:#5B8DB8}
+.alcleg-chain,.alcleg-ins{margin:10px 0 0;font-size:13.5px;color:var(--muted);line-height:1.5}
+.alcleg-chain .alc-chain i.on{background:var(--cobalt)}
+.alcleg-ins b{color:var(--fg)}
+@media (max-width:720px){.alcleg-b li{grid-template-columns:24px 1fr}.alcleg-b li span,.alcleg-b li em{grid-column:2}}
 </style>
 
 <div class="wrap">
@@ -1597,11 +1623,51 @@ const COE_C={
 };
 const LAY={VW:{n:'Video wall',d:'O que está acontecendo agora',i:'activity'},TAT:{n:'Camada tática',d:'Onde e quem age',i:'list-checks'},EST:{n:'Camada estratégica',d:'Por que e como melhorar',i:'chart-column'},ALR:{n:'Alerta',d:'Aviso quando passa do limite',i:'triangle-alert'}};
 const SEC_SHORT={'planning-hub':'Planning Hub','scct-outbound':'SCCT','repro':'Repro Design'};
+/* Alcance na cadeia (impacto cross-funcional): 1 isolada → 5 ponta a ponta. [nota, áreas atingidas, como se propaga] */
+const ALC_AREAS=[['forn','Fornecedor'],['inb','Transporte inbound'],['arm','Armazém'],['fab','Fábricas'],['com','Comercial e CSR'],['cli','Cliente'],['fin','Financeiro']];
+const ALC_T={5:'Ponta a ponta',4:'Várias áreas',3:'Uma área vizinha',2:'Pouco além do time',1:'Isolada'};
+const ALC_D={5:'Nasce num elo e chega ao cliente e ao fornecedor: ruptura, frete aéreo, estoque e capital de giro.',4:'Atinge duas ou mais áreas e o fluxo de material.',3:'Atinge uma área antes ou depois do Planning Hub.',2:'O efeito sai do time, mas fica no fluxo financeiro ou administrativo.',1:'O efeito fica no trabalho de quem executa. Nada muda no fluxo de material nem no atendimento.'};
+const ALC={
+'ph1:1':[3,['forn','fab'],'Fornecedor sem fôlego quando o volume sobe atrasa material, e a falta chega à produção.'],
+'ph2:1':[5,['com','forn','inb','fab','cli','fin'],'Pedido de importado com número velho vira falta (frete aéreo, cliente) ou excesso (estoque e capital de giro).'],
+'ph2:2':[5,['com','forn','inb','fab','cli','fin'],'Forecast que some ou salta sem aviso: falta de material, frete aéreo e cobrança do comercial.'],
+'ph2:3':[4,['forn','fab','fin'],'Ordens futuras sobram ou faltam até a próxima revisão: pedido ao fornecedor e estoque erram.'],
+'ph3:1':[3,['com','fab','forn'],'Volume extra entra à mão e obriga a refazer capacidade e matéria-prima.'],
+'ph3:2':[4,['fab','forn','cli'],'Se o número do IBP estiver errado, a fábrica e o time de closures planejam errado.'],
+'ph5:1':[2,['fab'],'Afeta a visão de capacidade das fábricas, sem efeito direto no fluxo.'],
+'ph5:2':[3,['fab','com'],'A decisão de capacidade com a fábrica ou o comercial fica para depois.'],
+'ph5:3':[3,['fab','cli'],'Realocação lenta em caso de problema numa fábrica atrasa o atendimento do mercado.'],
+'ph5:4':[2,['fab'],'Afeta só a leitura do fechamento do mês com a fábrica.'],
+'ph6:1':[3,['com','fin'],'Matéria-prima comprada para volume aceito pode ficar parada se o mercado não colocar as ordens.'],
+'ph4:1':[5,['com','cli','fab','forn','inb','fin'],'Erro de forecast vira pedido extra todo dia: pressão em estoque, produção, fornecedor e frete aéreo.'],
+'ph4:2':[4,['com','cli','fab','forn'],'Resposta lenta ou recusa ao CSR chega ao cliente e escala à diretoria.'],
+'ph7:0':[3,['forn','fab'],'Erro na conversão de embalagem em quilos vira compra errada de matéria-prima.'],
+'ph7:1':[4,['forn','fab','cli'],'Alerta falso esconde o risco real de ruptura que chega à produção e ao cliente.'],
+'ph7:2':[3,['com'],'Avisos repetidos e em unidade errada atrasam a correção do forecast pelo comercial.'],
+'ph7:4':[3,['forn','fab'],'MOQ errado altera o pedido ao fornecedor e a visão das fábricas no IBP.'],
+'ph8:0':[4,['forn','inb','fab','cli'],'PO colocada tarde vira atraso de chegada, falta na produção e risco para o cliente.'],
+'ph8:1':[1,['forn'],'Só um e-mail a mais por PO. Não muda o fluxo.'],
+'ph8:2':[3,['forn','inb','fab'],'Pedido não confirmado só é descoberto tarde, quando já afeta a chegada.'],
+'ph9:1':[4,['forn','inb','fab','cli'],'Lead time irreal no planejamento vira falta de material e mudança de plano.'],
+'ph10a:0':[3,['arm','fin'],'Sem validade no GR, o material vence sem aviso: perda e capital de giro.'],
+'ph10a:1':[2,['arm','forn','fin'],'A diferença de metragem vira pendência financeira semanas depois. O material segue fluindo.'],
+'ph10v:0':[2,['forn','fin'],'Atrasa o pagamento ao fornecedor. O fluxo de material não para.'],
+'ph10v:1':[1,['fin'],'Fica entre o planner e a Capgemini.'],
+'ph10v:2':[2,['forn','fin'],'Trava o pagamento até a correção da PO.'],
+'ph10v:3':[1,['fin'],'Pendência administrativa que se resolve quando o caminhão chega.'],
+'ph10v:4':[1,['forn'],'Pontual: pagamento parado nas férias.'],
+'ph10c:0':[1,['fin'],'Fila administrativa entre planner e controladoria.'],
+'ph10c:1':[1,['fin'],'Tempo do planner. A diferença é contábil; o material já foi recebido e usado.'],
+'ph10c:2':[1,['arm'],'Fica entre o planner e o armazém do Norte.'],
+'ph10c:3':[1,['fin'],'Ajuste contábil caso a caso.'],
+'ph11:0':[3,['arm','fin','com'],'Material vencido é perda direta e prende espaço e capital de giro.'],
+'ph12:0':[1,[],'Fica no próprio time: dúvidas de quem chegou há pouco.']
+};
 const PROWS=[];
 const PAIN_SECS=()=>SECTORS.filter(s=>s.steps.some(x=>x.acts.some(a=>a.pain)));
 SECTORS.forEach((s,si)=>s.steps.forEach((x,i)=>x.acts.forEach((a,j)=>{ if(!a.pain) return; const k=x.id+':'+j;
-  PROWS.push({k,si,i,j,s,x,a,coe:COE[k]||{c:'fora',l:'',ref:'—',como:''},fila:s.id==='planning-hub'?filaOf(x.id):null}) })));
-st.df={area:'all',imp:'all',coe:'all',src:'all',q:''}; st.cf={coe:'all',area:'all'};
+  PROWS.push({k,si,i,j,s,x,a,alc:ALC[k]||null,coe:COE[k]||{c:'fora',l:'',ref:'—',como:''},fila:s.id==='planning-hub'?filaOf(x.id):null}) })));
+st.df={area:'all',imp:'all',coe:'all',src:'all',alc:'all',ord:'proc',q:''}; st.cf={coe:'all',area:'all'};
 const coePill=c=>`<span class="cpill" style="--pc:${COE_C[c].c}">${ic(COE_C[c].i)}${esc(COE_C[c].s)}</span>`;
 const secTag=s=>`<span class="stag" style="--sc:${s.color}">${esc(SEC_SHORT[s.id]||s.name)}</span>`;
 const norm=v=>String(v||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
@@ -1615,6 +1681,19 @@ function chipRow(label,key,opts,cur){
   return `<div class="frow"><span class="lab">${esc(label)}</span>${opts.map(([v,n,c])=>`<button class="chip" data-f="${key}" data-v="${v}" aria-pressed="${cur===v}" ${c?`style="--dc:${c}"`:''}>${c?'<span class="d"></span>':''}${esc(n)}</button>`).join('')}</div>`;
 }
 
+function alcCell(a){ if(!a) return '<span class="st">—</span>';
+  const [n,ar,why]=a; const names=ALC_AREAS.filter(([k])=>ar.includes(k)).map(([,v])=>v);
+  return `<div class="alc" data-n="${n}"><div class="alc-top"><b>${n}</b><span class="alc-m">${[1,2,3,4,5].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</span></div><span class="alc-t">${esc(ALC_T[n])}</span>
+    <span class="st">${names.length?'Atinge: '+esc(names.join(', ')):'Fica no Planning Hub'}</span><span class="alc-why">${esc(why)}</span></div>`;
+}
+function alcLegend(){
+  const cnt=n=>PROWS.filter(r=>r.alc&&r.alc[0]===n).length;
+  const hi=PROWS.filter(r=>r.a.pain.imp==='alto'), hiWide=hi.filter(r=>r.alc&&r.alc[0]>=4).length, hiNarrow=hi.filter(r=>r.alc&&r.alc[0]<=2);
+  return `<details class="alcleg"><summary>${ic('git-compare')}<b>Alcance na cadeia:</b> quanto a dor se propaga para outras áreas, de 1 (isolada) a 5 (ponta a ponta). Proposta da KPMG, a validar.<span class="chev">${ic('chevron-down')}</span></summary>
+    <div class="alcleg-b"><ol>${[5,4,3,2,1].map(n=>`<li><span class="alc-n" data-n="${n}">${n}</span><b>${esc(ALC_T[n])}</b><span>${esc(ALC_D[n])}</span><em>${cnt(n)} dores</em></li>`).join('')}</ol>
+    
+    <p class="alcleg-ins"><b>Impacto e alcance são coisas diferentes.</b> Das ${hi.length} dores de alto impacto, ${hiWide} se propagam para várias áreas. ${hiNarrow.length?`Já ${hiNarrow.map(r=>'“'+esc(r.a.t.toLowerCase())+'”').join(' e ')} pesa${hiNarrow.length>1?'m':''} muito para o time, mas fica${hiNarrow.length>1?'m':''} no fluxo financeiro e não muda o fluxo de material.`:''}</p></div></details>`;
+}
 function renderDores(){
   const f=st.df;
   const areaOpts=[['all','Todas'],...PAIN_SECS().map(s=>[s.id,SEC_SHORT[s.id]||s.name,s.color])];
@@ -1629,25 +1708,30 @@ function renderDores(){
   <section class="fpanel">
     ${chipRow('Área','area',areaOpts,f.area)}
     ${chipRow('Impacto','imp',[['all','Todos'],['alto','Alto'],['medio','Médio'],['baixo','Baixo']],f.imp)}
+    ${chipRow('Alcance na cadeia','alc',[['all','Todos'],...[5,4,3,2,1].map(n=>[String(n),n+' · '+ALC_T[n]])],f.alc)}
+    ${chipRow('Ordenar','ord',[['proc','Pela ordem do processo'],['alc','Pelo alcance, do maior ao menor']],f.ord)}
     ${chipRow('No CoE','coe',coeOpts,f.coe)}
     ${chipRow('Fonte','src',srcOpts,f.src)}
     <div class="frow"><label class="lab" for="dq">Buscar</label><input id="dq" type="search" placeholder="Ex.: VIM, extra forecast, alumínio" value="${esc(f.q)}" autocomplete="off"><span class="fcount" id="dcount"></span></div>
   </section>
-  <div class="tscroll dtable"><table><thead><tr><th style="width:15%">Área e etapa</th><th style="width:25%">Dor</th><th style="width:22%">Paliativo · em validação</th><th style="width:18%">Melhor cenário · em validação</th><th style="width:14%">No CoE · em validação</th><th style="width:6%">Fila</th></tr></thead><tbody id="dbody"></tbody></table></div>`;
+  ${alcLegend()}
+  <div class="tscroll dtable"><table><thead><tr><th style="width:14%">Área e etapa</th><th style="width:22%">Dor</th><th style="width:13%">Alcance na cadeia</th><th style="width:18%">Paliativo · em validação</th><th style="width:15%">Melhor cenário · em validação</th><th style="width:13%">No CoE · em validação</th><th style="width:5%">Fila</th></tr></thead><tbody id="dbody"></tbody></table></div>`;
   renderDoresRows();
 }
 function renderDoresRows(){
   const f=st.df; const q=norm(f.q);
-  const rows=PROWS.filter(r=>(f.area==='all'||r.s.id===f.area)&&(f.imp==='all'||r.a.pain.imp===f.imp)&&(f.coe==='all'||r.coe.c===f.coe)&&(f.src==='all'||r.a.pain.src===f.src)&&
+  let rows=PROWS.filter(r=>(f.area==='all'||r.s.id===f.area)&&(f.imp==='all'||r.a.pain.imp===f.imp)&&(f.alc==='all'||(r.alc&&String(r.alc[0])===f.alc))&&(f.coe==='all'||r.coe.c===f.coe)&&(f.src==='all'||r.a.pain.src.split(' ').includes(f.src))&&
     (!q||norm([r.x.t,r.a.t,r.a.pain.txt,r.a.pal&&r.a.pal.txt,r.a.best&&r.a.best.txt,r.coe.ref,(r.a.pain.ids||[]).join(' ')].join(' ')).includes(q)));
+  if(f.ord==='alc') rows=[...rows].sort((p,q)=>((q.alc?q.alc[0]:0)-(p.alc?p.alc[0]:0)));
   $('#dcount').textContent=`${rows.length} de ${PROWS.length} dores`;
   $('#dbody').innerHTML=rows.length?rows.map(r=>`<tr class="go" tabindex="0" data-a="${r.si}:${r.i}:${r.j}">
     <td>${secTag(r.s)}<span class="stt">${esc(r.x.t)}</span><span class="st">${esc(r.a.t)}</span>${impTag(r.a.pain.imp)}</td>
-    <td><span class="at">${esc(r.a.pain.txt)}</span><span class="st">${esc(SRC[r.a.pain.src]?SRC[r.a.pain.src].n:r.a.pain.src)}</span></td>
+    <td><span class="at">${esc(r.a.pain.txt)}</span><span class="st">${esc(r.a.pain.src.split(' ').map(k=>SRC[k]?SRC[k].n:k).join(' · '))}</span></td>
+    <td>${alcCell(r.alc)}</td>
     <td>${r.a.pal?esc(r.a.pal.txt):'<span class="st">—</span>'}</td>
     <td>${r.a.best?`${esc(r.a.best.txt)}<span class="st">${esc(r.a.best.plat||'')}</span>`:'<span class="st">—</span>'}</td>
     <td>${coePill(r.coe.c)}${r.coe.l?`<span class="st">${esc(LAY[r.coe.l].n)}</span>`:''}${r.coe.ref&&r.coe.ref!=='—'?`<span class="st">${esc(r.coe.ref)}</span>`:''}</td>
-    <td>${r.fila?`<span class="fila">${r.fila}</span>`:'<span class="st">—</span>'}</td></tr>`).join(''):`<tr><td colspan="6" class="empty">Nenhuma dor com esses filtros. Limpe a busca ou escolha "Todas".</td></tr>`;
+    <td>${r.fila?`<span class="fila">${r.fila}</span>`:'<span class="st">—</span>'}</td></tr>`).join(''):`<tr><td colspan="7" class="empty">Nenhuma dor com esses filtros. Limpe a busca ou escolha "Todas".</td></tr>`;
 }
 $('#v-dores').addEventListener('click',e=>{
   const c=e.target.closest('[data-f]'); if(c){st.df[c.dataset.f]=c.dataset.v; renderDores(); return}
