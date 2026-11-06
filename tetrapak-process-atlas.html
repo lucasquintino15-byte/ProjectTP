@@ -855,6 +855,44 @@ tr.go:hover .alc-why,tr.go:focus .alc-why{display:block}
 .alcleg-chain .alc-chain i.on{background:var(--cobalt)}
 .alcleg-ins b{color:var(--fg)}
 @media (max-width:720px){.alcleg-b li{grid-template-columns:24px 1fr}.alcleg-b li span,.alcleg-b li em{grid-column:2}}
+
+.th-sort{min-width:150px}
+.th-sort .sortb,.th-sort .sortx{position:relative;z-index:1}
+.sortb{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:5px;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;border-radius:3px}
+.sortb:hover{color:var(--fg)}.sortb:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
+.sortb .sarr{font-size:12px;opacity:.55}.sortb.on{color:var(--cobalt)}.sortb.on .sarr{opacity:1}
+.sortx{all:unset;cursor:pointer;margin-left:6px;width:16px;height:16px;line-height:15px;text-align:center;border-radius:50%;font-size:13px;color:var(--muted);border:1px solid var(--line)}
+.sortx:hover{color:var(--fg);border-color:var(--muted)}.sortx:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
+
+/* explicação do "poderiam entrar no CoE" */
+.kpi-pop{position:relative;cursor:help}
+.kpi-pop:focus-visible{outline:2px solid var(--cobalt);outline-offset:2px}
+.kpi-hint{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--cobalt);margin-top:2px}
+.kpi-hint .ic{width:13px;height:13px}
+.cpop{position:absolute;z-index:30;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(4px);width:min(420px,92vw);background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:6px;box-shadow:0 12px 32px rgba(10,20,40,.18);padding:14px 16px;display:grid;gap:10px;text-align:left;opacity:0;visibility:hidden;transition:opacity .15s,transform .15s,visibility .15s;pointer-events:none}
+.kpi-pop:hover .cpop,.kpi-pop:focus .cpop,.kpi-pop:focus-within .cpop{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.cpop::before{content:"";position:absolute;top:-6px;left:50%;width:10px;height:10px;background:var(--surface);border-left:1px solid var(--line);border-top:1px solid var(--line);transform:translateX(-50%) rotate(45deg)}
+.cpop-h{font-weight:700;font-size:14px}
+.cpop p{margin:0;font-size:13px;line-height:1.45;color:var(--muted)}
+.cpop-bar{display:flex;height:8px;border-radius:4px;overflow:hidden;background:var(--line-soft)}
+.cpop-bar i{display:block;height:100%}
+.cpop-row{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start}
+.cpop-n{font-family:var(--f-display);font-size:24px;line-height:1;color:var(--pc)}
+.cpop-row b{display:block;font-size:13.5px}
+.cpop-row span{display:block;font-size:12.5px;line-height:1.4;color:var(--muted)}
+.cpop-row ul{margin:4px 0 0;padding-left:16px;font-size:12px;line-height:1.4;color:var(--muted)}
+.cpop-row ul b{display:inline;font-size:12px;font-weight:600;color:var(--fg)}
+.cpop-row ul span{display:inline;font-size:12px}
+.cpop-lay{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line-soft);padding-top:8px}
+.cpop-lay span{font-weight:700;color:var(--fg)}
+.cpop .cpop-f{display:flex;gap:6px;align-items:flex-start;font-size:12px;color:var(--muted)}
+.cpop-f .ic{width:14px;height:14px;flex:none;margin-top:1px;color:var(--e)}
+.kpi-c .cpop b{font-family:var(--f-body);font-size:13.5px;font-weight:700;line-height:1.3;font-variant-numeric:normal}
+.kpi-c .cpop ul b{font-size:12px;font-weight:600}
+.kpi-c .cpop span{font-size:12.5px;line-height:1.4;color:var(--muted)}
+.kpi-c .cpop ul span{font-size:12px}
+.kpi-c .cpop .cpop-n{font-family:var(--f-display);font-size:24px;line-height:1;color:var(--pc)}
+.kpi-c .cpop .cpop-lay span{font-size:12.5px;font-weight:700;color:var(--fg)}
 </style>
 
 <div class="wrap">
@@ -907,7 +945,7 @@ tr.go:hover .alc-why,tr.go:focus .alc-why{display:block}
   <section class="plan" id="plan" hidden aria-label="Plano de ação"></section>
   <section class="legend" id="legend"></section>
   <div class="nextwrap" id="nextch"></div>
-  <div class="foot"><span>Fontes: CoE Design (mar/2026) · Kick-off Wave 2 (out/2026) · entrevistas de 29/10/2026 (Daniel e Iranildes, Lia, Elizabeth) · Plano de ação do Planning Hub (03/11/2026) · deck “AI, Simulation and Digital Twin for the E2E Supply Chain” (out/2026)</span><span>KPMG Confidential · material de trabalho</span></div>
+  <div class="foot"><span>Fontes: CoE Design (mar/2026) · Kick-off Wave 2 (out/2026) · entrevistas de 29/10/2026 (Daniel e Iranildes, Lia, Elizabeth) · deck “AI, Simulation and Digital Twin for the E2E Supply Chain” (out/2026)</span><span>KPMG Confidential · material de trabalho</span></div>
 </div>
 
 <div class="ov" id="sim" hidden role="dialog" aria-modal="true" aria-label="Simulação">
@@ -1521,7 +1559,7 @@ const depPill=d=>`<span class="dep ${d.tipo}">${ic(d.tipo==='time'?'users':'hand
 const valTag=s=>esc(s).replace(/\s*\((proposta a validar[^)]*)\)/g,' <span class="val">a validar</span>');
 const goLink=id=>{const i=stepIdx(id); if(i<0) return ''; return `<button class="golink" data-go="${id}">${ic('map')}${esc(SECTORS[PH].steps[i].t)}</button>`};
 
-const MODES=[['inicio','⌂','Início'],['diag','1','Diagnóstico'],['map','2','Mapa interativo'],['dores','3','Dores'],['coe','4','Paliativos × CoE'],['plan','5','Plano de ação']];
+const MODES=[['inicio','⌂','Início'],['diag','1','Diagnóstico'],['map','2','Mapa interativo'],['dores','3','Dores'],['coe','4','Paliativos × CoE']];
 const HASH={inicio:'inicio',diag:'diagnostico',dores:'dores',coe:'coe',plan:'plano'};
 function renderModes(){
   $('#modes').innerHTML=MODES.map(([m,i,n])=>`<button class="mode" role="tab" data-mode="${m}" aria-selected="${st.mode===m}"><span class="n">${i}</span><b>${n}</b></button>`).join('');
@@ -1619,7 +1657,7 @@ const COE_C={
   fonte:{n:'Destrava KPI já desenhado',s:'Fonte de dado',d:'O KPI existe no desenho, mas sem fonte ou sem fórmula. O paliativo é o dado.',c:'var(--pacific)',i:'database'},
   amp:{n:'Ampliar o que existe',s:'Ampliar',d:'A tela ou o alerta existe. O paliativo acrescenta medida, filtro ou gatilho.',c:'var(--cobalt)',i:'layers'},
   novo:{n:'Novo no CoE',s:'Novo',d:'Não há nada no CoE Design. Entra como tela, KPI ou alerta novo.',c:'var(--e)',i:'sparkles'},
-  fora:{n:'Fora do CoE',s:'Fora do CoE',d:'Ferramenta de trabalho ou regra de processo. Vai para o plano de ação, não para o video wall.',c:'var(--muted)',i:'split'}
+  fora:{n:'Fora do CoE',s:'Fora do CoE',d:'Ferramenta de trabalho ou regra de processo. Não vira tela nem alerta do CoE.',c:'var(--muted)',i:'split'}
 };
 const LAY={VW:{n:'Video wall',d:'O que está acontecendo agora',i:'activity'},TAT:{n:'Camada tática',d:'Onde e quem age',i:'list-checks'},EST:{n:'Camada estratégica',d:'Por que e como melhorar',i:'chart-column'},ALR:{n:'Alerta',d:'Aviso quando passa do limite',i:'triangle-alert'}};
 const SEC_SHORT={'planning-hub':'Planning Hub','scct-outbound':'SCCT','repro':'Repro Design'};
@@ -1702,27 +1740,26 @@ function renderDores(){
   $('#v-dores').innerHTML=`
   <section class="vhead">
     <div><div class="eyebrow">${ic('table-2')}Painel de dores</div><h2>Painel de dores</h2>
-    <p>As ${PROWS.length} dores levantadas nas entrevistas do Planning Hub de 29/10/2026, com o paliativo, o melhor cenário, onde entrariam no CoE e a frente do plano de ação. As soluções e o cruzamento com o CoE estão em validação. Clique numa linha para abrir a etapa no mapa.</p></div>
+    <p>As ${PROWS.length} dores levantadas nas entrevistas do Planning Hub de 29/10/2026, com o paliativo, o melhor cenário, e onde entrariam no CoE. As soluções e o cruzamento com o CoE estão em validação. Clique numa linha para abrir a etapa no mapa.</p></div>
     <div class="vstats">${PAIN_SECS().map(s=>`<div class="vst" style="--sc:${s.color}"><b>${PROWS.filter(r=>r.s===s).length}</b><span>${esc(SEC_SHORT[s.id])}</span></div>`).join('')}</div>
   </section>
   <section class="fpanel">
     ${chipRow('Área','area',areaOpts,f.area)}
     ${chipRow('Impacto','imp',[['all','Todos'],['alto','Alto'],['medio','Médio'],['baixo','Baixo']],f.imp)}
     ${chipRow('Alcance na cadeia','alc',[['all','Todos'],...[5,4,3,2,1].map(n=>[String(n),n+' · '+ALC_T[n]])],f.alc)}
-    ${chipRow('Ordenar','ord',[['proc','Pela ordem do processo'],['alc','Pelo alcance, do maior ao menor']],f.ord)}
     ${chipRow('No CoE','coe',coeOpts,f.coe)}
     ${chipRow('Fonte','src',srcOpts,f.src)}
     <div class="frow"><label class="lab" for="dq">Buscar</label><input id="dq" type="search" placeholder="Ex.: VIM, extra forecast, alumínio" value="${esc(f.q)}" autocomplete="off"><span class="fcount" id="dcount"></span></div>
   </section>
   ${alcLegend()}
-  <div class="tscroll dtable"><table><thead><tr><th style="width:14%">Área e etapa</th><th style="width:22%">Dor</th><th style="width:13%">Alcance na cadeia</th><th style="width:18%">Paliativo · em validação</th><th style="width:15%">Melhor cenário · em validação</th><th style="width:13%">No CoE · em validação</th><th style="width:5%">Fila</th></tr></thead><tbody id="dbody"></tbody></table></div>`;
+  <div class="tscroll dtable"><table><thead><tr><th style="width:14%">Área e etapa</th><th style="width:22%">Dor</th><th style="width:13%" class="th-sort" aria-sort="${f.ord==='desc'?'descending':f.ord==='asc'?'ascending':'none'}"><button type="button" class="sortb${f.ord!=='proc'?' on':''}" data-sort="alc" title="${f.ord==='desc'?'Clique para ordenar do menor para o maior':'Clique para ordenar do maior para o menor'}">Alcance na cadeia<span class="sarr">${f.ord==='desc'?'↓':f.ord==='asc'?'↑':'↕'}</span></button>${f.ord!=='proc'?`<button type="button" class="sortx" data-sortx title="Tirar ordenação" aria-label="Tirar ordenação">×</button>`:''}</th><th style="width:18%">Paliativo · em validação</th><th style="width:15%">Melhor cenário · em validação</th><th style="width:15%">No CoE · em validação</th></tr></thead><tbody id="dbody"></tbody></table></div>`;
   renderDoresRows();
 }
 function renderDoresRows(){
   const f=st.df; const q=norm(f.q);
   let rows=PROWS.filter(r=>(f.area==='all'||r.s.id===f.area)&&(f.imp==='all'||r.a.pain.imp===f.imp)&&(f.alc==='all'||(r.alc&&String(r.alc[0])===f.alc))&&(f.coe==='all'||r.coe.c===f.coe)&&(f.src==='all'||r.a.pain.src.split(' ').includes(f.src))&&
     (!q||norm([r.x.t,r.a.t,r.a.pain.txt,r.a.pal&&r.a.pal.txt,r.a.best&&r.a.best.txt,r.coe.ref,(r.a.pain.ids||[]).join(' ')].join(' ')).includes(q)));
-  if(f.ord==='alc') rows=[...rows].sort((p,q)=>((q.alc?q.alc[0]:0)-(p.alc?p.alc[0]:0)));
+  if(f.ord!=='proc'){const sg=f.ord==='desc'?1:-1; rows=[...rows].sort((p,q)=>sg*((q.alc?q.alc[0]:0)-(p.alc?p.alc[0]:0)))}
   $('#dcount').textContent=`${rows.length} de ${PROWS.length} dores`;
   $('#dbody').innerHTML=rows.length?rows.map(r=>`<tr class="go" tabindex="0" data-a="${r.si}:${r.i}:${r.j}">
     <td>${secTag(r.s)}<span class="stt">${esc(r.x.t)}</span><span class="st">${esc(r.a.t)}</span>${impTag(r.a.pain.imp)}</td>
@@ -1731,9 +1768,11 @@ function renderDoresRows(){
     <td>${r.a.pal?esc(r.a.pal.txt):'<span class="st">—</span>'}</td>
     <td>${r.a.best?`${esc(r.a.best.txt)}<span class="st">${esc(r.a.best.plat||'')}</span>`:'<span class="st">—</span>'}</td>
     <td>${coePill(r.coe.c)}${r.coe.l?`<span class="st">${esc(LAY[r.coe.l].n)}</span>`:''}${r.coe.ref&&r.coe.ref!=='—'?`<span class="st">${esc(r.coe.ref)}</span>`:''}</td>
-    <td>${r.fila?`<span class="fila">${r.fila}</span>`:'<span class="st">—</span>'}</td></tr>`).join(''):`<tr><td colspan="7" class="empty">Nenhuma dor com esses filtros. Limpe a busca ou escolha "Todas".</td></tr>`;
+</tr>`).join(''):`<tr><td colspan="6" class="empty">Nenhuma dor com esses filtros. Limpe a busca ou escolha "Todas".</td></tr>`;
 }
 $('#v-dores').addEventListener('click',e=>{
+  if(e.target.closest('[data-sortx]')){st.df.ord='proc'; renderDores(); return}
+  if(e.target.closest('[data-sort]')){st.df.ord=st.df.ord==='desc'?'asc':'desc'; renderDores(); return}
   const c=e.target.closest('[data-f]'); if(c){st.df[c.dataset.f]=c.dataset.v; renderDores(); return}
   const r=e.target.closest('tr[data-a]'); if(r){const [si,i,j]=r.dataset.a.split(':').map(Number); goAct(si,i,j)}
 });
@@ -1741,11 +1780,11 @@ $('#v-dores').addEventListener('keydown',e=>{const r=e.target.closest('tr[data-a
 $('#v-dores').addEventListener('input',e=>{if(e.target.id==='dq'){st.df.q=e.target.value; renderDoresRows()}});
 
 const INSIGHTS=[
-  {i:'circle-alert',t:'As maiores dores do Planning Hub não têm tela no CoE',d:'VIM, conciliação GR/IR, confirmação de PO e PO colocada tarde não aparecem em nenhum KPI, tela ou alerta do CoE Design. O CoE acompanha cobertura, forecast e capacidade, mas não as tarefas de compra e fatura que ocupam o planner.',e:['7 novos no CoE','Frentes 1 e 2 do plano']},
+  {i:'circle-alert',t:'As maiores dores do Planning Hub não têm tela no CoE',d:'VIM, conciliação GR/IR, confirmação de PO e PO colocada tarde não aparecem em nenhum KPI, tela ou alerta do CoE Design. O CoE acompanha cobertura, forecast e capacidade, mas não as tarefas de compra e fatura que ocupam o planner.',e:['7 novos no CoE']},
   {i:'layers',t:'13 paliativos ampliam telas que já existem',d:'Exemplos: projeção de fechamento no PLH-PCA-03, motivo do extra forecast no INB-STR-13, quality size no INB-STR-12. O histórico que a Lia pediu já está desenhado (INB-STR-06/07) e depende da construção da Wave 2. O ritmo do mês não aparece no CoE Design e precisa ser confirmado com o Matheus.',e:['PLH-PCA-03','INB-STR-06/07','INB-STR-12/13']},
   {i:'triangle-alert',t:'O alerta de materiais críticos usa uma fonte que os planners questionam',d:'As telas PLH-MAT e os alertas de 14 dias e 9 semanas usam o Stock Projection do APO. Na Reunião 3, a Elizabeth mostrou que o alerta do APO acusa stockout que não existe, porque não desconta o consumo realizado. Se a regra não mudar antes do go-live, a tela nasce sem credibilidade.',e:['PLH-MAT-03…09','Reunião 3']},
   {i:'git-compare',t:'APAC já desenhou telas que a Lia está pedindo',d:'Planning & capacity overview (order intake × capacidade e carteira por planta), production OTIF e inventory days estão nos KPIs adicionais de APAC. Reaproveitar é mais rápido do que desenhar de novo para AMER.',e:['Anexo IV · APAC']},
-  {i:'split',t:'14 dos 34 paliativos ficam fora do CoE',d:'São ferramentas de trabalho ou regras de processo: guias, formulários, automações de envio e desenho de processo. Entram no plano de ação, e não no video wall.',e:['Plano de ação']},
+  {i:'split',t:'14 dos 34 paliativos ficam fora do CoE',d:'São ferramentas de trabalho ou regras de processo: guias, formulários, automações de envio e desenho de processo. Não viram tela nem alerta.',e:['Ferramentas e processo']},
   {i:'zap',t:'Cada alerta novo precisa de dono',d:'6 paliativos viram alerta novo ou ampliado. Somados aos 41 do CoE Design, o CoE precisa definir quem recebe, em quanto tempo responde e para quem escala. Isso já está no escopo de governança da Wave 2.',e:['41 alertas do CoE Design','Governança Wave 2']}
 ];
 
@@ -1758,7 +1797,7 @@ function renderCoe(){
   const cols=Object.keys(LAY).map(l=>{const items=show.filter(r=>r.coe.l===l);
     return `<section class="lcol"><header><span class="lc-i">${ic(LAY[l].i)}</span><div><b>${esc(LAY[l].n)}</b><small>${esc(LAY[l].d)}</small></div><span class="lc-n">${items.length}</span></header>
       <div class="lcards">${items.length?items.map(r=>`<button class="lcard" data-a="${r.si}:${r.i}:${r.j}" style="--pc:${COE_C[r.coe.c].c}">
-        <span class="lc-top">${coePill(r.coe.c)}${secTag(r.s)}${r.fila?`<span class="fila" title="Frente do plano de ação">${r.fila}</span>`:''}</span>
+        <span class="lc-top">${coePill(r.coe.c)}${secTag(r.s)}</span>
         <span class="lc-t">${esc(r.a.pal?r.a.pal.txt:r.a.t)}</span>
         <span class="lc-c">${esc(r.coe.como)}</span>
         ${r.coe.ref&&r.coe.ref!=='—'?`<span class="lc-r">${ic('arrow-right')}${esc(r.coe.ref)}</span>`:''}</button>`).join(''):'<p class="none">Nenhum item com esse filtro.</p>'}</div></section>`}).join('');
@@ -1782,7 +1821,7 @@ function renderCoe(){
     <p class="vsub">As quatro camadas do CoE Design. Clique num cartão para abrir a dor no mapa.${f.coe!=='all'?' <button class="lnk" data-cf="all">Mostrar todos</button>':''}</p>
     <div class="lgrid">${cols}</div></section>
 
-  <section class="pl-sec"><h3>${ic('split')} Fora do CoE · ${fora.length} paliativos que vão para o plano de ação</h3>
+  <section class="pl-sec"><h3>${ic('split')} Fora do CoE · ${fora.length} paliativos que não viram tela nem alerta</h3>
     <div class="fgrid">${foraBy.map(g=>`<div><div class="fg-h">${secTag(g.s)}<span>${g.items.length}</span></div><ul>${g.items.map(r=>`<li><button class="lnk" data-a="${r.si}:${r.i}:${r.j}">${esc(r.a.pal?r.a.pal.txt:r.a.t)}</button><small>${esc(r.coe.como)}</small></li>`).join('')}</ul></div>`).join('')}</div>
   </section>`;
 }
@@ -1805,6 +1844,22 @@ const catOf=l=>CATS.find(c=>c.layers.includes(l))||CATS[4];
 const IMP_S={alto:'Alto',medio:'Médio',baixo:'Baixo'};
 const impTag=v=>v?`<span class="imptag imp-${v}">Impacto ${IMP_S[v].toLowerCase()}</span>`:'';
 st.imSec=null;
+function coePop(O){
+  const N=O.length, g=c=>O.filter(o=>o.coe.c===c), amp=[...g('amp'),...g('cov'),...g('fonte')], nov=g('novo'), fora=g('fora');
+  const lay=k=>O.filter(o=>o.coe.c!=='fora'&&o.coe.l===k).length;
+  const ex=L=>L.slice(0,2).map(o=>`<li><b>${esc(o.a.t)}</b>${o.coe.ref&&o.coe.ref!=='—'?` <span>→ ${esc(o.coe.ref)}</span>`:''}</li>`).join('');
+  const seg=(n,c)=>n?`<i style="width:${n/N*100}%;background:${c}"></i>`:'';
+  return `<div class="cpop" id="coepop" role="tooltip">
+    <div class="cpop-h">O que quer dizer “poderiam entrar no CoE”</div>
+    <p>A ideia de paliativo vira ou melhora uma tela, um KPI ou um alerta do CoE. Cruzamos cada uma com o CoE Design, o desenho do CoE feito na Wave 1.</p>
+    <div class="cpop-bar">${seg(amp.length,'var(--cobalt)')}${seg(nov.length,'var(--e)')}${seg(fora.length,'var(--line)')}</div>
+    <div class="cpop-row"><span class="cpop-n" style="--pc:var(--cobalt)">${amp.length}</span><div><b>Ampliam o que já foi desenhado</b><span>A tela ou o alerta já existe no CoE Design. O paliativo acrescenta uma medida, um filtro ou um gatilho.</span><ul>${ex(amp)}</ul></div></div>
+    <div class="cpop-row"><span class="cpop-n" style="--pc:var(--e)">${nov.length}</span><div><b>Seriam novos no CoE</b><span>Não há nada parecido no CoE Design. Entrariam como tela, KPI ou alerta novo.</span><ul>${ex(nov)}</ul></div></div>
+    <div class="cpop-row"><span class="cpop-n" style="--pc:var(--muted)">${fora.length}</span><div><b>Ficam fora do CoE</b><span>São ferramenta de trabalho ou regra de processo. Não viram tela.</span></div></div>
+    <div class="cpop-lay"><span>Onde entrariam:</span> Video wall ${lay('VW')} · Tática ${lay('TAT')} · Estratégica ${lay('EST')} · Alerta ${lay('ALR')}</div>
+    <p class="cpop-f">${ic('triangle-alert')}Em validação. Desenhado na Wave 1 não quer dizer construído, e nenhuma integração está confirmada. O detalhe está no capítulo 4 · Paliativos × CoE.</p>
+  </div>`;
+}
 function renderDiag(){
   const O=PROWS.map(r=>({...r,cat:catOf(r.a.best.layer),low:!!(r.a.pal&&r.a.pal.how&&r.a.pal.how.effort==='Baixo'),sim:!!SIMS[r.k]}));
   const N=O.length, by=f=>O.filter(f).length;
@@ -1833,7 +1888,7 @@ function renderDiag(){
     <div class="dg-kpis">
       <div class="kpi-c dark"><b>${N}</b><span>dores mapeadas</span></div>
       <div class="kpi-c"><b>${nAlto}</b><span>de alto impacto</span><em>custo, ruptura, serviço ou foco da Wave 2</em></div>
-      <div class="kpi-c"><b>${nCoe}</b><span>entram no CoE</span><em>telas, KPIs ou alertas · ${N-nCoe} vão para o plano de ação</em></div>
+      <div class="kpi-c kpi-pop" tabindex="0" aria-describedby="coepop"><b>${nCoe}</b><span>poderiam entrar no CoE</span><em>telas, KPIs ou alertas · em validação</em><small class="kpi-hint">${ic('info')}Passe o mouse para entender</small>${coePop(O)}</div>
       <div class="kpi-c"><b>${nLow}</b><span>com paliativo de esforço baixo</span></div>
       <div class="kpi-c"><b>${nSim}</b><span>com simulação no mapa</span><em>hoje × com o paliativo</em></div>
     </div>
@@ -1851,7 +1906,7 @@ function renderDiag(){
     <div class="seg im-f" role="group" aria-label="Área">${[[null,'Todas as áreas'],...SECTORS.map((s,i)=>[i,SEC_SHORT[s.id]||s.name])].map(([k,n])=>`<button type="button" data-imsec="${k===null?'':k}" aria-pressed="${st.imSec===k}">${esc(n)}</button>`).join('')}</div>
     ${imap}
     <section class="ov-sec"><h3>Por onde começar · alto impacto com paliativo de esforço baixo<small>${qw.length} de ${altoTxt.length}</small></h3>
-      <div class="qwl">${qw.map(o=>`<button type="button" class="qw" data-a="${o.si}:${o.i}:${o.j}">${secTag(o.s)}<b>${esc(o.a.t)}</b><span>${esc(o.a.pal.txt)}</span>${o.fila?`<em>Frente ${o.fila} do plano</em>`:''}</button>`).join('')||'<p class="none">Nenhuma.</p>'}</div>
+      <div class="qwl">${qw.map(o=>`<button type="button" class="qw" data-a="${o.si}:${o.i}:${o.j}">${secTag(o.s)}<b>${esc(o.a.t)}</b><span>${esc(o.a.pal.txt)}</span></button>`).join('')||'<p class="none">Nenhuma.</p>'}</div>
     </section>
   </article>`;
 }
@@ -1913,8 +1968,8 @@ fsBtn.addEventListener('click',()=>{ try{ if(!document.fullscreenElement&&docume
 document.addEventListener('fullscreenchange',()=>{ fsLabel(!!document.fullscreenElement); setPgH() });
 
 /* boot */
-const h=(location.hash||'').slice(1); const fi=SECTORS.findIndex(s=>s.id===h); if(fi>=0){ st.si=fi; st.mode='map' } const HM={plano:'plan',diagnostico:'diag',dores:'dores',coe:'coe',inicio:'inicio'}; if(HM[h]) st.mode=HM[h];
-window.addEventListener('hashchange',()=>{const hh=location.hash.slice(1); const HM={plano:'plan',diagnostico:'diag',dores:'dores',coe:'coe',inicio:'inicio'}; if(HM[hh]){ if(st.mode!==HM[hh]){stop();st.mode=HM[hh];render()} return } const k=SECTORS.findIndex(s=>s.id===hh); if(k>=0&&(k!==st.si||st.mode!=='map')){stop();st.mode='map';st.si=k;st.step=null;render()}});
+const h=(location.hash||'').slice(1); const fi=SECTORS.findIndex(s=>s.id===h); if(fi>=0){ st.si=fi; st.mode='map' } const HM={diagnostico:'diag',dores:'dores',coe:'coe',inicio:'inicio'}; if(HM[h]) st.mode=HM[h];
+window.addEventListener('hashchange',()=>{const hh=location.hash.slice(1); const HM={diagnostico:'diag',dores:'dores',coe:'coe',inicio:'inicio'}; if(HM[hh]){ if(st.mode!==HM[hh]){stop();st.mode=HM[hh];render()} return } const k=SECTORS.findIndex(s=>s.id===hh); if(k>=0&&(k!==st.si||st.mode!=='map')){stop();st.mode='map';st.si=k;st.step=null;render()}});
 render();
 try{ if(st.mode==='map'&&!localStorage.getItem('tp-atlas-help')) openHelp() }catch(e){}
 })();
