@@ -893,6 +893,13 @@ tr.go:hover .alc-why,tr.go:focus .alc-why{display:block}
 .kpi-c .cpop ul span{font-size:12px}
 .kpi-c .cpop .cpop-n{font-family:var(--f-display);font-size:24px;line-height:1;color:var(--pc)}
 .kpi-c .cpop .cpop-lay span{font-size:12.5px;font-weight:700;color:var(--fg)}
+
+/* áreas ainda não entrevistadas: cartão apagado, borda pontilhada */
+.sec.sec-pre{background:transparent;border:1.5px dashed var(--line);box-shadow:none;opacity:.55;filter:grayscale(1)}
+.sec.sec-pre:hover{opacity:.75}
+.sec.sec-pre[aria-selected="true"]{opacity:.85;border-color:var(--muted);border-style:dashed;background:transparent;box-shadow:none}
+.sec.sec-pre .s-status{display:none}
+.sec.sec-pre .s-meta span:last-child{font-style:italic}
 </style>
 
 <div class="wrap">
@@ -1271,12 +1278,12 @@ $('#bNext').innerHTML=ic('skip-forward');
 
 function renderRail(){
   $('#rail').innerHTML=SECTORS.map((s,i)=>{const c=countSec(s);return `
-  <button class="sec" role="tab" aria-selected="${i===st.si}" data-si="${i}" style="--sc:${s.color}">
+  <button class="sec ${s.status==='preliminar'?'sec-pre':''}" role="tab" aria-selected="${i===st.si}" data-si="${i}" style="--sc:${s.color}" ${s.status==='preliminar'?'title="Área ainda não entrevistada. Mapa preliminar, a partir do CoE Design."':''}>
     <span class="s-status ${s.status==='preliminar'?'pre':''}" title="${esc(s.statusTxt)}"></span>
     <span class="s-ic">${ic(s.icon)}</span>
     <span class="s-name">${esc(s.name)}</span>
     <span class="s-sub">${esc(s.sub)}</span>
-    <span class="s-meta"><span>${c.steps} etapas</span><span class="p">${c.pains} dores</span><span>${s.status==='preliminar'?'preliminar':'entrevistado'}</span></span>
+    <span class="s-meta">${s.status==='preliminar'?`<span>${c.steps} etapas</span><span>Ainda não entrevistado</span>`:`<span>${c.steps} etapas</span><span class="p">${c.pains} dores</span><span>entrevistado</span>`}</span>
   </button>`}).join('');
 }
 
@@ -1299,7 +1306,7 @@ function renderCanvas(){
       const p=painsOf(x); const hit=st.hl&&stepHas(x,st.hl); const dim=st.hl&&!hit;
       const sys=x.sys.slice(0,3).map(sysChip).join('')+(x.sys.length>3?`<span class="chip">+${x.sys.length-3}</span>`:'');
       return `<button class="node ${st.step===i?'sel':''} ${dim?'dim':''} ${hit?'hit':''}" data-i="${i}" style="--lc:${l.c};--hc:${st.hl?SYS[st.hl].c:'transparent'}" aria-label="Etapa ${i+1}: ${esc(x.t)}">
-        <span class="n-top"><span class="n-ic">${ic(x.icon)}</span><span class="n-num">${pad(i+1)}</span><span class="n-flag ${p?'':'zero'}">${p?ic('triangle-alert')+p+(p>1?' dores':' dor'):ic('circle-check')+'sem gap'}</span></span>
+        <span class="n-top"><span class="n-ic">${ic(x.icon)}</span><span class="n-num">${pad(i+1)}</span>${p?`<span class="n-flag">${ic('triangle-alert')+p+(p>1?' dores':' dor')}</span>`:(s.status==='preliminar'?'':`<span class="n-flag zero">${ic('circle-check')}sem gap</span>`)}</span>
         <span class="n-title">${esc(x.t)}</span>
         <span class="n-foot">${x.acts.length} atividade${x.acts.length>1?'s':''}${x.acts.some((a,j)=>SIMS[x.id+':'+j])?`<span class="simtag">▶ passo a passo</span>`:''}</span>
       </button>`}).join('')}</div></section>`}).join('');
