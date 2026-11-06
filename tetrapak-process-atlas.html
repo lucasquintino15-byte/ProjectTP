@@ -719,7 +719,7 @@ body.noscroll{overflow:hidden}
 .tp-ev{background:var(--surface);border-color:var(--line);border-left-color:var(--c);box-shadow:0 1px 2px var(--shadow)}
 .top .mode{color:#E8EEF5}
 .top .mode:hover,.top .mode[aria-selected="true"]{color:#FFFFFF}
-/* ---------- Paliativos × CoE: mostrar/ocultar os achados */
+/* ---------- Cobertura do CoE: mostrar/ocultar os achados */
 .vh3 .instog{margin-left:auto;font-size:12px;letter-spacing:.06em;border:1px solid var(--line);background:var(--surface);color:var(--cobalt);padding:4px 10px;border-radius:3px;cursor:pointer}
 .vh3 .instog:hover{border-color:var(--cobalt);text-decoration:none}
 
@@ -941,7 +941,7 @@ tr.go:hover .alc-why,tr.go:focus .alc-why{display:block}
   </div>
 
   <section class="view" id="v-dores" hidden aria-label="Painel de dores"></section>
-  <section class="view" id="v-coe" hidden aria-label="Paliativos × CoE"></section>
+  <section class="view" id="v-coe" hidden aria-label="Cobertura do CoE"></section>
   <section class="plan" id="plan" hidden aria-label="Plano de ação"></section>
   <section class="legend" id="legend"></section>
   <div class="nextwrap" id="nextch"></div>
@@ -1559,7 +1559,7 @@ const depPill=d=>`<span class="dep ${d.tipo}">${ic(d.tipo==='time'?'users':'hand
 const valTag=s=>esc(s).replace(/\s*\((proposta a validar[^)]*)\)/g,' <span class="val">a validar</span>');
 const goLink=id=>{const i=stepIdx(id); if(i<0) return ''; return `<button class="golink" data-go="${id}">${ic('map')}${esc(SECTORS[PH].steps[i].t)}</button>`};
 
-const MODES=[['inicio','⌂','Início'],['diag','1','Diagnóstico'],['map','2','Mapa interativo'],['dores','3','Dores'],['coe','4','Paliativos × CoE']];
+const MODES=[['inicio','⌂','Início'],['diag','1','Diagnóstico'],['map','2','Mapa interativo'],['dores','3','Dores'],['coe','4','Cobertura do CoE']];
 const HASH={inicio:'inicio',diag:'diagnostico',dores:'dores',coe:'coe',plan:'plano'};
 function renderModes(){
   $('#modes').innerHTML=MODES.map(([m,i,n])=>`<button class="mode" role="tab" data-mode="${m}" aria-selected="${st.mode===m}"><span class="n">${i}</span><b>${n}</b></button>`).join('');
@@ -1806,8 +1806,8 @@ function renderCoe(){
   const areaOpts=[['all','Todas'],...PAIN_SECS().map(s=>[s.id,SEC_SHORT[s.id]||s.name,s.color])];
   $('#v-coe').innerHTML=`
   <section class="vhead">
-    <div><div class="eyebrow">${ic('layers')}Paliativos × CoE</div><h2>Paliativos × CoE Design</h2>
-    <p>Cruzamento dos ${PROWS.length} paliativos das entrevistas com o CoE Design: 95 KPIs do video wall, 19 telas táticas, 44 estratégicas e 41 alertas. Cada paliativo foi lido contra os IDs do PDF.</p></div>
+    <div><div class="eyebrow">${ic('layers')}Cobertura do CoE</div><h2>CoE: o que já existe e o que falta</h2>
+    <p>Cada uma das ${PROWS.length} ideias de paliativo cruzada com o CoE Design da Wave 1 (95 KPIs do video wall, 19 telas táticas, 44 estratégicas e 41 alertas). Em validação.</p></div>
   </section>
   <div class="valnote">${ic('info')}<span><b>Em validação.</b> Esta é uma leitura da KPMG. Nenhuma integração com o CoE está confirmada: cada item depende de validação técnica, com os especialistas de SAP, e de negócio, com o time do CoE.</span></div>
   <section class="fpanel">${chipRow('Área','carea',areaOpts,f.area)}</section>
@@ -1857,7 +1857,7 @@ function coePop(O){
     <div class="cpop-row"><span class="cpop-n" style="--pc:var(--e)">${nov.length}</span><div><b>Seriam novos no CoE</b><span>Não há nada parecido no CoE Design. Entrariam como tela, KPI ou alerta novo.</span><ul>${ex(nov)}</ul></div></div>
     <div class="cpop-row"><span class="cpop-n" style="--pc:var(--muted)">${fora.length}</span><div><b>Ficam fora do CoE</b><span>São ferramenta de trabalho ou regra de processo. Não viram tela.</span></div></div>
     <div class="cpop-lay"><span>Onde entrariam:</span> Video wall ${lay('VW')} · Tática ${lay('TAT')} · Estratégica ${lay('EST')} · Alerta ${lay('ALR')}</div>
-    <p class="cpop-f">${ic('triangle-alert')}Em validação. Desenhado na Wave 1 não quer dizer construído, e nenhuma integração está confirmada. O detalhe está no capítulo 4 · Paliativos × CoE.</p>
+    <p class="cpop-f">${ic('triangle-alert')}Em validação. Desenhado na Wave 1 não quer dizer construído, e nenhuma integração está confirmada. O detalhe está no capítulo 4 · Cobertura do CoE.</p>
   </div>`;
 }
 function renderDiag(){
