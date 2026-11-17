@@ -2,21 +2,26 @@
 
 Tetra Pak — Supply Chain CoE (AMER) Wave 2 · KPMG
 
+## Acesso à página
+
+**[Abrir o Tetra Pak Process Atlas](https://claude.ai/artifact/Vaeo2znqfcezVHajb7xE8h)**
+
+A página está publicada como artefato privado no claude.ai. Para outra pessoa abrir, o dono precisa compartilhá-la pelo menu Share da própria página. Também dá para baixar o HTML deste repositório e abrir localmente.
+
 ## Arquivos
 
-- `tetrapak-process-atlas.html` — **Tetra Pak Process Atlas**, a versão oficial e única do painel. Seis capítulos, com uma linha de páginas em cada um:
-  - **Início**: objetivo e como ler o painel.
-  - **Cadeia e CoE**: como a cadeia funciona, o CoE Design da Wave 1, o que ainda não foi visto e como atuar.
-  - **Mapa interativo**: fluxo das três áreas (Planning Hub, SCCT, Repro Design) com atividades, dores, paliativos, melhor cenário, simulações e o modo Percorrer.
-  - **Dores**: as 85 dores em tabela, com filtros e busca.
-  - **Paliativos × CoE**: o que já está na Wave 1, o que entra no CoE e em qual camada, com insights.
-  - **Plano de ação**: fila de seis frentes do Planning Hub (eliminar → simplificar → padronizar → automatizar).
+- `tetrapak-process-atlas.html` — **Tetra Pak Process Atlas**, versão de 17/11/2026. Mesmo conteúdo da página publicada, em um único arquivo que funciona sem internet. Capítulos (cada seção é uma página, com menu suspenso e caminho no topo):
+  - **Início**: objetivo e escopo (Planning Hub, SCCT, Repro Design).
+  - **1 · Diagnóstico**: oportunidades mapeadas, temas de dor, alcance na cadeia e tipo de solução.
+  - **2 · Processo**: fluxo de cada área; no SCCT, abas para fluxo, exportação marítima, ponta a ponta e Sul, Norte e Expo.
+  - **3 · Oportunidades**: as dores agrupadas em temas, com paliativo, melhor cenário e indicador no CoE.
+  - **4 · Matriz de oportunidades**: impacto × alcance.
+  - **5 · Impacto na cadeia**: alcance e propagação por tema, do forecast ao cliente final.
+  - **6 · Benchmark de soluções**: ferramenta por tema e dor (WIP) e a avaliação da Aera (Skills, dores, agente e integrações).
 - `Plano_de_Acao_Planning_Hub_TetraPak.docx` — documento Word do plano de ação.
 
 ## Como usar
 
-- Para ver: baixe o HTML e abra no navegador (Chrome/Edge), de preferência no computador. O arquivo funciona sozinho, sem internet.
-- Para editar: abra num editor de texto (ex.: VS Code).
-  - Conteúdo do mapa, das dores e dos paliativos: blocos `<script>` no fim do arquivo (`SECTORS`, `SIMS`, `COE`, `PLAN`).
-  - Capítulos Início e Cadeia e CoE: HTML nas seções `<section class="chap" id="inicio">` e `id="cadeia"`.
-  - Visual: bloco `<style>` do início. Fonte KPMG só em títulos e destaques; o restante usa Arial. Segue o tema claro ou escuro do sistema.
+- Para ver: abra o link acima ou baixe o HTML e abra no navegador (Chrome ou Edge), de preferência no computador.
+- Botões no topo: **Editar** (modo de edição com notas e destaques), **Tela cheia** e **Baixar HTML** (salva a versão com as edições).
+- O material é DRAFT e KPMG Confidential.
